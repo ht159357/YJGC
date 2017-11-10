@@ -1,8 +1,8 @@
 {
-  "name": "mint-demo",
+  "name": "YJGC",
   "version": "1.0.0",
-  "description": "mint-demo",
-  "author": "e <392135232@qq.com>",
+  "description": "YJGC",
+  "author": "SunnyHaroro <392135232@qq.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
