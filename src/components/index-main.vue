@@ -1,12 +1,12 @@
 <template>
   <div class="index-main-nav">
     <div class="index-nav-box">
-      <div class="index-nav-tab" data-nav="1" @click="activePage($event)" :class="[{ 'index-nav-tab-active': curNav == 1 } ]">
+      <div class="index-nav-tab" data-nav="1" @click="activePage($event)" :class="[{ 'index-nav-tab-active index-nav-tab-active1': curNav == 1 } ]">
         <span class="index-nav-tab-title">
           按匠师
         </span>
       </div>
-      <div class="index-nav-tab" data-nav="2" @click="activePage($event)" :class="[{ 'index-nav-tab-active': curNav == 2 } ]">
+      <div class="index-nav-tab" data-nav="2" @click="activePage($event)" :class="[{ 'index-nav-tab-active index-nav-tab-active2': curNav == 2 } ]">
         <span class="index-nav-tab-title">按项目</span>
       </div>
     </div>
@@ -110,7 +110,29 @@
     flex: 1;
     height: 40px;
     line-height: 40px;
+    position: relative;
   }
+  .index-nav-tab-active1:after{
+    content: "";
+    width: 15px;
+    height: 40px;
+    background: #fff;
+    position: absolute;
+    top: 2px;
+    right: -5px;
+    transform: rotate(-15deg);
+  }
+  .index-nav-tab-active2:after{
+    content: "";
+    width: 15px;
+    height: 40px;
+    background: #fff;
+    position: absolute;
+    top: 2px;
+    left: -5px;
+    transform: rotate(15deg);
+  }
+
   .index-nav-tab-active{
     background-color: #fff;
   }
@@ -248,5 +270,10 @@
   }
   .xm-info img{
     width: 100%;
+  }
+  .yj-elic{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 </style>
