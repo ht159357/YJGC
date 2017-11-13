@@ -31,16 +31,6 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    new HtmlWebpackPlugin({
-      filename: 'index2.html',
-      template: 'index2.html',
-      inject: true
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index3.html',
-      template: 'index3.html',
-      inject: true
-    }),
     new FriendlyErrorsPlugin()
   ]
 })

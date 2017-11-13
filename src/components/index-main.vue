@@ -13,7 +13,7 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <a class="index-js-info" href="#" v-for="item in 5" @click="showJishiDetails(item)">
+        <a class="index-js-info" v-for="item in 5" @click="showJishiDetails(item)">
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" src="./../assets/img/js-1.jpg" alt="">
@@ -40,6 +40,9 @@
             <!--状态-->
             <div class="yj-cell">
               <span class="yj-state">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhi"></use>
+                </svg>
                 今天可预约
               </span>
               <span class="yj-state">
@@ -83,17 +86,17 @@
           }
       },
       methods:{
-        activePage(event){//切换page
-          var self = event.currentTarget;
-          this.curNav = self.getAttribute("data-nav");
-        },
-        showJishiDetails( id ){
-            let data = {
-                showPage:true,
-                jishiId:id
-            }
-            this.$emit("jsevent",data);
-        }
+          activePage(event){//切换page
+              var self = event.currentTarget;
+              this.curNav = self.getAttribute("data-nav");
+          },
+          showJishiDetails( id ){
+              let data = {
+                  showPage:true,
+                  jishiId:id
+              }
+              this.$emit("jsevent",data);
+          }
       },
       mounted(){
 
