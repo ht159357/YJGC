@@ -45,19 +45,19 @@
         <div class="jis-filter-box">
           <div class="jis-filter jis-filter-active">
             热销
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon icon-arr" aria-hidden="true">
               <use xlink:href="#icon-up"></use>
             </svg>
           </div>
           <div class="jis-filter">
             上新
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon icon-arr" aria-hidden="true">
               <use xlink:href="#icon-down"></use>
             </svg>
           </div>
           <div class="jis-filter">
             价格
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon icon-arr" aria-hidden="true">
               <use xlink:href="#icon-up"></use>
             </svg>
           </div>
@@ -69,10 +69,12 @@
               <use xlink:href="#icon-tongzhi"></use>
             </svg>
             <div class="jis-yy-tz-box">
-              <div class="jis-yy-tz-con">
-                <span v-for="item in 5" class="jis-yy-tz-detail">
-                  本店开业啦！！！
-                </span>
+              <!--通知-->
+              <div id="jis-yy-tz-box-in">
+                <div id="jis-yy-tz-box-in1">
+                  <a v-for="item in 10">测试文字{{item}}</a>
+                </div>
+                <div id="jis-yy-tz-box-in2"></div>
               </div>
             </div>
           </div>
@@ -89,7 +91,7 @@
               <span class="jis-yy-title">服务店铺</span>
               <span>河西万达
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-map"></use>
+                  <use xlink:href="#icon-map"></use>i
                 </svg>
               </span>
             </div>
@@ -143,6 +145,33 @@ export default {
                 }
             }
         }
+    },
+    mounted(){
+        window.onload = function(){
+            scrollLeft();
+        };
+        function scrollLeft(){
+            var speed = 20;
+            var tab = document.getElementById('jis-yy-tz-box-in');
+            var tab1 = document.getElementById('jis-yy-tz-box-in1');
+            var tab2 = document.getElementById('jis-yy-tz-box-in2');
+            tab2.innerHTML = tab1.innerHTML;
+            function Marquee(){
+                if(tab2.offsetWidth - tab.scrollLeft <=0) {
+                    tab.scrollLeft = 0;
+                }else{
+                    tab.scrollLeft ++;
+                }
+
+            }
+            var timer = setInterval(Marquee,speed);
+            tab.onmouseover = function(){
+              clearInterval(timer);
+            };
+            tab.onmouseout = function(){
+              timer = setInterval(Marquee,speed);
+            }
+        }
     }
 }
 </script>
@@ -159,9 +188,9 @@ export default {
     text-align: center;
   }
   .jis-info{
-    flex: 0 0 45%;
+    flex: 0 0 47%;
     text-align: left;
-    padding-right: 3%;
+    padding-right: 1%;
     background-image: url(./../assets/img/border-1.png);
     background-repeat: no-repeat;
     background-position: right center;
@@ -181,6 +210,9 @@ export default {
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+  }
+  .icon-arr{
+    font-size: 12px;
   }
   .jis-cell{
     display: inline-block;
@@ -225,24 +257,38 @@ export default {
     width: 18px;
     float: left;
     height: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .jis-yy-tz-box{
-    overflow-x: scroll;
+    overflow: hidden;
     height: 40px;
     line-height: 40px;
-    width: calc(100% - 58px);
+    width: calc(100% - 38px);
+    position: relative;
+    font-size:14px;
+    font-weight:bold;
+    margin: 0 auto;
   }
-  .jis-yy-tz-con{
-    display: inline-block;
-    width: auto;
-    height: 40px;
-    line-height: 40px;
+  #jis-yy-tz-box-in{
+    width: 100%;
+    height: 30px;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
   }
-  .jis-yy-tz-detail{
-    margin-right: 50px;
+  .jis-yy-tz-box #jis-yy-tz-box-in1,
+  .jis-yy-tz-box #jis-yy-tz-box-in2{
+    display: inline;
   }
+  .jis-yy-tz-box #jis-yy-tz-box-in1 a,
+  .jis-yy-tz-box #jis-yy-tz-box-in2 a{
+    text-decoration: none;
+    color: #000;
+    margin-right: 100px;
+  }
+
+
   .jis-tab-box{
     display: flex;
     background: #fff;

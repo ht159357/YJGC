@@ -40,9 +40,6 @@
             <!--状态-->
             <div class="yj-cell">
               <span class="yj-state">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-tongzhi"></use>
-                </svg>
                 今天可预约
               </span>
               <span class="yj-state">
