@@ -1,57 +1,61 @@
 <template>
   <div id="app">
-    <header-nav></header-nav>
-    <!--轮播-->
-    <div class="mint-swipe-container">
-      <mt-swipe :auto="0" :prevent="true">
-        <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg">
-        </mt-swipe-item>
-        <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-18/5996b33598248.jpg">
-        </mt-swipe-item>
-        <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-05/59ae079009e5d.jpg">
-        </mt-swipe-item>
-      </mt-swipe>
+    <header-nav @activepage="showIndexActive"></header-nav>
+    <div id="index-app" v-if="!showJsDetails && showIndexs ">
+      <!--轮播-->
+      <div class="mint-swipe-container">
+        <mt-swipe :auto="0" :prevent="true">
+          <mt-swipe-item class="mint-swipe-item">
+            <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg">
+          </mt-swipe-item>
+          <mt-swipe-item class="mint-swipe-item">
+            <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-18/5996b33598248.jpg">
+          </mt-swipe-item>
+          <mt-swipe-item class="mint-swipe-item">
+            <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-05/59ae079009e5d.jpg">
+          </mt-swipe-item>
+        </mt-swipe>
+      </div>
+
+      <div class="shops-box">
+        <div class="shops-box-box">
+          <select class="select-reset" name="province">
+            <option value="1">江苏省</option>
+            <option value="2">上海市</option>
+            <option value="3">江西省</option>
+          </select>
+        </div>
+        <div class="shops-box-box">
+          <select class="select-reset" name="city">
+            <option value="1">南京市</option>
+            <option value="2">上海市</option>
+            <option value="3">南昌市</option>
+          </select>
+        </div>
+        <div class="shops-box-box">
+          <select class="select-reset" name="city">
+            <option value="1">南京店</option>
+            <option value="2">上海店</option>
+            <option value="1">南昌万达店</option>
+          </select>
+        </div>
+      </div>
+
+      <index-main  @jsevent="jishiEvent"></index-main>
     </div>
 
-    <div class="shops-box">
-      <div class="shops-box-box">
-        <select class="select-reset" name="province">
-          <option value="1">江苏省</option>
-          <option value="2">上海市</option>
-          <option value="3">江西省</option>
-        </select>
-      </div>
-      <div class="shops-box-box">
-        <select class="select-reset" name="city">
-          <option value="1">南京市</option>
-          <option value="2">上海市</option>
-          <option value="3">南昌市</option>
-        </select>
-      </div>
-      <div class="shops-box-box">
-        <select class="select-reset" name="city">
-          <option value="1">南京店</option>
-          <option value="2">上海店</option>
-          <option value="1">南昌万达店</option>
-        </select>
-      </div>
-    </div>
-
-    <index-main></index-main>
-    <div class="main-body">
-
-    </div>
+    <jishi-detail class="margin-top-header" v-if="showJsDetails"></jishi-detail>
   </div>
 </template>
 
 <script>
-  import Vue from 'vue'
+  import Vue from 'vue';
+  import store from './store/store'
   import { Swipe, SwipeItem } from 'mint-ui';
-  import headerNav from "./components/header"
+  import headerNav from "./components/header";
   import indexMain from './components/index-main';
+  import jishiDetail from "./components/jishi-details";
+
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
@@ -60,10 +64,32 @@
       name: 'app',
       components:{
           indexMain,
-          headerNav
+          headerNav,
+          jishiDetail
+      },
+      store,
+      data(){
+          return {
+              showIndexs: false,//显示首页
+              showJsDetails: true,//显示技师详情
+          }
       },
       methods: {
+          showIndexActive(data){
+              if( this.showIndexs ){
+                return;
+              }
+              console.log(data);
 
+              this.showIndexs = true;
+              this[store.state.curPage] = false;
+          },
+          jishiEvent(data){
+              console.log(data);
+              this.showIndexs = false;
+              this.showJsDetails = data.showPage;
+              store.state.curPage = 'showJsDetails';
+          }
       }
   }
 </script>
@@ -96,12 +122,12 @@
   }
   .shops-box{
     display: flex;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    /*border-top: 1px solid #ccc;*/
+    /*border-bottom: 1px solid #ccc;*/
   }
   .shops-box-box{
     flex: 1;
-    border-right: 1px solid #ccc;
+    /*border-right: 1px solid #ccc;*/
   }
   .shops-box-box:last-child{
     border-right: none;
@@ -125,5 +151,8 @@
     background-position: calc(100% - 10px);
     background-size: 12px;
     color: #808080;
+  }
+  .margin-top-header{
+    margin-top: 44px;
   }
 </style>

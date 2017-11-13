@@ -1,14 +1,13 @@
 <template>
   <!--头部-->
   <mt-header class="header-backcolor" style="height: 44px;" fixed title="">
-    <router-link to="#" slot="left">
-      <img style="width: 22px;" src="./../assets/img/indexicon.png" alt="">
-    </router-link>
-
-    <mt-button slot="right">
-      <img class="header-icon-btn" src="./../assets/img/header-icon.jpg" alt="">
+    <mt-button slot="left" @click="showIndex()">
+      <img style="width: 22px;" src="./../assets/img/indexicon.png">
     </mt-button>
 
+    <mt-button slot="right">
+      <img class="header-icon-btn" src="./../assets/img/header-icon.jpg">
+    </mt-button>
   </mt-header>
 </template>
 <script>
@@ -20,6 +19,14 @@
       data(){
           return {
               userid: 1
+          }
+      },
+      methods:{
+          showIndex(){
+              let data = {
+
+              };
+              this.$emit("activepage",data);
           }
       }
   }

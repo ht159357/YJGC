@@ -13,7 +13,7 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <a class="index-js-info" href="#" v-for="item in 5">
+        <a class="index-js-info" href="#" v-for="item in 5" @click="showJishiDetails(item)">
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" src="./../assets/img/js-1.jpg" alt="">
@@ -87,6 +87,13 @@
           var self = event.currentTarget;
           this.curNav = self.getAttribute("data-nav");
         },
+        showJishiDetails( id ){
+            let data = {
+                showPage:true,
+                jishiId:id
+            }
+            this.$emit("jsevent",data);
+        }
       },
       mounted(){
 
@@ -101,7 +108,7 @@
   }
   .index-main-nav{
     background: #eee;
-    padding-top: 5px;
+    padding-top: 10px;
   }
   .index-nav-box{
     display: flex;
