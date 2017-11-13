@@ -72,7 +72,7 @@
               <!--通知-->
               <div id="jis-yy-tz-box-in">
                 <div id="jis-yy-tz-box-in1">
-                  <a v-for="item in 10">测试文字{{item}}</a>
+                  <a v-for="item in 100">测试文字{{item}}</a>
                 </div>
                 <div id="jis-yy-tz-box-in2"></div>
               </div>
@@ -81,7 +81,7 @@
           <div class="jis-yy-tm">
             <div class="jis-yy-time">
               <span class="jis-yy-title">可预约时间</span>
-              <span>今日可约
+              <span class="jis-yy-bottom">今日可约
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-rili"></use>
                 </svg>
@@ -89,7 +89,7 @@
             </div>
             <div class="jis-yy-map">
               <span class="jis-yy-title">服务店铺</span>
-              <span>河西万达
+              <span class="jis-yy-bottom">河西万达
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-map"></use>i
                 </svg>
@@ -165,12 +165,6 @@ export default {
 
             }
             var timer = setInterval(Marquee,speed);
-            tab.onmouseover = function(){
-              clearInterval(timer);
-            };
-            tab.onmouseout = function(){
-              timer = setInterval(Marquee,speed);
-            }
         }
     }
 }
@@ -190,7 +184,7 @@ export default {
   .jis-info{
     flex: 0 0 47%;
     text-align: left;
-    padding-right: 1%;
+    padding-right: 0%;
     background-image: url(./../assets/img/border-1.png);
     background-repeat: no-repeat;
     background-position: right center;
@@ -257,14 +251,14 @@ export default {
     width: 18px;
     float: left;
     height: 40px;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-right: 10px;
   }
   .jis-yy-tz-box{
     overflow: hidden;
     height: 40px;
     line-height: 40px;
-    width: calc(100% - 38px);
+    width: calc(100% - 48px);
     position: relative;
     font-size:14px;
     font-weight:bold;
@@ -339,9 +333,11 @@ export default {
   }
   .jis-yy-tm{
     display: flex;
+    padding: 20px 0;
   }
   .jis-yy-time{
     flex: 1;
+    border-right: 1px solid #E0E0DF;
   }
   .jis-yy-map{
     flex: 1;
@@ -350,5 +346,9 @@ export default {
     display: inline-block;
     font-size: 12px;
     color: #9B9B9B;
+    width: 100%;
+  }
+  .jis-yy-bottom{
+
   }
 </style>
