@@ -144,6 +144,6 @@ export default {
     display: flex;
   }
   .jis-tab-one{
-    flex:;
+    flex: 1;
   }
 </style>
