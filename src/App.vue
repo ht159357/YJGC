@@ -1,10 +1,11 @@
 <template>
   <div id="app">
+    <img :src="loadingImg" v-show="false">
     <header-nav @activepage="showIndexActive"></header-nav>
     <div id="index-app" v-if="!showJsDetails && showIndexs ">
       <!--轮播-->
-      <div class="mint-swipe-container">
-        <mt-swipe :auto="0" :prevent="true">
+      <div class="mint-swipe-container margin-top-header" style="height: 200px;">
+        <mt-swipe :auto="2000" :prevent="true">
           <mt-swipe-item class="mint-swipe-item">
             <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg">
           </mt-swipe-item>
@@ -41,10 +42,11 @@
         </div>
       </div>
 
-      <index-main  @jsevent="jishiEvent"></index-main>
+      <index-main @jsevent="jishiEvent"></index-main>
     </div>
 
     <jishi-detail class="margin-top-header" v-if="showJsDetails"></jishi-detail>
+    <project-detail class="margin-top-header" v-if="showProjectDetails"></project-detail>
   </div>
 </template>
 
@@ -55,6 +57,7 @@
   import headerNav from "./components/header";
   import indexMain from './components/index-main';
   import jishiDetail from "./components/jishi-details";
+  import projectDetail from "./components/project-details"
 
 
   Vue.component(Swipe.name, Swipe);
@@ -65,13 +68,17 @@
       components:{
           indexMain,
           headerNav,
-          jishiDetail
+          jishiDetail,
+          projectDetail
       },
       store,
       data(){
           return {
+              pageList:["showJsDetails","showProjectDetails"],
               showIndexs: false,//显示首页
-              showJsDetails: true,//显示技师详情
+              showJsDetails: false,//显示技师详情
+              showProjectDetails: true,//显示具体项目
+              loadingImg:require("./assets/img/ball-loading.png")
           }
       },
       methods: {
@@ -87,9 +94,10 @@
           jishiEvent(data){
               console.log(data);
               this.showIndexs = false;
-              this.showJsDetails = data.showPage;
-              store.state.curPage = 'showJsDetails';
-          }
+              this[data.pageName] = data.showPage;
+              store.state.curPage = data.pageName;
+          },
+
       }
   }
 </script>
@@ -98,16 +106,18 @@
   @import "./assets/css/style.css";
   html,body{
     margin: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-  }
-  .mint-swipe-container{
-    margin-top: 44px;
-    height: 200px;
   }
   .mint-swipe-item{
     background: #5a676f;

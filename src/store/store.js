@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-  curPage:"showJsDetails"
+  curPage:"showProjectDetails"
 };
 
 const mutations= {

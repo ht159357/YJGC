@@ -13,7 +13,7 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <a class="index-js-info" v-for="item in 5" @click="showJishiDetails(item)">
+        <a class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" src="./../assets/img/js-1.jpg" alt="">
@@ -61,7 +61,7 @@
           </div>
           <div class="xm-one-box">
             <div class="xm-info" v-for="item in 8">
-              <img :src='"./../assets/img/nav-"+ item +".jpg"' alt="">
+              <img @click="showJishiDetails(item,'showProjectDetails')" :src='"./../assets/img/nav-"+ item +".jpg"' alt="">
             </div>
           </div>
         </div>
@@ -87,10 +87,11 @@
               var self = event.currentTarget;
               this.curNav = self.getAttribute("data-nav");
           },
-          showJishiDetails( id ){
+          showJishiDetails( id, name){
               let data = {
                   showPage:true,
-                  jishiId:id
+                  jishiId:id,
+                  pageName: name
               }
               this.$emit("jsevent",data);
           }
@@ -262,6 +263,7 @@
     flex: 0 0 25%;
     border: 1px solid #F7F6F7;
     border-top: none;
+    background: #fff;
   }
   .xm-one-box .xm-info:nth-child(1){
     border-left: none;
