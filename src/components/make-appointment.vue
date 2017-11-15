@@ -42,6 +42,7 @@
 <style>
   .app-body{
     background: #F0EFEF;
+    padding-bottom: 44px;
   }
   .app-viwe{
     margin-top: 10px;

@@ -150,6 +150,7 @@
 <style>
   .project-page{
     background: #EFEEEE;
+    padding-bottom: 50px;
   }
   .pro-price-box{
     margin: 10px;
@@ -286,7 +287,6 @@
   .pro-details{
     background: #fff;
     padding-top: 30px;
-    padding-bottom: 50px;
   }
   .pro-details-img{
     width: 100%;
