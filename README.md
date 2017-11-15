@@ -1,6 +1,6 @@
-# mint-demo
+# YJGC-Demo
 
-> mint-demo
+> YJGC-Demo
 
 ## Build Setup
 
