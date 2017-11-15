@@ -2,7 +2,7 @@
   <div id="app">
     <img :src="loadingImg" v-show="false">
     <header-nav @activepage="showIndexActive"></header-nav>
-    <div id="index-app" v-if="!showJsDetails && showIndexs ">
+    <div id="index-app" v-if="!$store.state.showJsDetails && $store.state.showIndexs ">
       <!--轮播-->
       <div class="mint-swipe-container margin-top-header" style="height: 200px;">
         <mt-swipe :auto="2000" :prevent="true">
@@ -45,8 +45,8 @@
       <index-main @jsevent="jishiEvent"></index-main>
     </div>
 
-    <jishi-detail class="margin-top-header" v-if="showJsDetails"></jishi-detail>
-    <project-detail class="margin-top-header" v-if="showProjectDetails"></project-detail>
+    <jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>
+    <project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>
   </div>
 </template>
 
@@ -74,27 +74,23 @@
       store,
       data(){
           return {
-              pageList:["showJsDetails","showProjectDetails"],
-              showIndexs: false,//显示首页
-              showJsDetails: false,//显示技师详情
-              showProjectDetails: true,//显示具体项目
               loadingImg:require("./assets/img/ball-loading.png")
           }
       },
       methods: {
           showIndexActive(data){
-              if( this.showIndexs ){
+              if( store.state.showIndexs ){
                 return;
               }
               console.log(data);
 
-              this.showIndexs = true;
-              this[store.state.curPage] = false;
+              store.state.showIndexs = true;
+              store.state[store.state.curPage] = false;
           },
           jishiEvent(data){
               console.log(data);
-              this.showIndexs = false;
-              this[data.pageName] = data.showPage;
+              store.state.showIndexs = false;
+              store.state[data.pageName] = data.showPage;
               store.state.curPage = data.pageName;
           },
 

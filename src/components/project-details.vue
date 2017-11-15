@@ -2,7 +2,7 @@
   <div class="project-page">
     <!--轮播-->
     <div class="mint-swipe-container">
-      <mt-swipe :auto="2000" :prevent="true" style="height: 250px;">
+      <mt-swipe :auto="0" :prevent="true" style="height: 250px;">
         <mt-swipe-item class="mint-swipe-item">
           <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a787d8c270c.jpg">
         </mt-swipe-item>
@@ -29,7 +29,7 @@
       </div>
       <div class="pro-price-right">
         <div class="pro-price">
-          <div class="pro-price-num">&yen;398999.1</div>
+          <div class="pro-price-num">&yen;39899.11</div>
           <div class="pro-price-title">价格</div>
         </div>
       </div>
@@ -47,6 +47,16 @@
     </div>
     <div class="pro-details">
       <img class="pro-details-img" src="./../assets/img/attention.jpg" alt="">
+    </div>
+    <div class="pro-bottom-box">
+      <div class="pro-choise-date">
+        <img src="./../assets/img/choise-date.png" alt="">
+        选时间
+      </div>
+      <div class="pro-choise-jishi">
+        <img src="./../assets/img/choise-jishi.png" alt="">
+        选匠师
+      </div>
     </div>
   </div>
 </template>
@@ -154,7 +164,7 @@
     border-radius: 4px;
     padding: 14px 0 8px;
     background: #FEE2E7;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #E71B4F;
     border-bottom: 1px solid #E71B4F;
@@ -164,7 +174,7 @@
   .pro-price-title{
     border-radius: 4px;
     padding: 2px 0;
-    font-size: 18px;
+    font-size: 16px;
     color: #E71B4F;
   }
   .pro-options-title{
@@ -207,8 +217,38 @@
   .pro-details{
     background: #fff;
     padding-top: 30px;
+    padding-bottom: 50px;
   }
   .pro-details-img{
     width: 100%;
+  }
+  .pro-bottom-box{
+    width: 100%;
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #2C2C2C;
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+  }
+  .pro-bottom-box img{
+    width: 24px;
+    vertical-align: -5px;
+  }
+  .pro-choise-date{
+    flex: 1;
+    background: #2C2C2C;
+    height: 48px;
+    line-height: 48px;
+  }
+  .pro-choise-jishi{
+    flex: 1;
+    background: #FC3353;
+    height: 48px;
+    line-height: 48px;
   }
 </style>
