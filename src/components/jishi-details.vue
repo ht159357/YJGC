@@ -757,5 +757,6 @@ export default {
   }
   .yj-g{
     border:1px solid #b6e8bb;
+    background: #DDF4DF;
   }
 </style>
