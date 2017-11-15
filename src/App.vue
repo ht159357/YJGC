@@ -47,18 +47,19 @@
 
     <jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>
     <project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>
+    <make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>
   </div>
 </template>
 
 <script>
   import Vue from 'vue';
   import store from './store/store'
-  import { Swipe, SwipeItem } from 'mint-ui';
+  import {Swipe, SwipeItem} from 'mint-ui';
   import headerNav from "./components/header";
   import indexMain from './components/index-main';
   import jishiDetail from "./components/jishi-details";
-  import projectDetail from "./components/project-details"
-
+  import projectDetail from "./components/project-details";
+  import makeAppointment from "./components/make-appointment";
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
@@ -69,7 +70,8 @@
           indexMain,
           headerNav,
           jishiDetail,
-          projectDetail
+          projectDetail,
+          makeAppointment
       },
       store,
       data(){
@@ -80,18 +82,19 @@
       methods: {
           showIndexActive(data){
               if( store.state.showIndexs ){
-                return;
+                  return;
               }
-              console.log(data);
-
               store.state.showIndexs = true;
               store.state[store.state.curPage] = false;
+              store.state.curPage = "";
+              console.log(store.state);
           },
           jishiEvent(data){
               console.log(data);
               store.state.showIndexs = false;
               store.state[data.pageName] = data.showPage;
               store.state.curPage = data.pageName;
+              console.log(store.state);
           },
 
       }
@@ -160,5 +163,12 @@
   }
   .margin-top-header{
     margin-top: 44px;
+  }
+  .icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
   }
 </style>

@@ -4,11 +4,13 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-  curPage:"",
-  pageList:["showJsDetails","showProjectDetails"],
-  showIndexs: true,//显示首页
+  curPage:"showAppointment",//当前页
+  pageList:["showJsDetails","showProjectDetails","showAppointment"],
+  showIndexs: false,//显示首页
   showJsDetails: false,//显示技师详情
   showProjectDetails: false,//显示具体项目
+  showAppointment:true,//显示预约界面
+  yyType:1,
 };
 
 const mutations= {

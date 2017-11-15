@@ -35,6 +35,14 @@
       </div>
     </div>
 
+    <!--好评率-->
+    <div class="goods-num-box">
+      <mt-cell title="好评度 100.00%" style="color: rgb(185,116,87);font-weight: bold;">
+        <span style="font-size: 12px;">共 100 个消费评价</span>
+        <img slot="icon" src="./../assets/img/damuzhi.png" width="16">
+      </mt-cell>
+    </div>
+
     <div class="pro-options" v-for="item in 5">
       <div class="pro-options-title">
         是否卸甲服务 （简单30分钟0.01元，日系60分钟0.01元）
@@ -48,21 +56,60 @@
     <div class="pro-details">
       <img class="pro-details-img" src="./../assets/img/attention.jpg" alt="">
     </div>
-    <div class="pro-bottom-box">
-      <div class="pro-choise-date">
+    <!--时间|匠师-->
+    <div class="pro-bottom-box" v-show="1">
+      <div class="pro-choise-date" @click="showAppointmentPage(1)">
         <img src="./../assets/img/choise-date.png" alt="">
         选时间
       </div>
-      <div class="pro-choise-jishi">
+      <div class="pro-choise-jishi" @click="showAppointmentPage(2)">
         <img src="./../assets/img/choise-jishi.png" alt="">
         选匠师
+      </div>
+    </div>
+    <!--款式|时间-->
+    <div class="pro-bottom-box" v-show="0">
+      <div class="pro-choise-date online-type" @click="">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-star1"></use>
+        </svg>
+        在线选款式
+      </div>
+      <div class="pro-choise-jishi online-date" @click="showAppointmentPage(3)">
+        选时间
+      </div>
+    </div>
+    <!--喜欢|店铺|时间-->
+    <div class="pro-bottom-box" v-show="0">
+      <div class="pro-choise-date shop-like-box">
+        <div>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-like-shop"></use>
+          </svg>
+          喜欢
+        </div>
+        <div>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shop"></use>
+          </svg>
+          店铺
+        </div>
+      </div>
+      <div class="pro-choise-jishi online-date" @click="showAppointmentPage(3)">
+        选时间
       </div>
     </div>
   </div>
 </template>
 <script>
+    import Vue from 'vue';
+    import { Cell } from 'mint-ui';
+    import store from "./../store/store";
+
+    Vue.component(Cell.name, Cell);
     export default {
         name: 'project-detail',
+        store,
         data(){
             return {
 
@@ -80,6 +127,22 @@
                       childEles[i].classList.remove("options-btn-active");
                     }
                 }
+            },
+            //type:1 选时间 通过日期和具体时间选择匠师预约
+            //type:2 选匠师 通过日期选择匠师的当天预约时间
+            //type:3 已选匠师 通过匠师选择具体日期和时间
+            showAppointmentPage( type ){
+                store.state.yyType = type;
+                var pagename = "showAppointment";
+                store.state.curPage = pagename;
+                store.state[pagename] = true;
+                store.state.showIndexs = false;
+                for( let i=0;i<store.state.pageList.length;i++ ){
+                  if( store.state.pageList[i] != pagename ){
+                    store.state[store.state.pageList[i]] = false;
+                  }
+                }
+                console.log(store.state);
             }
         }
     }
@@ -105,6 +168,13 @@
   .pro-name{
     font-size: 18px;
     font-weight: bold;
+  }
+  .icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
   }
   .pro-time{
     height: 30px;
@@ -200,9 +270,8 @@
   .pro-options-btn{
     display: inline-block;
     color: #5D5C5C;
-    margin-left: 35px;
     height: 30px;
-    margin: 10px 0 0 35px;
+    margin: 10px 0 0 15px;
     line-height: 30px;
     text-align: center;
     width: 75px;
@@ -231,13 +300,13 @@
     background: #2C2C2C;
     height: 48px;
     line-height: 48px;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     color: #fff;
   }
   .pro-bottom-box img{
-    width: 24px;
-    vertical-align: -5px;
+    width: 18px;
+    vertical-align: -4px;
   }
   .pro-choise-date{
     flex: 1;
@@ -250,5 +319,21 @@
     background: #FC3353;
     height: 48px;
     line-height: 48px;
+  }
+  .goods-num-box{
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .online-type,.online-date{
+    font-size: 14px;
+  }
+  .shop-like-box{
+    font-size: 14px;
+    display: flex;
+    background: #fff;
+    color: #666;
+  }
+  .shop-like-box>div{
+    flex: 0 0 50%;
   }
 </style>

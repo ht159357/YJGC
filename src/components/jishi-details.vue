@@ -160,7 +160,7 @@
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
 
         <div class="xm-one-box">
-          <div class="xm-info" v-for="item in 10">
+          <div @click="showProjectPage" class="xm-info" v-for="item in 10">
             <img :src='"./../assets/img/nav-"+ item +".jpg"' alt="">
           </div>
         </div>
@@ -169,7 +169,7 @@
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==2">
         <div class="jis-context-box">
           <!--单一评论-->
-          <a class="index-js-info" v-for="item in 5" @click="showJishiDetails(item)">
+          <a class="index-js-info" v-for="item in 5">
             <!--头像-->
             <div class="index-img-box">
               <img class="index-js-img" src="./../assets/img/header-icon.jpg" alt="">
@@ -302,13 +302,8 @@ export default {
                 'http://fuss10.elemecdn.com/7/a5/596ab03934612236f807b92906fd8jpeg.jpeg');
                 this.loading = false;
             }, 3000);
-        }
-    },
-    mounted(){
-        window.onload = function(){
-            scrollLeft();
-        };
-        function scrollLeft(){
+        },
+        scrollLeft(){
             var speed = 20;
             var tab = document.getElementById('jis-yy-tz-box-in');
             var tab1 = document.getElementById('jis-yy-tz-box-in1');
@@ -323,7 +318,27 @@ export default {
 
             }
             var timer = setInterval(Marquee,speed);
+        },
+        showProjectPage(){
+            var pagename = "showProjectDetails";
+            store.state.curPage = pagename;
+            store.state[pagename] = true;
+            store.state.showIndexs = false;
+            for( let i=0;i<store.state.pageList.length;i++ ){
+                if( store.state.pageList[i] != pagename ){
+                  store.state[store.state.pageList[i]] = false;
+                }
+            }
+            console.log(store.state);
         }
+    },
+    mounted(){
+        console.log(1);
+        this.scrollLeft();
+    }
+    ,activated(){
+        console.log(2);
+        this.scrollLeft();
     }
 }
 </script>
