@@ -4,13 +4,13 @@
     <div class="mint-swipe-container">
       <mt-swipe :auto="0" :prevent="true" style="height: 250px;">
         <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img pro-swipe-img" v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a787d8c270c.jpg'">
+          <img class="swipe-img pro-swipe-img" v-lazy="'http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg'">
         </mt-swipe-item>
         <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img pro-swipe-img" v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a7d5b9d439b.jpg'">
+          <img class="swipe-img pro-swipe-img" v-lazy="'http://fuss10.elemecdn.com/3/1e/42634e29812e6594c98a89e922c60jpeg.jpeg'">
         </mt-swipe-item>
         <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img pro-swipe-img" v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a778927ab79.jpg'">
+          <img class="swipe-img pro-swipe-img" v-lazy="'http://fuss10.elemecdn.com/1/c5/95c37272d3e554317dcec1e17a9f5jpeg.jpeg'">
         </mt-swipe-item>
       </mt-swipe>
     </div>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-
+    
     <!--好评率-->
     <div class="goods-num-box">
       <mt-cell title="好评度 100.00%" style="color: rgb(185,116,87);font-weight: bold;">

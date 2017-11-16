@@ -392,7 +392,7 @@ export default {
     fill: currentColor;
     overflow: hidden;
   }
-  .icon-arr{
+  .icon.icon-arr{
     font-size: 12px;
   }
   .jis-cell{
@@ -429,12 +429,12 @@ export default {
     margin-top: 10px;
     font-size: 12px;
   }
-  .icon-like{
+  .icon.icon-like{
     font-size: 14px;
     margin-right: 5px;
     margin-left: -5px;
   }
-  .icon-tz{
+  .icon.icon-tz{
     width: 18px;
     float: left;
     height: 40px;
@@ -618,7 +618,7 @@ export default {
     float: right;
     font-weight: normal;
   }
-  .icon-right-arr{
+  .icon.icon-right-arr{
     vertical-align: -1px;
   }
   .jis-pro-box{
@@ -657,12 +657,12 @@ export default {
   }
   .jis-pro-name{
     color: #bbb;
+    font-size: 14px;
   }
   .jis-pro-price{
     color: rgb(251,52,83);
     font-weight: bold;
     font-size: 18px;
-    padding: 5px 0;
   }
   .jis-pro-ul{
     display: flex;
