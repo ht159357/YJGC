@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <img :src="loadingImg" v-show="false">
     <header-nav @activepage="showIndexActive"></header-nav>
     <div id="index-app" v-if="!$store.state.showJsDetails && $store.state.showIndexs ">
       <!--轮播-->
       <div class="mint-swipe-container margin-top-header" style="height: 200px;">
         <mt-swipe :auto="2000" :prevent="true">
           <mt-swipe-item class="mint-swipe-item">
-            <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg">
+            <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg'" class="swipe-img index-swipe-img">
           </mt-swipe-item>
           <mt-swipe-item class="mint-swipe-item">
-            <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-18/5996b33598248.jpg">
+            <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-18/5996b33598248.jpg'" class="swipe-img index-swipe-img">
           </mt-swipe-item>
           <mt-swipe-item class="mint-swipe-item">
-            <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-05/59ae079009e5d.jpg">
+            <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-05/59ae079009e5d.jpg'" class="swipe-img index-swipe-img">
           </mt-swipe-item>
         </mt-swipe>
       </div>
@@ -170,5 +169,11 @@
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+  }
+  .index-swipe-img[lazy=loading] {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    background: url("./assets/img/loading.svg") no-repeat center #ddd;
   }
 </style>

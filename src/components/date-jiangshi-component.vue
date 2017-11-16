@@ -6,19 +6,19 @@
     </div>
     <!--匠师列表-->
     <!--没有匠师缺省-->
-    <div class="jiangshi-no-data" v-if="0">
+    <div class="jiangshi-no-data" v-if="1">
       该时段没有匠师可以约了(^_^)
     </div>
     <div class="jiangshi-list">
       <!--单个匠师-->
-      <div class="jiangshi-one" v-for="item in 5">
+      <div class="jiangshi-one" v-for="(item,index) in 5">
         <div class="jiangshi-header">
-          <img src="./../assets/img/js-2.jpg" class="jiangshi-icon">
+          <img v-lazy="require('./../assets/img/js-2.jpg')" class="jiangshi-icon">
         </div>
         <div class="jiangshi-info">
           <div class="jiangshi-box-info">
             <span class="jiangshi-name">玲玲</span>
-            <span class="jiangshi-choies">选择</span>
+            <span class="jiangshi-choies" :data-jiangshi="index" :class="[{'jiangshi-choies-active': jiangshiFlag == index}]" @click="jsPikerAtive($event)">选择</span>
           </div>
           <div class="jiangshi-details mint-header-title">
             擅长的手艺:加时,加时,加时,加时,纯色美甲,纯色美甲体验,加时,加时,加时,加时,加时,猫眼美甲,线条款式,美钻款式,加时,加时,简易日系,经典日系,加时,新娘美甲,专属定制,纯色卸甲,美钻卸甲,日系卸甲,美足卸甲
@@ -41,9 +41,33 @@
 </template>
 <script>
     export default {
-        name:"date-jiangshi-component"
+        name:"date-jiangshi-component",
+        data(){
+            return {
+                jiangshiFlag: null
+            }
+        },
+        methods:{
+            jsPikerAtive(event){
+                let self = event.currentTarget;
+                let flag = self.getAttribute("data-jiangshi");
+                if( this.jiangshiFlag == flag ){
+                  this.jiangshiFlag = null;
+                    return;
+                }
+                this.jiangshiFlag = flag;
+
+            },
+        }
     }
 </script>
+<style scoped>
+  .jiangshi-icon[lazy=loading]{
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+</style>
 <style>
   .jiangshi-box{
     margin-top: 10px;
@@ -112,5 +136,9 @@
   }
   .jiangshi-level{
     margin-top: 10px;
+  }
+  .jiangshi-choies-active{
+    background: #FC3353;
+    color: #fff;
   }
 </style>

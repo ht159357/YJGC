@@ -10,7 +10,7 @@ const state = {
   showJsDetails: false,//显示技师详情
   showProjectDetails: false,//显示具体项目
   showAppointment:true,//显示预约界面
-  yyType:1,
+  yyType:2,
 };
 
 const mutations= {

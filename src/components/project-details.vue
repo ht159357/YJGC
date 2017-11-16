@@ -4,13 +4,13 @@
     <div class="mint-swipe-container">
       <mt-swipe :auto="0" :prevent="true" style="height: 250px;">
         <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a787d8c270c.jpg">
+          <img class="swipe-img pro-swipe-img" v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a787d8c270c.jpg'">
         </mt-swipe-item>
         <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a7d5b9d439b.jpg">
+          <img class="swipe-img pro-swipe-img" v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a7d5b9d439b.jpg'">
         </mt-swipe-item>
         <mt-swipe-item class="mint-swipe-item">
-          <img class="swipe-img" src="http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a778927ab79.jpg">
+          <img class="swipe-img pro-swipe-img" v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-31/59a778927ab79.jpg'">
         </mt-swipe-item>
       </mt-swipe>
     </div>
@@ -147,6 +147,13 @@
         }
     }
 </script>
+<style scoped>
+  [lazy=loading]{
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+</style>
 <style>
   .project-page{
     background: #EFEEEE;

@@ -2,7 +2,7 @@
  * Created by hutao on 2017/11/15.
  */
 export default{
-  getThirtyDays
+  getThirtyDays,
 }
 function getThirtyDays(){
   //返回三十天的日期数组
@@ -22,6 +22,5 @@ function getThirtyDays(){
     })
     startDate.setDate(startDate.getDate() + 1);
   }
-  console.log(dataArr);
   return dataArr;
 }

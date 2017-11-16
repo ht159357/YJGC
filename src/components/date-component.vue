@@ -26,6 +26,7 @@
             datePikerAtive(event){
                 let self = event.currentTarget;
                 this.dateFlag = self.getAttribute("date-flag");
+
             },
         },
         beforeMount(){
@@ -36,6 +37,7 @@
 <style>
   .date-date-box{
     display: flex;
+    background: #fff;
     padding:10px 0 0;
     border-top:1px solid #EDEBEC;
     border-bottom:1px solid #EDEBEC;

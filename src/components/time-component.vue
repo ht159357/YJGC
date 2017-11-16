@@ -14,7 +14,7 @@
         name:"time-component",
         data(){
             return{
-                timeFlag: 0
+                timeFlag: null
             }
         },
         methods:{

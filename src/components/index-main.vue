@@ -16,7 +16,7 @@
         <a class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
           <!--头像-->
           <div class="index-img-box">
-            <img class="index-js-img" src="./../assets/img/js-1.jpg" alt="">
+            <img class="index-js-img" v-lazy="require('./../assets/img/js-1.jpg')" alt="">
           </div>
           <!--技师信息-->
           <div class="index-info-box">
@@ -61,7 +61,7 @@
           </div>
           <div class="xm-one-box">
             <div class="xm-info" v-for="item in 8">
-              <img @click="showJishiDetails(item,'showProjectDetails')" :src='"./../assets/img/nav-"+ item +".jpg"' alt="">
+              <img @click="showJishiDetails(item,'showProjectDetails')" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
             </div>
           </div>
         </div>
@@ -71,10 +71,6 @@
   </div>
 </template>
 <script>
-  import Vue from 'vue'
-  import { Lazyload } from 'mint-ui';
-
-  Vue.use(Lazyload);
   export default {
       name:'index-main',
       data(){
@@ -101,12 +97,14 @@
       }
   }
 </script>
-<style>
-  image[lazy=loading] {
-    width: 40px;
-    height: 300px;
-    margin: auto;
+<style scoped>
+  [lazy=loading] {
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
   }
+</style>
+<style>
   .index-main-nav{
     background: #eee;
     padding-top: 10px;

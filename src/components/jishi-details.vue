@@ -2,7 +2,7 @@
   <div class="jis-detail-box">
     <div class="jis-info-box" :style="jisinfobox">
       <div class="jis-header">
-        <img class="jis-header-img" src="./../assets/img/js-2.jpg" alt="">
+        <img class="jis-header-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
       </div>
       <div class="jis-info">
         <div class="jis-cell">
@@ -139,12 +139,12 @@
             v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10" style="width: 100%;">
-            <li class="jis-pro-li" v-for="item in list">
+            <li class="jis-pro-li" v-for="(item,index) in list">
               <div class="jis-pro-one">
                 <div class="jis-pro-img-box">
                   <img class="jis-pro-img" v-lazy="item">
                   <div class="jis-pro-info">
-                    <span class="jis-pro-name">自然款</span>
+                    <span class="jis-pro-name">自然款{{index}}</span>
                     <span class="jis-pro-price">&yen;258</span>
                   </div>
                 </div>
@@ -161,7 +161,7 @@
 
         <div class="xm-one-box">
           <div @click="showProjectPage" class="xm-info" v-for="item in 10">
-            <img :src='"./../assets/img/nav-"+ item +".jpg"' alt="">
+            <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item +".jpg")' alt="">
           </div>
         </div>
 
@@ -237,9 +237,6 @@ import store from './../store/store';
 import { Popup } from 'mint-ui';
 import { InfiniteScroll } from 'mint-ui';
 import { Spinner } from 'mint-ui';
-import { Lazyload } from 'mint-ui';
-
-Vue.use(Lazyload);
 Vue.component(Spinner.name, Spinner);
 Vue.component(Popup.name, Popup);
 Vue.use(InfiniteScroll);
@@ -342,6 +339,18 @@ export default {
     }
 }
 </script>
+<style scoped>
+  .index-js-img[lazy=loading],.jis-yy-img[lazy=loading]{
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  .jis-header-img[lazy=loading]{
+    width: 80%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+</style>
 <style>
   .jis-detail-box{
     background: #F7F7F7;
@@ -693,21 +702,14 @@ export default {
   .xm-info img{
     width: 100%;
   }
-  .jis-pro-img[lazy=loading] {
-    width: 90%;
-    height: 150px;
-    margin: 0 auto;
-    background: #ddd;
-  }
 </style>
 <style scoped>
   .index-js-info{
     display: flex;
-    padding: 8px 0;
+    padding: 10px 0;
     text-decoration: none;color: inherit;
     border-bottom: 1px solid #eee;
     align-items: flex-start;
-    padding-top: 5px;
   }
   .index-img-box{
     display: inline-block;
@@ -773,5 +775,11 @@ export default {
   .yj-g{
     border:1px solid #b6e8bb;
     background: #DDF4DF;
+  }
+  .jis-pro-img[lazy=loading] {
+    width: 90%;
+    height: 150px;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
   }
 </style>
