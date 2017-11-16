@@ -4,3 +4,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+div.mint-swipe-indicator.is-active{
+  background: #FB3453;
+  opacity: 1;
+}

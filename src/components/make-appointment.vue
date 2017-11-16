@@ -1,78 +1,103 @@
 <template>
   <div class="app-body">
-    <div class="app-header">
-      <div class="app-shop-title">
-        店面：
-      </div>
-      <div class="app-shop-name mint-header-title">
-        南昌万达店
-      </div>
-      <a href="http://map.baidu.com/mobile/webapp/place/marker/qt=inf&vt=map&act=read_share&code=315/third_party=uri_api&point=118.791511|32.04711&title=颜匠工场&content=颜匠工场 新百店=pcqq.c2c" class="app-shop-addr">
-        <svg class="icon app-icon-right-arr" aria-hidden="true" style="vertical-align: -0.1em;"><use xlink:href="#icon-position"></use></svg>
-        具体位置
-      </a>
-      <div class="app-shop-index">
-        切换门店<svg class="icon icon-right-arr" aria-hidden="true"><use xlink:href="#icon-right-arr-red"></use></svg>
-      </div>
-    </div>
-    <appointment-date class="app-viwe" v-if="$store.state.yyType == 1"></appointment-date>
-    <appointment-js class="app-viwe" v-if="$store.state.yyType == 2"></appointment-js>
-    <appointment-time class="app-viwe" v-if="$store.state.yyType == 3"></appointment-time>
-    <!--{{$store.state.showGoodDetails}}-->
-    <!--商品信息-->
-    <div class="goods-detals-box">
-      <div class="goods-one">
-        <div class="goods-one-left">
-          <img src="./../assets/img/header-icon.jpg">
+      <div class="app-header">
+        <div class="app-shop-title">
+          店面：
         </div>
-        <div class="goods-one-right">
-          <div class="goods-one-1">
-            <span class="goods-name">低调的华丽</span>
-            <span class="goods-price">&yen;198</span>
-          </div>
-          <div class="goods-one-1">
-            <span class="goods-sellname">手艺人: 萌萌</span>
-          </div>
+        <div class="app-shop-name mint-header-title">
+          南昌万达店
+        </div>
+        <a href="http://map.baidu.com/mobile/webapp/place/marker/qt=inf&vt=map&act=read_share&code=315/third_party=uri_api&point=118.791511|32.04711&title=颜匠工场&content=颜匠工场 新百店=pcqq.c2c" class="app-shop-addr">
+          <svg class="icon app-icon-right-arr" aria-hidden="true" style="vertical-align: -0.1em;"><use xlink:href="#icon-position"></use></svg>
+          具体位置
+        </a>
+        <div class="app-shop-index" @click="backIndex()">
+          切换门店<svg class="icon icon-right-arr" aria-hidden="true"><use xlink:href="#icon-right-arr-red"></use></svg>
         </div>
       </div>
-    </div>
-    <!--支付-->
-    <div class="yy-pay-btn" v-if="$store.state.shopType == 1">
-      预约支付 &yen; 10
-    </div>
-    <!--选过匠师支付-->
-    <div class="yy-pay-btn yy-pay-btn-2" v-if="$store.state.shopType == 2 || $store.state.shopType == 3">
-      <div class="pay-btn-left">
-        预约&yen;158（颜币：0.00）
+      <appointment-date class="app-viwe" v-if="$store.state.yyType == 1"></appointment-date>
+      <appointment-js class="app-viwe" v-if="$store.state.yyType == 2"></appointment-js>
+      <appointment-time class="app-viwe" v-if="$store.state.yyType == 3"></appointment-time>
+      <!--{{$store.state.showGoodDetails}}-->
+      <!--商品信息-->
+      <div class="goods-detals-box">
+        <div class="goods-one">
+          <div class="goods-one-left">
+            <img src="./../assets/img/header-icon.jpg">
+          </div>
+          <div class="goods-one-right">
+            <div class="goods-one-1">
+              <span class="goods-name">低调的华丽</span>
+              <span class="goods-price">&yen;198</span>
+            </div>
+            <div class="goods-one-1">
+              <span class="goods-sellname">手艺人: 萌萌</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="pay-btn-right">
-        提交订单
+      <!--支付-->
+      <div class="yy-pay-btn" v-if="$store.state.shopType == 1" @click="payIt()">
+        预约支付 &yen; 10
       </div>
-    </div>
+      <!--选过匠师支付-->
+      <div class="yy-pay-btn yy-pay-btn-2" v-if="$store.state.shopType == 2 || $store.state.shopType == 3">
+        <div class="pay-btn-left">
+          预约&yen;158（颜币：0.00）
+        </div>
+        <div class="pay-btn-right">
+          提交订单
+        </div>
+      </div>
+
   </div>
 </template>
 <script>
     import appointmentDate from "./appointment-date";
     import appointmentJs from "./appointment-js";
     import appointmentTime from "./appointment-time";
+    import store from './../store/store';
 
     export default {
         name:"make-appointment",
         components:{
             appointmentDate,
             appointmentJs,
-            appointmentTime
+            appointmentTime,
         },
         data(){
             return {
 
+            }
+        },
+        store,
+        methods:{
+            backIndex(){
+                if( store.state.showIndexs ){
+                    return;
+                }
+                store.state.showIndexs = true;
+                store.state[store.state.curPage] = false;
+                store.state.curPage = "";
+            },
+            payIt(){
+                let pagename = "showYySuccess";
+                store.state.curPage = pagename;
+                store.state[pagename] = true;
+                store.state.showIndexs = false;
+                for( let i=0;i<store.state.pageList.length;i++ ){
+                    if( store.state.pageList[i] != pagename ){
+                        store.state[store.state.pageList[i]] = false;
+                    }
+                }
+                console.log(store.state);
             }
         }
     }
 </script>
 <style>
   .app-body{
-    background: #F0EFEF;
+    background: #F7F5F4;
     padding-bottom: 44px;
   }
   .app-viwe{

@@ -47,6 +47,7 @@
     <jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>
     <project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>
     <make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>
+    <yy-success class="margin-top-header" v-if="$store.state.showYySuccess"></yy-success>
   </div>
 </template>
 
@@ -59,6 +60,7 @@
   import jishiDetail from "./components/jishi-details";
   import projectDetail from "./components/project-details";
   import makeAppointment from "./components/make-appointment";
+  import yySuccess from "./components/yy-success";
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
@@ -70,7 +72,8 @@
           headerNav,
           jishiDetail,
           projectDetail,
-          makeAppointment
+          makeAppointment,
+          yySuccess
       },
       store,
       data(){
@@ -105,6 +108,7 @@
   html,body{
     margin: 0;
     -webkit-tap-highlight-color: transparent;
+    background: #F7F5F5;
   }
   ul{
     list-style: none;
@@ -163,7 +167,7 @@
   .margin-top-header{
     margin-top: 44px;
   }
-  .icon {
+  .icon{
     width: 1em;
     height: 1em;
     vertical-align: -0.15em;
@@ -175,9 +179,5 @@
     height: 200px;
     margin: 0 auto;
     background: url("./assets/img/loading.svg") no-repeat center #ddd;
-  }
-  .mint-swipe-indicator.is-active{
-    background: #FB3453;
-    opacity: 1;
   }
 </style>
