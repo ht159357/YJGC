@@ -71,6 +71,7 @@
   </div>
 </template>
 <script>
+  import store from './../store/store'
   export default {
       name:'index-main',
       data(){
@@ -78,6 +79,7 @@
               curNav: 1
           }
       },
+      store,
       methods:{
           activePage(event){//切换page
               var self = event.currentTarget;
@@ -90,6 +92,8 @@
                   pageName: name
               }
               this.$emit("jsevent",data);
+              store.state.shopType = 1;
+              store.state.showGoodDetails = false;
           }
       },
       mounted(){

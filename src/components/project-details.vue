@@ -56,8 +56,8 @@
     <div class="pro-details">
       <img class="pro-details-img" src="./../assets/img/attention.jpg" alt="">
     </div>
-    <!--时间|匠师-->
-    <div class="pro-bottom-box" v-show="1">
+    <!--时间|匠师   shopType = 1-->
+    <div class="pro-bottom-box" v-if="$store.state.shopType == 1">
       <div class="pro-choise-date" @click="showAppointmentPage(1)">
         <img src="./../assets/img/choise-date.png" alt="">
         选时间
@@ -67,9 +67,9 @@
         选匠师
       </div>
     </div>
-    <!--款式|时间-->
-    <div class="pro-bottom-box" v-show="0">
-      <div class="pro-choise-date online-type" @click="">
+    <!--款式|时间   shopType = 2-->
+    <div class="pro-bottom-box" v-if="$store.state.shopType == 2">
+      <div class="pro-choise-date online-type" @click="backJsDetails()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-star1"></use>
         </svg>
@@ -79,8 +79,8 @@
         选时间
       </div>
     </div>
-    <!--喜欢|店铺|时间-->
-    <div class="pro-bottom-box" v-show="0">
+    <!--喜欢|店铺|时间   shopType = 3-->
+    <div class="pro-bottom-box" v-if="$store.state.shopType == 3">
       <div class="pro-choise-date shop-like-box">
         <div>
           <svg class="icon" aria-hidden="true">
@@ -88,7 +88,7 @@
           </svg>
           喜欢
         </div>
-        <div>
+        <div @click="backJsDetails()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shop"></use>
           </svg>
@@ -142,7 +142,17 @@
                     store.state[store.state.pageList[i]] = false;
                   }
                 }
-                console.log(store.state);
+            },
+            backJsDetails(){
+                var pagename = "showJsDetails";
+                store.state.curPage = pagename;
+                store.state[pagename] = true;
+                store.state.showIndexs = false;
+                for( let i=0;i<store.state.pageList.length;i++ ){
+                  if( store.state.pageList[i] != pagename ){
+                    store.state[store.state.pageList[i]] = false;
+                  }
+                }
             }
         }
     }

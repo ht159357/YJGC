@@ -4,7 +4,7 @@
     <div id="index-app" v-if="!$store.state.showJsDetails && $store.state.showIndexs ">
       <!--轮播-->
       <div class="mint-swipe-container margin-top-header" style="height: 200px;">
-        <mt-swipe :auto="2000" :prevent="true">
+        <mt-swipe :auto="0" :prevent="true">
           <mt-swipe-item class="mint-swipe-item">
             <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg'" class="swipe-img index-swipe-img">
           </mt-swipe-item>
@@ -175,5 +175,9 @@
     height: 200px;
     margin: 0 auto;
     background: url("./assets/img/loading.svg") no-repeat center #ddd;
+  }
+  .mint-swipe-indicator.is-active{
+    background: #FB3453;
+    opacity: 1;
   }
 </style>

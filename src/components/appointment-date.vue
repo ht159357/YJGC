@@ -6,10 +6,6 @@
       <time-component></time-component>
     </div>
     <date-jiangshi-component></date-jiangshi-component>
-    <!--支付-->
-    <div class="yy-pay-btn">
-      预约支付 &yen; 10
-    </div>
   </div>
 </template>
 <script>
@@ -39,23 +35,8 @@
 
 </script>
 <style>
-  .date-body{
-    margin-bottom: 44px;
-  }
   .date-box{
     background: #fff;
     text-align: left;
-  }
-  .yy-pay-btn{
-    width: 100%;
-    font-size: 16px;
-    color: #fff;
-    font-weight: bold;
-    height: 44px;
-    line-height: 44px;
-    background: #2C2C2C;
-    position: fixed;
-    bottom: 0;
-    left: 0;
   }
 </style>

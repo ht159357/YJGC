@@ -139,7 +139,8 @@
             v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10" style="width: 100%;">
-            <li class="jis-pro-li" v-for="(item,index) in list">
+            <li class="jis-pro-li" v-for="(item,index) in list"
+                @click="showProjectPage(3,true)">
               <div class="jis-pro-one">
                 <div class="jis-pro-img-box">
                   <img class="jis-pro-img" v-lazy="item">
@@ -160,8 +161,8 @@
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
 
         <div class="xm-one-box">
-          <div @click="showProjectPage" class="xm-info" v-for="item in 10">
-            <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item +".jpg")' alt="">
+          <div @click="showProjectPage(2,false)" class="xm-info" v-for="item in 10">
+            <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
           </div>
         </div>
 
@@ -316,7 +317,7 @@ export default {
             }
             var timer = setInterval(Marquee,speed);
         },
-        showProjectPage(){
+        showProjectPage(shoptype,showgood){
             var pagename = "showProjectDetails";
             store.state.curPage = pagename;
             store.state[pagename] = true;
@@ -326,7 +327,12 @@ export default {
                   store.state[store.state.pageList[i]] = false;
                 }
             }
-            console.log(store.state);
+            store.state.shopType = shoptype;
+            if(showgood){
+                store.state.showGoodDetails = true;
+            }else{
+              store.state.showGoodDetails = false;
+            }
         }
     },
     mounted(){
