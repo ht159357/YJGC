@@ -1,8 +1,8 @@
 <template>
   <div class="my-Page-box">
-    <div class="my-header-box">
+    <div class="my-header-box" :style="">
       <div class="my-header-icon">
-        <img src="./../assets/img/header-icon.jpg" alt="">
+        <img src="./../assets/img/header-icon.jpg">
       </div>
       <p class="my-name" :class="[
           {'level-color-1':userLevel==1},
@@ -69,7 +69,11 @@
                 userLevel: 1,
                 userMaxExp: 1000,
                 userExp: 800,
-                userExpWidth:null
+                userExpWidth:null,
+                headerBackStyle:{
+                    "background": "url("+require('./../assets/img/sharecenter-heade-bg.png')+") no-repeat 50%",
+                    "background-size": "100%"
+                }
             }
         },
         beforeMount(){
