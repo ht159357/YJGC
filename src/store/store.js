@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+let localData = localStorage;
+
 Vue.use(Vuex);
 
 const state = {
