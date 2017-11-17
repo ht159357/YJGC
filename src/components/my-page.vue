@@ -1,6 +1,6 @@
 <template>
   <div class="my-Page-box">
-    <div class="my-header-box" :style="">
+    <div class="my-header-box" :style="headerBackStyle">
       <div class="my-header-icon">
         <img src="./../assets/img/header-icon.jpg">
       </div>
@@ -88,8 +88,6 @@
     background: #fff;
   }
   .my-header-box{
-    background: url("./../assets/img/sharecenter-heade-bg.png") no-repeat center;
-    background-size: 100%;
     padding-bottom: 15px;
   }
   .my-header-icon{
