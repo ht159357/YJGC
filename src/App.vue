@@ -48,6 +48,7 @@
     <project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>
     <make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>
     <yy-success class="margin-top-header" v-if="$store.state.showYySuccess"></yy-success>
+    <my-page class="margin-top-header" v-if="$store.state.showMyPage"></my-page>
   </div>
 </template>
 
@@ -61,6 +62,7 @@
   import projectDetail from "./components/project-details";
   import makeAppointment from "./components/make-appointment";
   import yySuccess from "./components/yy-success";
+  import myPage from "./components/my-page"
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
@@ -73,7 +75,8 @@
           jishiDetail,
           projectDetail,
           makeAppointment,
-          yySuccess
+          yySuccess,
+          myPage
       },
       store,
       data(){
