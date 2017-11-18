@@ -1,5 +1,43 @@
 <template>
   <div class="index-main-nav">
+    <!--轮播-->
+    <div class="mint-swipe-container" style="height: 200px;">
+      <mt-swipe :auto="0" :prevent="true">
+        <mt-swipe-item class="mint-swipe-item">
+          <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg'" class="swipe-img index-swipe-img">
+        </mt-swipe-item>
+        <mt-swipe-item class="mint-swipe-item">
+          <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-18/5996b33598248.jpg'" class="swipe-img index-swipe-img">
+        </mt-swipe-item>
+        <mt-swipe-item class="mint-swipe-item">
+          <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-05/59ae079009e5d.jpg'" class="swipe-img index-swipe-img">
+        </mt-swipe-item>
+      </mt-swipe>
+    </div>
+
+    <div class="shops-box">
+      <div class="shops-box-box">
+        <select class="select-reset" name="province">
+          <option value="1">江苏省</option>
+          <option value="2">上海市</option>
+          <option value="3">江西省</option>
+        </select>
+      </div>
+      <div class="shops-box-box">
+        <select class="select-reset" name="city">
+          <option value="1">南京市</option>
+          <option value="2">上海市</option>
+          <option value="3">南昌市</option>
+        </select>
+      </div>
+      <div class="shops-box-box">
+        <select class="select-reset" name="city">
+          <option value="1">南京店</option>
+          <option value="2">上海店</option>
+          <option value="1">南昌万达店</option>
+        </select>
+      </div>
+    </div>
     <div class="index-nav-box">
       <div class="index-nav-tab" data-nav="1" @click="activePage($event)" :class="[{ 'index-nav-tab-active index-nav-tab-active1': curNav == 1 } ]">
         <span class="index-nav-tab-title">
@@ -13,7 +51,7 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <a class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
+        <router-link :to="'/jiangshi:'+item" class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" v-lazy="require('./../assets/img/js-1.jpg')" alt="">
@@ -47,7 +85,7 @@
               </span>
             </div>
           </div>
-        </a>
+        </router-link>
       </div>
     </div>
     <div class="index-nav-page" v-show="curNav==2">
@@ -60,9 +98,9 @@
             </div>
           </div>
           <div class="xm-one-box">
-            <div class="xm-info" v-for="item in 8">
+            <router-link :to="'/project'" class="xm-info" v-for="item in 8">
               <img @click="showJishiDetails(item,'showProjectDetails')" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
-            </div>
+            </router-link>
           </div>
         </div>
 
@@ -111,10 +149,10 @@
 <style>
   .index-main-nav{
     background: #eee;
-    padding-top: 10px;
   }
   .index-nav-box{
     display: flex;
+    margin-top: 10px;
   }
   .index-nav-tab{
     flex: 1;

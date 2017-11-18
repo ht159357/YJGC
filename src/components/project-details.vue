@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    
+
     <!--好评率-->
     <div class="goods-num-box">
       <mt-cell title="好评度 100.00%" style="color: rgb(185,116,87);font-weight: bold;">
@@ -57,7 +57,7 @@
       <img class="pro-details-img" src="./../assets/img/attention.jpg" alt="">
     </div>
     <!--时间|匠师   shopType = 1-->
-    <div class="pro-bottom-box" v-if="$store.state.shopType == 1">
+    <div class="pro-bottom-box" v-if="shopType == 1">
       <div class="pro-choise-date" @click="showAppointmentPage(1)">
         <img src="./../assets/img/choise-date.png" alt="">
         选时间
@@ -68,7 +68,7 @@
       </div>
     </div>
     <!--款式|时间   shopType = 2-->
-    <div class="pro-bottom-box" v-if="$store.state.shopType == 2">
+    <div class="pro-bottom-box" v-if="shopType == 2">
       <div class="pro-choise-date online-type" @click="backJsDetails()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-star1"></use>
@@ -80,7 +80,7 @@
       </div>
     </div>
     <!--喜欢|店铺|时间   shopType = 3-->
-    <div class="pro-bottom-box" v-if="$store.state.shopType == 3">
+    <div class="pro-bottom-box" v-if="shopType == 3">
       <div class="pro-choise-date shop-like-box">
         <div>
           <svg class="icon" aria-hidden="true">
@@ -112,8 +112,12 @@
         store,
         data(){
             return {
-
+                shopType:this.$route.params.shopType,
+                goodsId:this.$route.params.goodsId
             }
+        },
+        activated(){
+            console.log(this.$route.params);
         },
         methods:{
             btnSwitch(event){

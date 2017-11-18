@@ -2,7 +2,9 @@
   <!--头部-->
   <mt-header class="header-backcolor" style="height: 44px;" fixed title="颜匠工场">
     <mt-button slot="left" @click="showIndex()">
-      <img style="width: 22px;" src="./../assets/img/indexicon.png">
+      <router-link to="/">
+        <img style="width: 22px;" src="./../assets/img/indexicon.png">
+      </router-link>
     </mt-button>
 
     <mt-button slot="right" @click="showMyPage">

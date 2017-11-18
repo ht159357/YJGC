@@ -139,17 +139,20 @@
             v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10" style="width: 100%;">
-            <li class="jis-pro-li" v-for="(item,index) in list"
-                @click="showProjectPage(3,true)">
-              <div class="jis-pro-one">
-                <div class="jis-pro-img-box">
-                  <img class="jis-pro-img" v-lazy="item">
-                  <div class="jis-pro-info">
-                    <span class="jis-pro-name">自然款{{index}}</span>
-                    <span class="jis-pro-price">&yen;258</span>
+            <li class="jis-pro-li" v-for="(item,index) in list">
+              <router-link :to="'/project/'+index+'/'+3"
+                @click="showProjectPage(3,true)"
+                class="router-link">
+                <div class="jis-pro-one">
+                  <div class="jis-pro-img-box">
+                    <img class="jis-pro-img" v-lazy="item">
+                    <div class="jis-pro-info">
+                      <span class="jis-pro-name">自然款{{index}}</span>
+                      <span class="jis-pro-price">&yen;258</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </router-link>
             </li>
           </ul>
           <div class="jis-loadmore" v-show="loading">
@@ -161,9 +164,9 @@
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
 
         <div class="xm-one-box">
-          <div @click="showProjectPage(2,false)" class="xm-info" v-for="item in 10">
+          <router-link :to="'/project/'+ item +'/'+ 2" @click="showProjectPage(2,false)" class="xm-info" v-for="item in 10">
             <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
-          </div>
+          </router-link>
         </div>
 
       </div>

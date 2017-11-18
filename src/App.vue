@@ -1,54 +1,12 @@
 <template>
   <div id="app">
     <header-nav @activepage="showIndexActive"></header-nav>
-    <div id="index-app" v-if="!$store.state.showJsDetails && $store.state.showIndexs ">
-      <!--轮播-->
-      <div class="mint-swipe-container margin-top-header" style="height: 200px;">
-        <mt-swipe :auto="0" :prevent="true">
-          <mt-swipe-item class="mint-swipe-item">
-            <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg'" class="swipe-img index-swipe-img">
-          </mt-swipe-item>
-          <mt-swipe-item class="mint-swipe-item">
-            <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-08-18/5996b33598248.jpg'" class="swipe-img index-swipe-img">
-          </mt-swipe-item>
-          <mt-swipe-item class="mint-swipe-item">
-            <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-05/59ae079009e5d.jpg'" class="swipe-img index-swipe-img">
-          </mt-swipe-item>
-        </mt-swipe>
-      </div>
-
-      <div class="shops-box">
-        <div class="shops-box-box">
-          <select class="select-reset" name="province">
-            <option value="1">江苏省</option>
-            <option value="2">上海市</option>
-            <option value="3">江西省</option>
-          </select>
-        </div>
-        <div class="shops-box-box">
-          <select class="select-reset" name="city">
-            <option value="1">南京市</option>
-            <option value="2">上海市</option>
-            <option value="3">南昌市</option>
-          </select>
-        </div>
-        <div class="shops-box-box">
-          <select class="select-reset" name="city">
-            <option value="1">南京店</option>
-            <option value="2">上海店</option>
-            <option value="1">南昌万达店</option>
-          </select>
-        </div>
-      </div>
-
-      <index-main @jsevent="jishiEvent"></index-main>
-    </div>
-
-    <jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>
-    <project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>
-    <make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>
-    <yy-success class="margin-top-header" v-if="$store.state.showYySuccess"></yy-success>
-    <my-page class="margin-top-header" v-if="$store.state.showMyPage"></my-page>
+    <router-view class="margin-top-header"></router-view>
+    <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
+    <!--<project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>-->
+    <!--<make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>-->
+    <!--<yy-success class="margin-top-header" v-if="$store.state.showYySuccess"></yy-success>-->
+    <!--<my-page class="margin-top-header" v-if="$store.state.showMyPage"></my-page>-->
   </div>
 </template>
 
@@ -112,6 +70,9 @@
     margin: 0;
     -webkit-tap-highlight-color: transparent;
     background: #F7F5F5;
+  }
+  .router-link{
+    text-decoration: none;
   }
   ul{
     list-style: none;
