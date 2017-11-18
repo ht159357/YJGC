@@ -54,12 +54,12 @@
         <router-link :to="'/jiangshi/'+item" class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
           <!--头像-->
           <div class="index-img-box">
-            <img class="index-js-img" v-lazy="require('./../assets/img/js-1.jpg')" alt="">
+            <img class="index-js-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
           </div>
           <!--技师信息-->
           <div class="index-info-box">
             <div class="yj-cell">
-              <span class="yj-name">桂玲</span>
+              <span class="yj-name">莉莉</span>
               <span class="yj-work">美甲师</span>
             </div>
             <div class="yj-cell">
@@ -99,7 +99,7 @@
           </div>
           <div class="xm-one-box">
             <router-link :to="'/project/'+item+'/'+1" class="xm-info" v-for="item in 8">
-              <img @click="showJishiDetails(item,'showProjectDetails')" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
+              <img v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
             </router-link>
           </div>
         </div>
@@ -122,16 +122,6 @@
           activePage(event){//切换page
               var self = event.currentTarget;
               this.curNav = self.getAttribute("data-nav");
-          },
-          showJishiDetails( id, name){
-              let data = {
-                  showPage:true,
-                  jishiId:id,
-                  pageName: name
-              }
-              this.$emit("jsevent",data);
-              store.state.shopType = 1;
-              store.state.showGoodDetails = false;
           }
       },
       mounted(){

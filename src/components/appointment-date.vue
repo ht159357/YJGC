@@ -27,8 +27,8 @@
         },
         methods:{
             timePikerAtive(event){
-              let self = event.currentTarget;
-              this.timeFlag = self.getAttribute("time-flag");
+                let self = event.currentTarget;
+                this.timeFlag = self.getAttribute("time-flag");
             }
         }
     }

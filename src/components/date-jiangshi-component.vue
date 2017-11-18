@@ -17,7 +17,7 @@
         </div>
         <div class="jiangshi-info">
           <div class="jiangshi-box-info">
-            <span class="jiangshi-name">玲玲</span>
+            <span class="jiangshi-name">莉莉</span>
             <span class="jiangshi-choies" :data-jiangshi="index" :class="[{'jiangshi-choies-active': jiangshiFlag == index}]" @click="jsPikerAtive($event)">选择</span>
           </div>
           <div class="jiangshi-details mint-header-title">

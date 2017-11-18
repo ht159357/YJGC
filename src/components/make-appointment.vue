@@ -11,7 +11,7 @@
           <svg class="icon app-icon-right-arr" aria-hidden="true" style="vertical-align: -0.1em;"><use xlink:href="#icon-position"></use></svg>
           具体位置
         </a>
-        <router-link to="/" class="app-shop-index router-link"  @click="backIndex()">
+        <router-link to="/" class="app-shop-index router-link">
           切换门店<svg class="icon icon-right-arr" aria-hidden="true"><use xlink:href="#icon-right-arr-red"></use></svg>
         </router-link>
       </div>
@@ -31,7 +31,7 @@
               <span class="goods-price">&yen;198</span>
             </div>
             <div class="goods-one-1">
-              <span class="goods-sellname">手艺人: 萌萌</span>
+              <span class="goods-sellname">手艺人: 莉莉</span>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
         预约支付 &yen; 10
       </div>
       <!--选过匠师支付-->
-      <div class="yy-pay-btn yy-pay-btn-2" v-if="$route.params.shopType == 2 || $route.params.shopType == 3">
+      <div class="yy-pay-btn yy-pay-btn-2" v-if="$route.params.shopType == 2 || $route.params.shopType == 3" @click="payIt()">
         <div class="pay-btn-left">
           预约&yen;158（颜币：0.00）
         </div>
@@ -72,25 +72,10 @@
         },
         store,
         methods:{
-            backIndex(){
-                if( store.state.showIndexs ){
-                    return;
-                }
-                store.state.showIndexs = true;
-                store.state[store.state.curPage] = false;
-                store.state.curPage = "";
-            },
             payIt(){
-                let pagename = "showYySuccess";
-                store.state.curPage = pagename;
-                store.state[pagename] = true;
-                store.state.showIndexs = false;
-                for( let i=0;i<store.state.pageList.length;i++ ){
-                    if( store.state.pageList[i] != pagename ){
-                        store.state[store.state.pageList[i]] = false;
-                    }
-                }
-                console.log(store.state);
+
+                //支付完成跳转
+                this.$router.push('../../../yySuccess');
             }
         }
     }

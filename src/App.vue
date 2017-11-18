@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <header-nav @activepage="showIndexActive"></header-nav>
+  <div id="app" v-cloak>
+    <header-nav></header-nav>
     <router-view class="margin-top-header"></router-view>
     <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
     <!--<project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>-->
@@ -15,12 +15,6 @@
   import store from './store/store'
   import {Swipe, SwipeItem} from 'mint-ui';
   import headerNav from "./components/header";
-  import indexMain from './components/index-main';
-  import jishiDetail from "./components/jishi-details";
-  import projectDetail from "./components/project-details";
-  import makeAppointment from "./components/make-appointment";
-  import yySuccess from "./components/yy-success";
-  import myPage from "./components/my-page"
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
@@ -28,13 +22,7 @@
   export default {
       name: 'app',
       components:{
-          indexMain,
-          headerNav,
-          jishiDetail,
-          projectDetail,
-          makeAppointment,
-          yySuccess,
-          myPage
+          headerNav
       },
       store,
       data(){
@@ -43,22 +31,6 @@
           }
       },
       methods: {
-          showIndexActive(data){
-              if( store.state.showIndexs ){
-                  return;
-              }
-              store.state.showIndexs = true;
-              store.state[store.state.curPage] = false;
-              store.state.curPage = "";
-              console.log(store.state);
-          },
-          jishiEvent(data){
-              console.log(data);
-              store.state.showIndexs = false;
-              store.state[data.pageName] = data.showPage;
-              store.state.curPage = data.pageName;
-              console.log(store.state);
-          },
 
       }
   }
@@ -70,6 +42,9 @@
     margin: 0;
     -webkit-tap-highlight-color: transparent;
     background: #F7F5F5;
+  }
+  [v-cloak] {
+    display: none;
   }
   .router-link{
     text-decoration: none;

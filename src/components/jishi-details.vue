@@ -140,9 +140,7 @@
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10" style="width: 100%;">
             <li class="jis-pro-li" v-for="(item,index) in list">
-              <router-link :to="'/project/'+index+'/'+3"
-                @click="showProjectPage(3,true)"
-                class="router-link">
+              <router-link :to="'/project/'+index+'/'+3" class="router-link">
                 <div class="jis-pro-one">
                   <div class="jis-pro-img-box">
                     <img class="jis-pro-img" v-lazy="item">
@@ -164,7 +162,7 @@
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
 
         <div class="xm-one-box">
-          <router-link :to="'/project/'+ item +'/'+ 2" @click="showProjectPage(2,false)" class="xm-info" v-for="item in 10">
+          <router-link :to="'/project/'+ item +'/'+ 2" class="xm-info" v-for="item in 10">
             <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
           </router-link>
         </div>
@@ -319,23 +317,6 @@ export default {
 
             }
             var timer = setInterval(Marquee,speed);
-        },
-        showProjectPage(shoptype,showgood){
-            var pagename = "showProjectDetails";
-            store.state.curPage = pagename;
-            store.state[pagename] = true;
-            store.state.showIndexs = false;
-            for( let i=0;i<store.state.pageList.length;i++ ){
-                if( store.state.pageList[i] != pagename ){
-                  store.state[store.state.pageList[i]] = false;
-                }
-            }
-            store.state.shopType = shoptype;
-            if(showgood){
-                store.state.showGoodDetails = true;
-            }else{
-              store.state.showGoodDetails = false;
-            }
         }
     },
     mounted(){

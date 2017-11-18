@@ -6,7 +6,7 @@
         <div class="jt-icon-box">
           <img class="jt-icon" v-lazy="require('./../assets/img/js-2.jpg')">
         </div>
-        <span class="jt-name">萌萌</span>
+        <span class="jt-name">莉莉</span>
       </div>
       <div class="jt-right-box">
         <!--轮播-->
