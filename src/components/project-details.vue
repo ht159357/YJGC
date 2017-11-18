@@ -58,14 +58,14 @@
     </div>
     <!--时间|匠师   shopType = 1-->
     <div class="pro-bottom-box" v-if="shopType == 1">
-      <div class="pro-choise-date" @click="showAppointmentPage(1)">
+      <router-link to="/makeAppointment/1/1/0" class="pro-choise-date router-link" @click="showAppointmentPage(1)">
         <img src="./../assets/img/choise-date.png" alt="">
         选时间
-      </div>
-      <div class="pro-choise-jishi" @click="showAppointmentPage(2)">
+      </router-link>
+      <router-link to="/makeAppointment/2/1/0" class="pro-choise-jishi router-link" @click="showAppointmentPage(2)">
         <img src="./../assets/img/choise-jishi.png" alt="">
         选匠师
-      </div>
+      </router-link>
     </div>
     <!--款式|时间   shopType = 2-->
     <div class="pro-bottom-box" v-if="shopType == 2">
@@ -75,9 +75,9 @@
         </svg>
         在线选款式
       </div>
-      <div class="pro-choise-jishi online-date" @click="showAppointmentPage(3)">
+      <router-link to="/makeAppointment/3/2/0" class="pro-choise-jishi online-date router-link" @click="showAppointmentPage(3)">
         选时间
-      </div>
+      </router-link>
     </div>
     <!--喜欢|店铺|时间   shopType = 3-->
     <div class="pro-bottom-box" v-if="shopType == 3">
@@ -95,9 +95,9 @@
           店铺
         </div>
       </div>
-      <div class="pro-choise-jishi online-date" @click="showAppointmentPage(3)">
+      <router-link to="/makeAppointment/3/3/1"  class="pro-choise-jishi online-date router-link" @click="showAppointmentPage(3)">
         选时间
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -148,15 +148,16 @@
                 }
             },
             backJsDetails(){
-                var pagename = "showJsDetails";
-                store.state.curPage = pagename;
-                store.state[pagename] = true;
-                store.state.showIndexs = false;
-                for( let i=0;i<store.state.pageList.length;i++ ){
-                  if( store.state.pageList[i] != pagename ){
-                    store.state[store.state.pageList[i]] = false;
-                  }
-                }
+//                var pagename = "showJsDetails";
+//                store.state.curPage = pagename;
+//                store.state[pagename] = true;
+//                store.state.showIndexs = false;
+//                for( let i=0;i<store.state.pageList.length;i++ ){
+//                  if( store.state.pageList[i] != pagename ){
+//                    store.state[store.state.pageList[i]] = false;
+//                  }
+//                }
+                history.back();
             }
         }
     }

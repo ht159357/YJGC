@@ -51,7 +51,7 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <router-link :to="'/jiangshi:'+item" class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
+        <router-link :to="'/jiangshi/'+item" class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" v-lazy="require('./../assets/img/js-1.jpg')" alt="">
@@ -98,7 +98,7 @@
             </div>
           </div>
           <div class="xm-one-box">
-            <router-link :to="'/project'" class="xm-info" v-for="item in 8">
+            <router-link :to="'/project/'+item+'/'+1" class="xm-info" v-for="item in 8">
               <img @click="showJishiDetails(item,'showProjectDetails')" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
             </router-link>
           </div>

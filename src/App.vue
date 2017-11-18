@@ -73,6 +73,7 @@
   }
   .router-link{
     text-decoration: none;
+    color: inherit;
   }
   ul{
     list-style: none;

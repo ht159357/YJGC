@@ -29,7 +29,7 @@
     </div>
     <div class="my-list-box">
 
-      <mt-cell class="my-cell-list" title="我的颜币" isLink="">
+      <mt-cell to="/myYanbi" class="my-cell-list" title="我的颜币" isLink="">
         <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
         <span class="my-cell-yen">&yen;99999.6</span>
       </mt-cell>

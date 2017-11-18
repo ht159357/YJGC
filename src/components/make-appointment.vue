@@ -11,16 +11,16 @@
           <svg class="icon app-icon-right-arr" aria-hidden="true" style="vertical-align: -0.1em;"><use xlink:href="#icon-position"></use></svg>
           具体位置
         </a>
-        <div class="app-shop-index" @click="backIndex()">
+        <router-link to="/" class="app-shop-index router-link"  @click="backIndex()">
           切换门店<svg class="icon icon-right-arr" aria-hidden="true"><use xlink:href="#icon-right-arr-red"></use></svg>
-        </div>
+        </router-link>
       </div>
-      <appointment-date class="app-viwe" v-if="$store.state.yyType == 1"></appointment-date>
-      <appointment-js class="app-viwe" v-if="$store.state.yyType == 2"></appointment-js>
-      <appointment-time class="app-viwe" v-if="$store.state.yyType == 3"></appointment-time>
+      <appointment-date class="app-viwe" v-if="$route.params.yyType == 1"></appointment-date>
+      <appointment-js class="app-viwe" v-if="$route.params.yyType == 2"></appointment-js>
+      <appointment-time class="app-viwe" v-if="$route.params.yyType == 3"></appointment-time>
       <!--{{$store.state.showGoodDetails}}-->
       <!--商品信息-->
-      <div class="goods-detals-box">
+      <div class="goods-detals-box" v-if="$route.params.showGoods == 1">
         <div class="goods-one">
           <div class="goods-one-left">
             <img src="./../assets/img/header-icon.jpg">
@@ -37,11 +37,11 @@
         </div>
       </div>
       <!--支付-->
-      <div class="yy-pay-btn" v-if="$store.state.shopType == 1" @click="payIt()">
+      <div class="yy-pay-btn" v-if="$route.params.shopType == 1" @click="payIt()">
         预约支付 &yen; 10
       </div>
       <!--选过匠师支付-->
-      <div class="yy-pay-btn yy-pay-btn-2" v-if="$store.state.shopType == 2 || $store.state.shopType == 3">
+      <div class="yy-pay-btn yy-pay-btn-2" v-if="$route.params.shopType == 2 || $route.params.shopType == 3">
         <div class="pay-btn-left">
           预约&yen;158（颜币：0.00）
         </div>

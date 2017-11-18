@@ -8,7 +8,10 @@
     </mt-button>
 
     <mt-button slot="right" @click="showMyPage">
-      <img class="header-icon-btn" src="./../assets/img/header-icon.jpg">
+      <router-link to="/myPage">
+        <img class="header-icon-btn" src="./../assets/img/header-icon.jpg">
+      </router-link>
+
     </mt-button>
   </mt-header>
 </template>
