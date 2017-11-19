@@ -1,7 +1,7 @@
 <template>
   <div id="app" v-cloak>
-    <header-nav></header-nav>
-    <router-view class="margin-top-header"></router-view>
+    <header-nav v-if="showHeader"></header-nav>
+    <router-view :class="[{'margin-top-header': showHeader}]"></router-view>
     <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
     <!--<project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>-->
     <!--<make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>-->
@@ -27,11 +27,17 @@
       store,
       data(){
           return {
-              loadingImg:require("./assets/img/ball-loading.png")
+              loadingImg:require("./assets/img/ball-loading.png"),
+              showHeader: true
           }
       },
       methods: {
 
+      },
+      mounted(){
+          if(this.$route.path == "/register"){
+            this.showHeader = false;
+          }
       }
   }
 </script>

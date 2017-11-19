@@ -7,6 +7,7 @@ import makeAppointment from "./../components/make-appointment";
 import yySuccess from "./../components/yy-success";
 import myPage from "./../components/my-page";
 import myYanbi from "./../components/my-yanbi";
+import register from "./../components/register"
 
 Vue.use(Router);
 
@@ -37,6 +38,9 @@ export default new Router({
     },{
       path: '/myYanbi',
       component: myYanbi
+    },{
+      path:"/register",
+      component: register
     }
   ]
 })
