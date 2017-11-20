@@ -1,6 +1,6 @@
 <template>
   <div class="yb-app">
-    <mt-cell class="yb-top-title" :title="'2017-09'" :value="'说明文字'"></mt-cell>
+    <mt-cell class="yb-top-title" :title="'2017-09'" :value="'消费：¥ '+0.00"></mt-cell>
     <mt-loadmore :top-method="loadTop" ref="loadmore" class="yb-list">
       <ul v-infinite-scroll="loadMore"
           infinite-scroll-disabled="loading"
@@ -24,8 +24,12 @@
       <div class="jis-loadmore" v-show="loading">
         <mt-spinner color="#FB3453" type="triple-bounce"></mt-spinner>
       </div>
-
     </mt-loadmore>
+    <router-link to="/yanfen520" class="tobe-yanfen520-box router-link">
+      <div class="tobe-yanfen520">
+        成为520颜粉
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
@@ -40,7 +44,7 @@
       data(){
           return {
               list:[1,2,3,4,5,6,7,8,9,10],
-              loading: false,
+              loading: false
           }
       },
       methods:{
@@ -59,7 +63,7 @@
                       this.list.push( i );
                   }
                   this.loading = false;
-              }, 2000);
+              }, 100000);
           }
       }
   }
@@ -114,5 +118,25 @@
     text-align: center;
     width: 100%;
     padding: 10px 0;
+  }
+  .tobe-yanfen520-box{
+    position: fixed;
+    left: 0;
+    background: #fff;
+    bottom: 0;
+    width: 100%;
+  }
+  .tobe-yanfen520{
+    height: 35px;
+    line-height: 35px;
+    background: #FB3453;
+    color: #fff;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto 10px;
+    border-radius: 5px;
+  }
+  .yb-list{
+    margin-bottom: 45px;
   }
 </style>

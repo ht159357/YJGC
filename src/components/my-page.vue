@@ -36,25 +36,25 @@
       <mt-cell class="my-cell-list" title="我的卡券" isLink="">
         <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="我的预约" isLink="">
+      <mt-cell to="myYy" class="my-cell-list" title="我的预约" isLink="">
         <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
         <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="开具发票" isLink="">
+      <mt-cell to="/makeBill" class="my-cell-list" title="开具发票" isLink="">
         <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的消息" isLink="">
         <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="我的喜欢" isLink="">
+      <mt-cell to="myLike" class="my-cell-list" title="我的喜欢" isLink="">
         <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="我的匠师" isLink="">
+      <mt-cell to="/myJiangshi" class="my-cell-list" title="我的匠师" isLink="">
         <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="常见问题" isLink="">
+      <mt-cell to="/question" class="my-cell-list" title="常见问题" isLink="">
         <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
       </mt-cell>
 
@@ -181,7 +181,7 @@
     color: #8019C3!important;
   }
   .level-4{
-    background: url("./../assets/img/level-5.png");
+    background: url("./../assets/img/level-5.png") #FB3453;
     background-repeat: no-repeat;
     background-size: 24px;
   }
@@ -227,6 +227,7 @@
   .my-cell-list{
     color: #000;
     font-size: 14px;
+    border-bottom: 1px solid #E5E5E5;
   }
   .my-cell-icon{
     width: 22px;

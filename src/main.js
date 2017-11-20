@@ -7,7 +7,6 @@ import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import storeConfig from './store/store';
 import fontIcon from "./assets/js/fonticon";
-
 import { Lazyload } from 'mint-ui';
 
 Vue.use(Lazyload);
