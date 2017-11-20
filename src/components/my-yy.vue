@@ -105,7 +105,7 @@
   .myyy-info-box{
     flex: 1;
     text-align: left;
-    padding-left: 5px;
+    /*padding-left: 5px;*/
     padding-bottom: 5px;
   }
   .myyy-top-box{
