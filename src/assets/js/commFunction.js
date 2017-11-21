@@ -3,6 +3,7 @@
  */
 export default{
   getThirtyDays,
+  is_weixn,
 }
 function getThirtyDays(){
   //返回三十天的日期数组
@@ -23,4 +24,12 @@ function getThirtyDays(){
     startDate.setDate(startDate.getDate() + 1);
   }
   return dataArr;
+}
+function is_weixn(){
+    let ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+    } else {
+        return false;
+    }
 }

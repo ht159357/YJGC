@@ -1,5 +1,11 @@
 <template>
   <div id="app" v-cloak>
+    <div class="open-in-wx" v-if="!is_wx">
+      <svg class="icon icon-gantan-tos" aria-hidden="true">
+        <use xlink:href="#icon-gantan"></use>
+      </svg>
+      <h2>请在微信客户端打开链接</h2>
+    </div>
     <header-nav v-if="showHeader"></header-nav>
     <router-view :class="[{'margin-top-header': showHeader}]"></router-view>
     <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
@@ -15,6 +21,9 @@
   import store from './store/store'
   import {Swipe, SwipeItem} from 'mint-ui';
   import headerNav from "./components/header";
+  import wx from 'weixin-js-sdk'
+  import axios from 'axios';
+  import commjs from "./assets/js/commFunction"
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
@@ -28,16 +37,25 @@
       data(){
           return {
               loadingImg:require("./assets/img/ball-loading.png"),
-              showHeader: true
+              showHeader: true,
+//              is_wx: commjs.is_weixn(),//生产
+              is_wx: true,//测试
           }
       },
       methods: {
 
       },
       mounted(){
-          if(this.$route.path == "/register"){
+          if(this.$route.path === "/register"){
             this.showHeader = false;
           }
+      },
+      created(){
+          axios.post("http://192.168.6.28:8080/wechat/register/allCity");
+          wx.config({
+              debug:false,
+          })
+
       }
   }
 </script>
@@ -125,5 +143,20 @@
     height: 200px;
     margin: 0 auto;
     background: url("./assets/img/loading.svg") no-repeat center #ddd;
+  }
+  .open-in-wx{
+    width: 100%;
+    position: absolute;
+    /*background: rgba(97,97,97,0.7);*/
+    background: #fff;
+    z-index: 9999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .icon-gantan-tos{
+    margin-top: 30%;
+    font-size: 100px;
   }
 </style>

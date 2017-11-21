@@ -18,13 +18,10 @@
         <div class="que-box-left">
           <img class="que-box-title-img" src="./../assets/img/que-zixun.png"><span class="que-name">还需要更多帮助？</span>
         </div>
-        <svg style="margin-right: 10px;" class="icon" aria-hidden="true">
-          <use xlink:href="#icon-right-arr"></use>
-        </svg>
       </div>
-      <div class="lx-kf">
+      <a class="lx-kf" href="tel:400-025-8808">
         <img class="que-needmore-img" style="margin-right: 10px;" src="./../assets/img/phone.png">联系客服
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -96,6 +93,7 @@
     border: none;
   }
   .lx-kf{
+    text-decoration: none;
     text-align: center;
     display: flex;
     align-items: center;

@@ -4,24 +4,37 @@
       <p class="reg-title">颜粉注册</p>
     </div>
     <div class="reg-info-box">
-      <input class="reg-input" type="text" placeholder="请输入您的姓名（必填）">
-      <input class="reg-input" type="text" placeholder="请输入您的手机号（必填）">
-      <div class="reg-phone-box">
+      <div class="reg-cell-boxone">
+        <input class="reg-input" type="text" placeholder="请输入您的姓名（必填）">
+      </div>
+      <div class="reg-cell-boxone">
+        <input class="reg-input" type="text" placeholder="请输入您的手机号（必填）">
+      </div>
+      <div class="reg-cell-boxone">
         <input class="reg-input reg-sm-input" type="text" placeholder="验证码（必填）">
         <div class="reg-get-yzm" :class="[{'reg-get-yzm-dis':yzmState}]" @click="getYzm">
           获取验证码
           <span v-if="yzmState">({{yzmTime}})</span>
         </div>
       </div>
-      <select class="reg-input">
-        <option>新百店</option>
-        <option>南京店</option>
-        <option>上海店</option>
-      </select>
-      <select class="reg-input">
-        <option>会员</option>
-        <option>颜粉</option>
-      </select>
+      <div class="city-box reg-cell-boxone">
+        <select class="reg-input">
+          <option>上海</option>
+          <option>南京</option>
+          <option>苏州</option>
+        </select>
+
+        <select class="reg-input">
+          <option>新百店</option>
+          <option>南京店</option>
+          <option>上海店</option>
+        </select>
+      </div>
+
+      <!--<select class="reg-input">-->
+        <!--<option>会员</option>-->
+        <!--<option>颜粉</option>-->
+      <!--</select>-->
       <div class="reg-agreat">
         <label><input type="checkbox" class="reg-check">我已阅读并同意</label>
         <span class="reg-xy" @click="showOrHideModel"> 《颜匠工场注册协议》</span>
@@ -107,38 +120,51 @@
     height: 130px;
     background: url("./../assets/img/yanfen_reg.png") no-repeat center;
     background-size: 100%;
-    background-position-y: -50px;
+    background-position-y: 90%;
   }
   .reg-title{
     margin: 0;
     text-align: left;
-    padding-top: 50px;
+    padding-top: 52px;
     text-indent: 20px;
     font-size: 20px;
     letter-spacing: 5px;
     color: #fff;
   }
   .reg-info-box{
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 3%;
+    box-sizing: border-box;
     background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  .reg-cell-boxone{
+    width: 90%;
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
   }
   .reg-info-box .reg-input:first-child{
     margin-top: 0;
   }
   .reg-input{
-    width: 90%;
+    width: 100%;
     background: #F5F5F5;
     border: 1px solid #E9E8E8;
     border-radius: 5px;
     height: 30px;
     line-height: 30px;
     text-indent: 15px;
-    margin-top: 10px;
     outline: none;
+    appearance: none;
+  }
+  .reg-input>*{
+    flex: 1;
   }
   .reg-phone-box{
-    width: 90%;
+    /*width: 90%;*/
     margin: 10px auto 0;
     display: flex;
     justify-content: space-between;
@@ -158,7 +184,7 @@
   .reg-agreat{
     width: 90%;
     text-align: left;
-    margin: 10px auto 0;
+    margin: 10px 0 0;
     font-size: 14px;
   }
   .reg-check{
@@ -182,7 +208,7 @@
   }
   .agree-book-box{
     padding: 15px;
-    height: 65%;
+    height: calc( 100% - 55px - 52px - 30px );
     overflow: scroll;
     text-align: left;
     border-bottom: 1px solid #e5e5e5;
@@ -210,7 +236,7 @@
     line-height: 35px;
     background: #FB6FAE;
     color: #fff;
-    margin: 10px auto 0;
+    margin: 10px auto;
     border-radius: 5px;
   }
   .reg-btn{
@@ -224,5 +250,12 @@
   }
   .reg-get-yzm-dis{
     background: #D4D4D4;
+  }
+  .city-box .reg-input{
+    flex: 0 0 50%;
+    margin: 0;
+    height: 34px;
+    line-height: 34px;
+    background: url("./../assets/img/select-down.png") no-repeat center right 5px,#F5F5F5;
   }
 </style>
