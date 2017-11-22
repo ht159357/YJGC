@@ -16,6 +16,7 @@ import myJiangshi from "./../components/my-jiangshi"
 import question from "./../components/my-comm-question"
 import questionChild from "./../components/my-comm-question-child"
 import answer from "./../components/my-comm-question-answer"
+import registerJms from "./../components/register-jms"
 
 Vue.use(Router);
 
@@ -26,7 +27,7 @@ export default new Router({
   redirect:'/',
   routes: [
     {
-      path: '/',
+      path: '/index',
       component: indexMian
     },{
       path: '/jiangshi/:id',

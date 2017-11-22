@@ -21,12 +21,19 @@
   import store from './store/store'
   import {Swipe, SwipeItem} from 'mint-ui';
   import headerNav from "./components/header";
-  import wx from 'weixin-js-sdk'
+  import wx from 'weixin-js-sdk';
   import axios from 'axios';
-  import commjs from "./assets/js/commFunction"
+  import commjs from "./assets/js/commFunction";
 
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
+
+  var curWwwPath=window.document.location.href; //获取当前网址
+  var pathName=window.document.location.pathname;//获取主机之后的地址
+  var pos=curWwwPath.indexOf(pathName);
+  var httpStr = curWwwPath.substring(0,pos);//获取主机地址
+  httpStr = "http://192.168.6.13:8080";
+  console.log(curWwwPath,pathName,pos,httpStr);
 
   export default {
       name: 'app',
@@ -47,11 +54,15 @@
       },
       mounted(){
           if(this.$route.path === "/register"){
-            this.showHeader = false;
+              this.showHeader = false;
+          }
+      },
+      activated(){
+          if(this.$route.path === "/register"){
+              this.showHeader = false;
           }
       },
       created(){
-          axios.post("http://192.168.6.28:8080/wechat/register/allCity");
           wx.config({
               debug:false,
           })

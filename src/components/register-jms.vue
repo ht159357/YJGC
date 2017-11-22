@@ -1,7 +1,7 @@
 <template>
   <div class="reg-box">
     <div class="reg-back">
-      <p class="reg-title">颜粉注册</p>
+      <p class="reg-title">加盟商注册</p>
     </div>
     <div class="reg-info-box">
       <div class="reg-cell-boxone">
