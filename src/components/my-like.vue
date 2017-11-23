@@ -118,7 +118,10 @@
     width: 100%;
     padding: 10px 0;
   }
-  .jis-context-box{
-
+  .jis-pro-img[lazy=loading] {
+    width: 90%;
+    height: 150px;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
   }
 </style>

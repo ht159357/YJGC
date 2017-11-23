@@ -11,12 +11,15 @@ import register from "./../components/register"
 import yanfen520 from "./../components/kaitong-yanfen520"
 import myYy from "./../components/my-yy"
 import makeBill from "./../components/make-bill"
+import makeOrder from "./../components/make-order"
 import myLike from "./../components/my-like"
 import myJiangshi from "./../components/my-jiangshi"
 import question from "./../components/my-comm-question"
 import questionChild from "./../components/my-comm-question-child"
 import answer from "./../components/my-comm-question-answer"
 import registerJms from "./../components/register-jms"
+import myShare from "./../components/my-share"
+import dzPage from "./../components/dz-page"
 
 Vue.use(Router);
 
@@ -60,6 +63,9 @@ export default new Router({
       path:"/makeBill",
       component: makeBill
     },{
+      path:"/makeOrder",
+      component: makeOrder
+    },{
       path:"/myLike",
       component: myLike
     },{
@@ -77,6 +83,12 @@ export default new Router({
     },{
       path:"/registerJms",
       component: registerJms
+    },{
+      path:"/myShare",
+      component: myShare
+    },,{
+      path:"/dzPage",
+      component: dzPage
     },
   ]
 })

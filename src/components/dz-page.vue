@@ -10,30 +10,17 @@
           {'level-color-3':userLevel==3},
           {'level-color-4':userLevel==4},
           {'level-color-5':userLevel==5},]">欧阳娜娜</p>
-      <div class="my-level-box" :class="[
-          {'level-1':userLevel==1},
-          {'level-2':userLevel==2},
-          {'level-3':userLevel==3},
-          {'level-4':userLevel==4},
-          {'level-5':userLevel==5},]">
-        <div class="my-jd-box">
-          <div class="my-jd-inner" :style="{width : userExpWidth + '%'}">{{userExp}}/{{userMaxExp}}</div>
-        </div>
-      </div>
-      <p class="my-jd-ch" :class="[
-          {'level-color-1':userLevel==1},
-          {'level-color-2':userLevel==2},
-          {'level-color-3':userLevel==3},
-          {'level-color-4':userLevel==4},
-          {'level-color-5':userLevel==5},]">颜粉</p>
+      <select class="select-reset dz-select">
+        <option value="">江宁万达店</option>
+      </select>
     </div>
     <div class="my-list-box">
 
-      <mt-cell to="/myYanbi" class="my-cell-list" title="我的颜币" isLink="">
+      <mt-cell class="my-cell-list" title="创客排名" isLink="">
         <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
-        <span class="my-cell-yen">&yen;99999.6</span>
+        <span class="my-cell-yen">&yen;1.6</span>
       </mt-cell>
-      <mt-cell class="my-cell-list" title="我的卡券" isLink="">
+      <mt-cell class="my-cell-list" title="店铺订单" isLink="">
         <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
       </mt-cell>
       <mt-cell to="myYy" class="my-cell-list" title="我的预约">
@@ -57,7 +44,7 @@
       <mt-cell to="/question" class="my-cell-list" title="常见问题">
         <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/dzPage" class="my-cell-list" title="店主中心">
+      <mt-cell to="" class="my-cell-list" title="店主中心">
         <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell to="/myShare" class="my-cell-list" title="我要分享">
@@ -123,84 +110,6 @@
     font-weight: bold;
     color: #fff;
   }
-  .my-level-box{
-    width: 100px;
-    height: 24px;
-    line-height: 24px;
-    margin: 0 auto;
-    color: #fff;
-    background-repeat: no-repeat;
-    background-size: 24px;
-    padding-left: 24px;
-    display: flex;
-    align-items: center;
-  }
-  .level-1{
-    background: url("./../assets/img/level-1.png");
-    background-repeat: no-repeat;
-    background-size: 24px;
-  }
-  .level-color-1{
-    color: #FFDBDB!important;
-  }
-  .level-2{
-    background: url("./../assets/img/level-2.png");
-    background-repeat: no-repeat;
-    background-size: 24px;
-  }
-  .level-2 .my-jd-box{
-    border: 1px solid #E0DFDF;
-  }
-  .level-2 .my-jd-inner{
-    background: #F7F5F5;
-  }
-  .level-color-2{
-    color: #F7F5F5!important;
-  }
-  .level-3{
-    background: url("./../assets/img/level-3.png");
-    background-repeat: no-repeat;
-    background-size: 24px;
-  }
-  .level-3 .my-jd-box{
-    border: 1px solid #FFCB67;
-  }
-  .level-3 .my-jd-inner{
-    background: #FFAD39;
-  }
-  .level-color-3{
-    color: #FFAD39!important;
-  }
-  .level-5{
-    background: url("./../assets/img/level-4.png");
-    background-repeat: no-repeat;
-    background-size: 24px;
-  }
-  .level-5 .my-jd-box{
-    border: 1px solid #8019C3;
-  }
-  .level-5 .my-jd-inner{
-    background: #8019C3;
-    color: #fff;
-  }
-  .level-color-5{
-    color: #8019C3!important;
-  }
-  .level-4{
-    background: url("./../assets/img/level-5.png") #FB3453;
-    background-repeat: no-repeat;
-    background-size: 24px;
-  }
-  .level-4 .my-jd-box{
-    border: 1px solid #484748;
-  }
-  .level-4 .my-jd-inner{
-    background: #1B1B1B;
-    color: #fff;
-  }
-  .level-color-4{
-    color: #1B1B1B!important;
-  }
   .my-jd-box{
     width: 80px;
     margin-left: 5px;
@@ -244,5 +153,15 @@
   }
   .my-cell-yen{
     font-size: 14px;
+  }
+  .select-reset.dz-select{
+    width: auto;
+    padding: 6px 15px;
+    height: auto;
+    line-height: normal;
+    background: #fff;
+    border: 1px solid red !important;
+    border-radius: 20px;
+    margin-top: 15px;
   }
   </style>

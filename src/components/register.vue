@@ -43,11 +43,11 @@
     <mt-popup class="reg-need-know"
       v-model="popupVisible" position="right" style="right: 5%;">
       <div class="modal-title">
-        颜匠工场注册协议
+        {{ notice.title }}
       </div>
       <div class="agree-book-box">
         <div class="agree-book">
-
+          {{ notice.know_answer }}
         </div>
       </div>
       <div class="i-readed" @click="showOrHideModel">
@@ -91,6 +91,7 @@
               storefront_id : "",
               user_name : "",
               ireader: false,
+              notice: {}
           }
       },
       methods:{
@@ -185,6 +186,18 @@
                   })
               }
           });
+          axios({
+              method: 'post',
+              url: httpStr + "/wechat/register/getNotice?know_type="+1,
+          }).then(function (ret) {
+              console.log(ret);
+              if( ret.data.flag === 105 ){
+                  Toast("没有获取到须知！");
+              }else if( ret.data.flag === 100 ){
+                  console.log(ret.data);
+                  self.notice = ret.data.notice;
+              }
+          });
           console.log(this.cityList);
       }
   }
@@ -277,6 +290,7 @@
   }
   .modal-title{
     padding: 15px;
+    height: 16px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
   }

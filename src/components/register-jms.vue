@@ -13,10 +13,17 @@
         <input class="reg-input" type="text" placeholder="请输入您的手机号（必填）" v-model.trim="phone">
       </div>
       <div class="reg-cell-boxone">
+        <input class="reg-input reg-sm-input" type="text" placeholder="验证码（必填）" id="yzm" v-model.trim="veriCode">
+        <div class="reg-get-yzm" :class="[{'reg-get-yzm-dis':yzmState}]" @click="getYzm">
+          获取验证码
+          <span v-if="yzmState">({{yzmTime}})</span>
+        </div>
+      </div>
+      <div class="reg-cell-boxone">
         <input class="reg-input" type="text" placeholder="请输入您的身份证号（必填）" v-model.trim="id_number">
       </div>
       <div class="reg-cell-boxone">
-        <input class="reg-input" type="text" placeholder="注册资金（必填）" v-model.trim="register_money">
+        <input class="reg-input" type="text" placeholder="注册资金（必填，单位元）" v-model.trim="register_money">
       </div>
       <div class="reg-cell-boxone">
         <input class="reg-input" type="text" placeholder="店面数（必填）" v-model.trim="outlets_num">
@@ -31,8 +38,9 @@
       </div>
       <div class="reg-agreat">
         <label><input type="checkbox" class="reg-check" v-model="ireader">我已阅读并同意</label>
-        <span class="reg-xy" @click="showOrHideModel"> 《颜匠工场注册协议》</span>
+        <span class="reg-xy" @click="showOrHideModel"> 《颜匠工场加盟商注册协议》</span>
       </div>
+
     </div>
     <div class="reg-btn" @click="register">
       颜粉注册
@@ -41,11 +49,11 @@
     <mt-popup class="reg-need-know"
       v-model="popupVisible" position="right" style="right: 5%;">
       <div class="modal-title">
-        颜匠工场注册协议
+        {{ notice.title }}
       </div>
       <div class="agree-book-box">
         <div class="agree-book">
-
+          {{ notice.know_answer }}
         </div>
       </div>
       <div class="i-readed" @click="showOrHideModel">
@@ -78,21 +86,52 @@
                   "background-position-y": "90%"
               },
               popupVisible: false,
+              yzmTime: 60,
+              yzmState: false,
+              code:null,
               ireader: false,
               cityList:[],
               openId: openId,
               name: "胡涛",
               id_number: "340222199412035014",
-              phone: "18119921782",
+              phone: "15855991987",
+              veriCode : "",
               register_money: "10000",
               outlets_num: "2",
               territory_id: "",
-              remark: ""
+              remark: "",
+              notice: {},
           }
       },
       methods:{
           showOrHideModel(){
               this.popupVisible = !this.popupVisible;
+          },
+          getYzm(){//获取验证码
+            let self = this;
+            let phoneNum = self.phone;
+            if( phoneNum === "" || !(/^1[34578]\d{9}$/.test(phoneNum)) ){
+              Toast("请输入正确手机号！");
+              return;
+            }
+            axios({
+              method: 'post',
+              url: httpStr + "/wechat/register/getVeriCode?phone_num="+phoneNum,
+            }).then(function(ret){
+              if( ret.data.flag === 100 ){
+                self.code = ret.data.code;
+                self.yzmState = true;
+                let timer = setInterval(function(){
+                  self.yzmTime--;
+                  if( self.yzmTime === 0 ){
+                    clearInterval(timer);
+                    self.yzmState = false;
+                  }
+                },1000)
+              }else if( ret.data.flag === 104 ){
+                Toast("手机号重复！");
+              }
+            });
           },
           register(){
               let self = this;
@@ -113,11 +152,14 @@
               }else if( !self.ireader ){
                   Toast("请阅读并同意注册协议！");
                   return;
+              }else if( self.veriCode !== self.code || self.veriCode === "" ){
+                  Toast("验证码不正确！");
+                  return;
               }
 
               axios({
                   method: 'post',
-                  url:httpStr+"/wechat/register/addAlliance?openId="+self.openId+"&name="+self.name+"&id_number="+self.id_number+"&phone="+self.phone+"&register_money="+(self.register_money*100)+"&outlets_num="+self.outlets_num+"&territory_id="+self.territory_id+"&remark="+self.remark,
+                  url:httpStr+"/wechat/register/addAlliance?openId="+self.openId+"&name="+self.name+"&id_number="+self.id_number+"&phone="+self.phone+"&register_money="+(self.register_money*100)+"&outlets_num="+self.outlets_num+"&territory_id="+self.territory_id+"&remark="+self.remark+"&code="+self.veriCode,
               }).then(function(ret){
                   console.log(ret.data);
                   if( ret.data.flag === 100 ){
@@ -126,6 +168,12 @@
                       });
                   }else if( ret.data.flag === 104 ){
                       Toast("手机号已被注册！");
+                  }else if( ret.data.flag === 103 ){
+                      Toast("验证码超时，请重新获取！");
+                  }else if( ret.data.flag === 104 ){
+                     Toast("您的手机号已经注册！");
+                  }else if( ret.data.flag === 102 ){
+                     Toast("验证码错误！");
                   }
               })
           }
@@ -134,13 +182,14 @@
           let self = this;
           axios({
               method: 'post',
-              url: httpStr + "/wechat/register/getNotice",
+              url: httpStr + "/wechat/register/getNotice?know_type="+2,
           }).then(function (ret) {
               console.log(ret);
               if( ret.data.flag === 105 ){
                   //Toast("没有获取到须知！");
               }else if( ret.data.flag === 100 ){
                   console.log(ret.data);
+                  self.notice = ret.data.notice;
               }
           });
           axios({
@@ -241,6 +290,7 @@
   }
   .modal-title{
     padding: 15px;
+    height: 16px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
   }
