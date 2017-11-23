@@ -1,6 +1,6 @@
 <template>
   <div class="reg-box">
-    <div class="reg-back">
+    <div class="reg-back" :style="regBackClass">
       <p class="reg-title">颜粉注册</p>
     </div>
     <div class="reg-info-box">
@@ -41,33 +41,13 @@
     </div>
 
     <mt-popup class="reg-need-know"
-      v-model="popupVisible" position="right">
+      v-model="popupVisible" position="right" style="right: 5%;">
       <div class="modal-title">
         颜匠工场注册协议
       </div>
       <div class="agree-book-box">
         <div class="agree-book">
-          <h4 style="text-align: center;color:#000;">用户注册协议</h4>
-          <h5>一、总则</h5>
-          1.1 颜匠工场微信预约平台的所有权和运营权归南京我秀我妆网络科技有限公司所有。<br>
-          1.2 用户在注册之前，应当仔细阅读本协议，并同意遵守本协议后方可成为注册用户。一旦注册成功，则用户与颜匠工场微信预约平台之间自动形成协议关系，用户应当受本协议的约束。
-          <h5>二、服务内容</h5>
-          2.1 注册成功的用户，可在颜匠工场微信预约平台对想要体验的服务项目进行预约。
-          <h5>三、使用规则</h5>
-          3.1颜粉卡有效期限为一年，一人一卡，不可转借他人使用。<br>
-          3.2 注册成功的用户，在颜匠工场微信预约平台进行预约时，请准时到达。若不能准时到达，则预约名额只保留10分钟。10分钟一过，则需要排队等位或者重新预约新的时间。<br>
-          3.3 若一年之内出现三次迟到，并且未提前告知的情况，则颜匠工场可单方面解除其会员资格。<br>
-          3.4 用户在预约成功后，在服务开始72小时-24小时前取消预约可退还50%的预约项目款项，24小时内取消的预约，相应款项不予退还。
-          <h5>四、隐私保护</h5>
-          4.1 本平台不对外公开或向第三方提供单个用户的注册资料及用户在使用预约服务时存储在本平台的非公开内容，但下列情况除外：<br>
-          (1) 事先获得用户的明确授权；<br>
-          (2) 根据有关的法律法规要求；<br>
-          (3) 按照相关政府主管部门的要求；<br>
-          (4) 为维护社会公众的利益。<br>
-          4.2 在不透露单个用户隐私资料的前提下，本平台有权对整个用户数据库进行分析并对用户数据库进行商业上的利用。<br>
-          <h5>五、附则</h5>
-          5.1 本协议的订立、执行和解释及争议的解决均应适用中华人民共和国法律。<br>
-          5.2 本协议解释权及修订权归南京我秀我妆网络科技有限公司所有。
+
         </div>
       </div>
       <div class="i-readed" @click="showOrHideModel">
@@ -84,14 +64,7 @@
   import axios from 'axios';
   import commjs from "./../assets/js/commFunction";
   import { Toast } from 'mint-ui';
-
-  let openid = "oUC9iwsC_uSSxI0I4RJrBu3F1I2c";
-  var curWwwPath=window.document.location.href; //获取当前网址
-  var pathName=window.document.location.pathname;//获取主机之后的地址
-  var pos=curWwwPath.indexOf(pathName);
-  var httpStr = curWwwPath.substring(0,pos);//获取主机地址
-//  httpStr = "http://wx.wx.ixuemai.net";
-  httpStr = "http://192.168.6.13:8080";
+  import { MessageBox } from 'mint-ui';
 
   Vue.component(Popup.name, Popup);
   Vue.component(Loadmore.name, Loadmore);
@@ -100,6 +73,11 @@
       name:"register",
       data(){
           return {
+              regBackClass:{
+                  "background": "url(" + require('./../assets/img/yanfen_reg.png') +") no-repeat center",
+                  "background-size": "100%",
+                  "background-position-y": "90%"
+              },
               popupVisible: false,
               yzmTime: 60,
               yzmState: false,
@@ -119,7 +97,7 @@
           showOrHideModel(){
               this.popupVisible = !this.popupVisible;
           },
-          getYzm(){
+          getYzm(){//获取验证码
               let self = this;
               let phoneNum = document.getElementById("phoneNumber").value;
               if( phoneNum === "" || !(/^1[34578]\d{9}$/.test(self.phone_num)) ){
@@ -140,11 +118,14 @@
                               self.yzmState = false;
                           }
                       },1000)
+                  }else if( ret.data.flag === 104 ){
+                      Toast("手机号重复！");
                   }
               });
           },
-          register(){
+          register(){//注册
               let self = this;
+
               self.territory_id = document.getElementById("city").value;
               self.storefront_id = document.getElementById("shop").value;
               if( self.user_name === "" || self.phone_num === "" ){ //验证验证码是否正确
@@ -153,15 +134,23 @@
                   Toast("请填写正确手机号！");return
 
               }else if( self.veriCode !== self.code || self.veriCode === "" ){
-                  alert("验证码不正确！");return;
+                Toast("验证码不正确！");return;
               }else if(!self.ireader){
-                  alert("请阅读并同意注册协议！");return;
+                Toast("请阅读并同意注册协议！");return;
               }else{
                   axios({
                       method: 'post',
                       url: httpStr + "/wechat/register/register?phone_num="+self.phone_num+"&veriCode="+self.veriCode+"&wechat_id="+self.wechat_id+"&territory_id="+self.territory_id+"&storefront_id="+self.storefront_id+"&user_name="+self.user_name,
                   }).then(function(ret){
-                      console.log(ret.data);
+                      if( ret.data.flag === 100 ){
+                          MessageBox.alert('注册成功！').then(action => {
+                              self.$router.push("/index");
+                          });
+                      }else if( ret.data.flag === 103 ){
+                          Toast("验证码超时，请重新获取！");
+                      }else if( ret.data.flag === 104 ){
+                          Toast("您的手机号已经注册！");
+                      }
                   })
               }
           },
@@ -203,7 +192,6 @@
 <style>
   .reg-back{
     height: 130px;
-    background: url("./../assets/img/yanfen_reg.png") no-repeat center;
     background-size: 100%;
     background-position-y: 90%;
   }
@@ -218,6 +206,7 @@
   }
   .reg-info-box{
     padding-top: 3%;
+    padding-bottom: 3%;
     box-sizing: border-box;
     background: #fff;
     display: flex;

@@ -17,7 +17,7 @@
         抬头类型
       </div>
       <mt-radio
-        v-model="billType"
+        v-model="headerType"
         :options="optionsHeaderType">
       </mt-radio>
     </div>
@@ -44,8 +44,8 @@
       <div class="bill-cell-key bill-cell-key-money">
         发票内容
       </div>
-      <div class="bill-box-value" style="flex: 1;background: #D9D9D9;">
-        <input placeholder="服务" type="text" class="bill-input" style="background: #D9D9D9;text-indent: 10px;">
+      <div class="bill-box-value" style="flex: 1;">
+        <input placeholder="服务" type="text" class="bill-input bill-disable" style="background: #D9D9D9;text-indent: 10px;">
       </div>
     </div>
 
@@ -53,8 +53,8 @@
       <div class="bill-cell-key bill-cell-key-money">
         发票金额
       </div>
-      <div class="bill-box-value" style="flex: 1;background: #D9D9D9;">
-        <input placeholder="58" type="text" class="bill-input" style="background: #D9D9D9;text-indent: 10px;">
+      <div class="bill-box-value" style="flex: 1;">
+        <input placeholder="58" type="text" class="bill-input bill-disable" style="background: #D9D9D9;text-indent: 10px;" disabled>
       </div>
     </div>
 
@@ -78,23 +78,22 @@
         name:"makeBill",
         data(){
             return {
-                billType:"",
+                billType:"zzfp",
                 optionsBillType : [{
                   label: '电子发票',
-                  value: 'dz',
+                  value: 'dzfp',
                   disabled: true
                 },{
                   label: '纸质发票',
-                  value: 'zz'
+                  value: 'zzfp'
                 }],
-                headerType:"",
+                headerType:"grfp",
                 optionsHeaderType : [{
-                  label: '公司抬头',
-                  value: 'gs',
-                  disabled: true
-                },{
                   label: '个人抬头',
-                  value: 'gr'
+                  value: 'grfp'
+                },{
+                  label: '公司抬头',
+                  value: 'gsfp'
                 }],
             }
         }
@@ -120,28 +119,37 @@
     line-height: 52px;
     padding: 0 10px;
   }
-  .mint-cell{
+  a.mint-cell{
     display: flex;
     flex: 1;
     padding: 0;
   }
-  .mint-radiolist{
+  div.mint-radiolist{
     display: flex;
   }
-  .mint-radiolist-title{
+  label.mint-radiolist-title{
     display: none;
   }
-  .mint-cell-wrapper{
+  div.mint-cell-wrapper{
     font-size: 12px;
   }
-  .mint-radiolist-label{
+  label.mint-radiolist-label{
     padding: 0;
   }
   .bill-input{
     border: none;
     outline: none;
+    height: 75%;
+    text-indent: 10px;
   }
   .bill-cell-key-money{
     width: 70px;
+  }
+  .bill-disable{
+    width: 95%;
+  }
+  input.mint-radio-input:checked + .mint-radio-core {
+    background-color: #fb3453;
+    border-color: #fb3453;
   }
 </style>

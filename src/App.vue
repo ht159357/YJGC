@@ -6,8 +6,8 @@
       </svg>
       <h2>请在微信客户端打开链接</h2>
     </div>
-    <header-nav v-if="showHeader"></header-nav>
-    <router-view :class="[{'margin-top-header': showHeader}]"></router-view>
+    <header-nav v-if="$store.state.showHeader"></header-nav>
+    <router-view :class="[{'margin-top-header': $store.state.showHeader}]"></router-view>
     <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
     <!--<project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>-->
     <!--<make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>-->
@@ -28,13 +28,6 @@
   Vue.component(Swipe.name, Swipe);
   Vue.component(SwipeItem.name, SwipeItem);
 
-  var curWwwPath=window.document.location.href; //获取当前网址
-  var pathName=window.document.location.pathname;//获取主机之后的地址
-  var pos=curWwwPath.indexOf(pathName);
-  var httpStr = curWwwPath.substring(0,pos);//获取主机地址
-  httpStr = "http://192.168.6.13:8080";
-  console.log(curWwwPath,pathName,pos,httpStr);
-
   export default {
       name: 'app',
       components:{
@@ -44,28 +37,33 @@
       data(){
           return {
               loadingImg:require("./assets/img/ball-loading.png"),
-              showHeader: true,
-//              is_wx: commjs.is_weixn(),//生产
+//              showHeader: false,
+//              is_wx: commjs.is_weixn(),//生产，禁止非微信端打开
               is_wx: true,//测试
           }
       },
       methods: {
-
+          checkIsReg(){//注册界面不显示header
+              let curPath = this.$route.path.toUpperCase();
+              console.log()
+              if( curPath === "/register".toUpperCase()||curPath === "/registerJms".toUpperCase() ){
+                  this.$store.state.showHeader = false;
+              }else{
+                  this.$store.state.showHeader = true;
+              }
+          }
       },
       mounted(){
-          if(this.$route.path === "/register"){
-              this.showHeader = false;
-          }
+          this.checkIsReg();
       },
-      activated(){
-          if(this.$route.path === "/register"){
-              this.showHeader = false;
-          }
+      updated(){
+          this.checkIsReg();
       },
       created(){
-          wx.config({
-              debug:false,
-          })
+
+//          wx.config({
+//              debug:false,
+//          })
 
       }
   }
@@ -125,6 +123,7 @@
     border: none;
     outline: none;
     height: 44px;
+    border-radius: 0;
     line-height: 44px;
     padding-left: 14px;
     padding-right: 26px;

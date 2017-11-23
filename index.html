@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>颜匠工场</title>
     <script>
-      var openId = "oUC9iwsC_uSSxI0I4RJrBu3F1I2c";
+      var openId = "oUC9iwsC_uSSxI0I4RJrBu3F1I2c";//测试
+      var curWwwPath=window.document.location.href; //获取当前网址
+      var pathName=window.document.location.pathname;//获取主机之后的地址
+      var pos=curWwwPath.indexOf(pathName);
+      var httpStr = curWwwPath.substring(0,pos);//获取主机地址
+      httpStr = "http://192.168.6.13:8080";
+      console.log(curWwwPath,pathName,pos,httpStr);
     </script>
   </head>
   <body>

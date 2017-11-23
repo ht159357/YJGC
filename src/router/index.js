@@ -24,7 +24,7 @@ export default new Router({
   // mode: 'history',
   // history:false,
   base: "/YJGC/dist", //基路径
-  redirect:'/',
+  redirect:'/index',
   routes: [
     {
       path: '/index',
@@ -74,6 +74,9 @@ export default new Router({
     },{
       path:"/answer/:qid",
       component: answer
+    },{
+      path:"/registerJms",
+      component: registerJms
     },
   ]
 })

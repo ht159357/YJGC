@@ -17,7 +17,7 @@ const state = {
   // yyType: 1,//预约类型
   // shopType: 1,//店铺类型 1首页进入，2匠师进入，选款式按钮，3匠师进入，有喜欢按钮
   // showGoodDetails:false,//预约时时候显示商品信息
-
+  showHeader:true
 };
 
 const mutations= {
