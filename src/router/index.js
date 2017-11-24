@@ -8,6 +8,9 @@ import yySuccess from "./../components/yy-success";
 import myPage from "./../components/my-page";
 import myYanbi from "./../components/my-yanbi";
 import register from "./../components/register"
+import registerJms from "./../components/register-jms"
+import registerGxjms from "./../components/register-gxjms"
+import registerGxjmsXz from "./../components/register-gxjmsxz"
 import yanfen520 from "./../components/kaitong-yanfen520"
 import myYy from "./../components/my-yy"
 import makeBill from "./../components/make-bill"
@@ -17,7 +20,6 @@ import myJiangshi from "./../components/my-jiangshi"
 import question from "./../components/my-comm-question"
 import questionChild from "./../components/my-comm-question-child"
 import answer from "./../components/my-comm-question-answer"
-import registerJms from "./../components/register-jms"
 import myShare from "./../components/my-share"
 import dzPage from "./../components/dz-page"
 import ckpm from "./../components/ckpm"
@@ -94,6 +96,12 @@ export default new Router({
     },{
       path:"/ckpm",
       component: ckpm
-    },
+    },{
+      path:"/registerGxjmsXz",
+      component: registerGxjmsXz
+    },{
+      path:"/registerGxjms",
+      component: registerGxjms
+    }
   ]
 })

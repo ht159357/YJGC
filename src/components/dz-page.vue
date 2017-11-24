@@ -37,7 +37,7 @@
       <mt-cell class="my-cell-list" title="物料商城" isLink="">
         <img slot="icon" src="../assets/img/yjbb.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="个人中心" isLink="">
+      <mt-cell to="/myPage" class="my-cell-list" title="个人中心" isLink="">
         <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
       </mt-cell>
 
