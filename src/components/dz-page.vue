@@ -16,39 +16,29 @@
     </div>
     <div class="my-list-box">
 
-      <mt-cell class="my-cell-list" title="创客排名" isLink="">
-        <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
-        <span class="my-cell-yen">&yen;1.6</span>
+      <mt-cell to="/ckpm" class="my-cell-list" title="创客排名" isLink="">
+        <img slot="icon" src="../assets/img/ckpm.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="店铺订单" isLink="">
-        <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
+        <img slot="icon" src="../assets/img/dpdd.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="myYy" class="my-cell-list" title="我的预约">
-        <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
+      <mt-cell class="my-cell-list" title="销售报表" isLink="">
+        <img slot="icon" src="../assets/img/xsbb.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
-        <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
+      <mt-cell class="my-cell-list" title="匠师考勤" isLink="">
+        <img slot="icon" src="../assets/img/jskq.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/makeOrder" class="my-cell-list" title="开具发票">
-        <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
+      <mt-cell class="my-cell-list" title="排班管理" isLink="">
+        <img slot="icon" src="../assets/img/pbgl.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="我的消息" isLink="">
-        <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
+      <mt-cell class="my-cell-list" title="营业报表" isLink="">
+        <img slot="icon" src="../assets/img/ryjbb.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="myLike" class="my-cell-list" title="我的喜欢">
-        <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
+      <mt-cell class="my-cell-list" title="物料商城" isLink="">
+        <img slot="icon" src="../assets/img/yjbb.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/myJiangshi" class="my-cell-list" title="我的匠师">
-        <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/question" class="my-cell-list" title="常见问题">
-        <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="" class="my-cell-list" title="店主中心">
+      <mt-cell class="my-cell-list" title="个人中心" isLink="">
         <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/myShare" class="my-cell-list" title="我要分享">
-        <img slot="icon" src="../assets/img/share.png" class="my-cell-icon">
       </mt-cell>
 
     </div>

@@ -36,31 +36,31 @@
       <mt-cell class="my-cell-list" title="我的卡券" isLink="">
         <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="myYy" class="my-cell-list" title="我的预约">
+      <mt-cell to="myYy" class="my-cell-list" title="我的预约" isLink="">
         <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
         <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/makeOrder" class="my-cell-list" title="开具发票">
+      <mt-cell to="/makeOrder" class="my-cell-list" title="开具发票" isLink="">
         <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的消息" isLink="">
         <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="myLike" class="my-cell-list" title="我的喜欢">
+      <mt-cell to="myLike" class="my-cell-list" title="我的喜欢" isLink="">
         <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/myJiangshi" class="my-cell-list" title="我的匠师">
+      <mt-cell to="/myJiangshi" class="my-cell-list" title="我的匠师" isLink="">
         <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/question" class="my-cell-list" title="常见问题">
+      <mt-cell to="/question" class="my-cell-list" title="常见问题" isLink="">
         <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/dzPage" class="my-cell-list" title="店主中心">
+      <mt-cell to="/dzPage" class="my-cell-list" title="店主中心" isLink="">
         <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell to="/myShare" class="my-cell-list" title="我要分享">
+      <mt-cell to="/myShare" class="my-cell-list" title="我要分享" isLink="">
         <img slot="icon" src="../assets/img/share.png" class="my-cell-icon">
       </mt-cell>
 

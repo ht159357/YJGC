@@ -20,6 +20,8 @@ import answer from "./../components/my-comm-question-answer"
 import registerJms from "./../components/register-jms"
 import myShare from "./../components/my-share"
 import dzPage from "./../components/dz-page"
+import ckpm from "./../components/ckpm"
+
 
 Vue.use(Router);
 
@@ -86,9 +88,12 @@ export default new Router({
     },{
       path:"/myShare",
       component: myShare
-    },,{
+    },{
       path:"/dzPage",
       component: dzPage
+    },{
+      path:"/ckpm",
+      component: ckpm
     },
   ]
 })
