@@ -1,4 +1,4 @@
-# YJGC-Demo
+# YJGC-Demo 颜匠工场微信端vue源码 @author 胡涛
 
 > YJGC-Demo
 

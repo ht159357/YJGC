@@ -45,7 +45,7 @@
         发票内容
       </div>
       <div class="bill-box-value" style="flex: 1;">
-        <input placeholder="服务" type="text" class="bill-input bill-disable" style="background: #D9D9D9;text-indent: 10px;">
+        <input placeholder="服务" type="text" class="bill-input bill-disable" style="background: #D9D9D9;text-indent: 10px;" disabled>
       </div>
     </div>
 

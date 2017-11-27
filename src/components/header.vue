@@ -1,6 +1,6 @@
 <template>
   <!--头部-->
-  <mt-header class="header-backcolor" style="height: 44px;" fixed title="颜匠工场">
+  <mt-header class="header-backcolor" style="height: 44px;" fixed :title="title">
     <mt-button slot="left">
       <router-link to="/index">
         <img style="width: 22px;" src="./../assets/img/indexicon.png">
@@ -25,7 +25,8 @@
       name:"header-nav",
       data(){
           return {
-              userid: 1
+              userid: 1,
+              title: "颜匠工场"
           }
       },
       store,
