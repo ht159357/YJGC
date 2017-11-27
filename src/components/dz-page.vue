@@ -19,10 +19,10 @@
       <mt-cell to="/ckpm" class="my-cell-list" title="创客排名" isLink="">
         <img slot="icon" src="../assets/img/ckpm.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="店铺订单" isLink="">
+      <mt-cell to="/shopOrder" class="my-cell-list" title="店铺订单" isLink="">
         <img slot="icon" src="../assets/img/dpdd.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="销售报表" isLink="">
+      <mt-cell to="/salesReport" class="my-cell-list" title="销售报表" isLink="">
         <img slot="icon" src="../assets/img/xsbb.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="匠师考勤" isLink="">

@@ -89,7 +89,7 @@
             return {
                 beginDate: "2017-07-01",
                 endDate: "2017-11-24",
-                curNav: 1,
+                curNav: 0,
             }
         },
         methods:{
@@ -117,6 +117,12 @@
                 let year = myDate.getFullYear();
                 let month = myDate.getMonth()+1;
                 let day = myDate.getDate();
+                if( month < 10 ){
+                    month = "0"+month;
+                }
+                if( day < 10 ){
+                    day = "0"+day;
+                }
 //                this.beginDate = year + "-" + month + "-" + day;
                 return year + "-" + month + "-" + day;
             },
@@ -125,6 +131,12 @@
                 let year = myDate.getFullYear();
                 let month = myDate.getMonth()+1;
                 let day = myDate.getDate();
+                if( month < 10 ){
+                    month = "0"+month;
+                }
+                if( day < 10 ){
+                    day = "0"+day;
+                }
 //                this.endDate = year + "-" + month + "-" + day;
                 return year + "-" + month + "-" + day;
             }

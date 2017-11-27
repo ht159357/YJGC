@@ -60,9 +60,9 @@
   import Vue from 'vue'
   import { Loadmore } from 'mint-ui';
   import { InfiniteScroll } from 'mint-ui';import { Popup } from 'mint-ui';
+  import commjs from "./../assets/js/commFunction";
   import wx from 'weixin-js-sdk';
   import axios from 'axios';
-  import commjs from "./../assets/js/commFunction";
   import { Toast } from 'mint-ui';
   import { MessageBox } from 'mint-ui';
 

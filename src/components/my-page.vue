@@ -72,7 +72,7 @@
         name:"my-page",
         data(){
             return {
-                userLevel: 1,
+                userLevel: 2,
                 userMaxExp: 1000,
                 userExp: 800,
                 userExpWidth:null,

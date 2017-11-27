@@ -10,7 +10,7 @@ import myYanbi from "./../components/my-yanbi";
 import register from "./../components/register"
 import registerJms from "./../components/register-jms"
 import registerGxjms from "./../components/register-gxjms"
-import registerGxjmsXz from "./../components/register-gxjmsxz"
+import registerGxjmsXy from "../components/register-gxjmsxy"
 import yanfen520 from "./../components/kaitong-yanfen520"
 import myYy from "./../components/my-yy"
 import makeBill from "./../components/make-bill"
@@ -23,6 +23,8 @@ import answer from "./../components/my-comm-question-answer"
 import myShare from "./../components/my-share"
 import dzPage from "./../components/dz-page"
 import ckpm from "./../components/ckpm"
+import shopOrder from "./../components/shop-order"
+import salesReport from "./../components/sales-report"
 
 
 Vue.use(Router);
@@ -97,11 +99,17 @@ export default new Router({
       path:"/ckpm",
       component: ckpm
     },{
-      path:"/registerGxjmsXz",
-      component: registerGxjmsXz
+      path:"/registerGxjmsXy",
+      component: registerGxjmsXy
     },{
       path:"/registerGxjms",
       component: registerGxjms
+    },{
+      path:"/shopOrder",
+      component: shopOrder
+    },{
+      path:"/salesReport",
+      component: salesReport
     }
   ]
 })

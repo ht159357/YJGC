@@ -19,7 +19,7 @@
 <script>
   import { Toast } from 'mint-ui';
   export default {
-      name:"register-gxjmsxz",
+      name:"register-gxjmsxy",
       data(){
           return {
               ireader : false
@@ -39,10 +39,12 @@
       }
   }
 </script>
-<style>
+<style scoped>
   .reg-box{
     padding: 0 2%;
   }
+</style>
+<style>
   .modal-title{
     padding: 15px;
     font-weight: bold;
