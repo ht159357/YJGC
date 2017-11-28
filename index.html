@@ -5,25 +5,30 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>颜匠工场</title>
     <script>
-      var openId = "oUC9iwsC_uSSxI0I4RJrBu3F1I2c";//测试
       var curWwwPath=window.document.location.href; //获取当前网址
       var pathName=window.document.location.pathname;//获取主机之后的地址
       var pos=curWwwPath.indexOf(pathName);
       var httpStr = curWwwPath.substring(0,pos);//获取主机地址
-      httpStr = "http://192.168.6.13:8080";//测试
 
       //生产
-//      var theRequest = new Object();
-//      theRequest = curWwwPath.split("?")[1].split("&");
-//      var urlObj={};
-//      for( var i in theRequest ){
-//          console.log(theRequest[i].split("="))
+//      if( localStorage.length === 0 ){
+//        var theRequest = new Object();
+//        theRequest = curWwwPath.split("?")[1].split("&");
+//        var urlObj={};
+//        for( var i in theRequest ){
 //          urlObj[theRequest[i].split("=")[0]]=theRequest[i].split("=")[1];
+//          localStorage.setItem(theRequest[i].split("=")[0],theRequest[i].split("=")[1]);
+//        }
+//        var openId = localStorage.openId;
+//      }else{
+//        var openId = localStorage.openId;
 //      }
-//      var openId = urlObj.openId;
-//      localStorage.setItem("openId",openId);
-//      console.log(openId)
-      console.log(curWwwPath,pathName,pos,httpStr);
+
+      var openId = "oUC9iwsC_uSSxI0I4RJrBu3F1I2c";//测试
+      httpStr = "http://192.168.6.13:8080";//测试
+
+      console.log(openId);
+      console.log(curWwwPath,pathName,httpStr);
     </script>
   </head>
   <body>

@@ -179,6 +179,17 @@
           }
       },
       created(){
+          axios({
+              method:"post",
+              url:httpStr + "/wechat/register/isAllianceBt",
+              data:{
+                  openId:openId
+              }
+          }).then(function(ret){
+              if(ret.data.has === 1){
+                  self.$router.push("/registed/1");
+              }
+          })
           let self = this;
           axios({
               method: 'post',

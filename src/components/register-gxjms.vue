@@ -148,6 +148,7 @@
                   let data = ret.data;
                   console.log(data);
                   if( data.flag === 100 ){
+                      /*****************支付调用*****************/
                       //公众号支付
                       WeixinJSBridge.invoke('getBrandWCPayRequest',{
                           "appId": data.data.appId,      //公众号名称，由商户传入
@@ -165,6 +166,7 @@
                         //因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。
                           WeixinJSBridge.log('yo~ ready.');
                       }, false)
+                      /*******************支付调用****************/
                   }else{
                       Toast("订单创建失败！");
                   }

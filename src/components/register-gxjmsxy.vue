@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+  import axios from 'axios';
   import { Toast } from 'mint-ui';
   export default {
       name:"register-gxjmsxy",
@@ -34,8 +35,21 @@
               }
           }
       },
-      created(){
-
+      beforeCreate(){
+          let self = this;
+          axios({
+              method:"post",
+              url:httpStr + "/wechat/register/isShareFranchBt",
+              data:{
+                wechat_id:openId
+              }
+          }).then(function(ret){
+              if( ret.data.flag === 100 ){
+                  if(ret.data.has === 1){
+                      self.$router.push("/registed/2");
+                  }
+              }
+          })
       }
   }
 </script>

@@ -25,13 +25,13 @@
       <mt-cell to="/salesReport" class="my-cell-list" title="销售报表" isLink="">
         <img slot="icon" src="../assets/img/xsbb.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="匠师考勤" isLink="">
+      <mt-cell to="/workAttendance" class="my-cell-list" title="匠师考勤" isLink="">
         <img slot="icon" src="../assets/img/jskq.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="排班管理" isLink="">
+      <mt-cell to="/workerScheduling" class="my-cell-list" title="排班管理" isLink="">
         <img slot="icon" src="../assets/img/pbgl.png" class="my-cell-icon">
       </mt-cell>
-      <mt-cell class="my-cell-list" title="营业报表" isLink="">
+      <mt-cell to="/businessChart" class="my-cell-list" title="营业报表" isLink="">
         <img slot="icon" src="../assets/img/ryjbb.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="物料商城" isLink="">
