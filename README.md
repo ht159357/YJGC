@@ -1,6 +1,6 @@
-# YJGC-Demo 颜匠工场微信端vue源码 @author 胡涛
+# YJGC
 
-> YJGC-Demo
+> 颜匠工场微信端vue源码 @author 胡涛
 
 ## Build Setup
 
