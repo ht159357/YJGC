@@ -48,7 +48,10 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <router-link :to="'/jiangshi/'+item" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')">
+        <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')">
+          <div>
+            <img src="" alt="">
+          </div>
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
@@ -56,26 +59,30 @@
           <!--技师信息-->
           <div class="index-info-box">
             <div class="yj-cell">
-              <span class="yj-name">莉莉</span>
-              <span class="yj-work">美甲师</span>
+              <span class="yj-name">{{item.stageName}}</span>
+              <span class="yj-work">{{item.work_types}}</span>
             </div>
             <div class="yj-cell">
-              <span class="yj-workd yj-elic">手部护理,美足护理,美钻款式</span>
+              <span class="yj-workd yj-elic">{{item.work_goods}}</span>
             </div>
             <div class="yj-cell yj-star-box">
-              <!--星星-->
-              <svg class="icon" aria-hidden="true" v-for="item in 5">
-                <use xlink:href="#icon-star"></use>
-              </svg>
-              <!--奖杯-->
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-jiangbei"></use>
-              </svg>
+              <!--&lt;!&ndash;星星&ndash;&gt;-->
+              <!--<svg class="icon" aria-hidden="true" v-for="item in 5">-->
+                <!--<use xlink:href="#icon-star"></use>-->
+              <!--</svg>-->
+              <!--&lt;!&ndash;奖杯&ndash;&gt;-->
+              <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-jiangbei"></use>-->
+              <!--</svg>-->
+              <el-rate v-model="item.evaluate" disabled disabled-void-color="#ccc" show-text></el-rate>
             </div>
             <!--状态-->
             <div class="yj-cell">
-              <span class="yj-state">
-                今天可预约
+              <span class="yj-state" v-if="item.appointment === 0">
+                今天可约
+              </span>
+              <span class="yj-state" v-else>
+                明日可约
               </span>
               <span class="yj-state">
                 店铺优惠卷
@@ -108,6 +115,10 @@
 <script>
   import axios from 'axios';
   import store from './../store/store'
+  import Vue from 'vue'
+  import { Rate } from 'element-ui';
+
+  Vue.use(Rate);
   export default {
       name:'index-main',
       data(){
@@ -119,7 +130,7 @@
               cityId:null,
               shopList:null,
               shopId:null,
-              shopInfo:null
+              shopInfo:null,
           }
       },
       store,
@@ -158,6 +169,9 @@
                       self.shopInfo = data.data;
                   }
               })
+          },
+          setPoint( val ){
+              return (val/2);
           }
       },
       mounted(){
@@ -174,6 +188,11 @@
                   self.setCity();
               }
           })
+      },
+      computed:{
+          "item.evaluate"(val){
+              return val / 2;
+          }
       }
   }
 </script>
@@ -238,7 +257,7 @@
     text-align: justify;
   }
   .index-page-box{
-    padding: 10px 5px;
+    padding: 10px 5px 0;
   }
   .icon {
     width: 1em;
