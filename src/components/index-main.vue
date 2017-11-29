@@ -48,7 +48,7 @@
     <div class="index-nav-page" v-show="curNav==1">
       <div class="index-page-box">
         <!--单一技师-->
-        <router-link :to="'/jiangshi/'+item" class="index-js-info" v-for="item in 5" @click="showJishiDetails(item,'showJsDetails')">
+        <router-link :to="'/jiangshi/'+item" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')">
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
@@ -119,6 +119,7 @@
               cityId:null,
               shopList:null,
               shopId:null,
+              shopInfo:null
           }
       },
       store,
@@ -131,6 +132,7 @@
               let self = this;
               self.cityList = self.provinceList[self.provinceIndex].citys;
               self.cityId = self.provinceList[self.provinceIndex].citys[0].id;
+              self.setShop();
           },
           setShop(){//获取店铺列表
               let self = this;
@@ -153,6 +155,7 @@
                   let data = ret.data;
                   if( data.flag === 100 ){
                       console.log(data);
+                      self.shopInfo = data.data;
                   }
               })
           }
@@ -169,7 +172,6 @@
               if( ret.data.flag === 100 ){
                   self.provinceList = ret.data.data;
                   self.setCity();
-                  self.setShop();
               }
           })
       }

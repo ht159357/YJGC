@@ -29,6 +29,9 @@ import workAttendance from "./../components/work-attendance"
 import registed from "./../components/registed"
 import workerScheduling from "./../components/worker-scheduling"
 import businessChart from "./../components/business-chart"
+import star from "./../components/star"
+
+
 
 Vue.use(Router);
 
@@ -131,6 +134,9 @@ export default new Router({
     },{//营业报表
       path:"/businessChart",
       component: businessChart
+    },{//星星
+      path:"/star",
+      component: star
     }
   ]
 })
