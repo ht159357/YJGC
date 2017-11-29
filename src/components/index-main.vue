@@ -74,7 +74,7 @@
               <!--<svg class="icon" aria-hidden="true">-->
                 <!--<use xlink:href="#icon-jiangbei"></use>-->
               <!--</svg>-->
-              <el-rate v-model="item.evaluate" disabled disabled-void-color="#ccc" show-text></el-rate>
+              <el-rate v-model="item.evaluate / 2" disabled disabled-void-color="#ccc" show-text></el-rate>
             </div>
             <!--状态-->
             <div class="yj-cell">
@@ -170,9 +170,6 @@
                   }
               })
           },
-          setPoint( val ){
-              return (val/2);
-          }
       },
       mounted(){
 
@@ -188,11 +185,6 @@
                   self.setCity();
               }
           })
-      },
-      computed:{
-          "item.evaluate"(val){
-              return val / 2;
-          }
       }
   }
 </script>
