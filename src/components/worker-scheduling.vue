@@ -7,7 +7,9 @@
     export default {
         name:"worker-scheduling",
         data(){
+            return {
 
+            }
         }
     }
 </script>

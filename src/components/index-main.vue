@@ -17,24 +17,21 @@
 
     <div class="shops-box">
       <div class="shops-box-box">
-        <select class="select-reset" name="province">
-          <option value="1">江苏省</option>
-          <option value="2">上海市</option>
-          <option value="3">江西省</option>
+        <!--省-->
+        <select class="select-reset" v-model="provinceIndex" name="province" @change="setCity">
+          <option :value="index" v-for="(item,index) in provinceList">{{item.name}}</option>
         </select>
       </div>
       <div class="shops-box-box">
-        <select class="select-reset" name="city">
-          <option value="1">南京市</option>
-          <option value="2">上海市</option>
-          <option value="3">南昌市</option>
+        <!--市-->
+        <select class="select-reset" name="city" v-model="cityId" @change="setShop">
+          <option :value="item.id" v-for="item in cityList">{{item.name}}</option>
         </select>
       </div>
       <div class="shops-box-box">
-        <select class="select-reset" name="city">
-          <option value="1">南京店</option>
-          <option value="2">上海店</option>
-          <option value="1">南昌万达店</option>
+        <!--店铺-->
+        <select class="select-reset" name="city" v-model="shopId" @change="setShopInfo">
+          <option :value="item.storefrontId" v-for="item in shopList">{{item.storefrontName}}</option>
         </select>
       </div>
     </div>
@@ -109,12 +106,19 @@
   </div>
 </template>
 <script>
+  import axios from 'axios';
   import store from './../store/store'
   export default {
       name:'index-main',
       data(){
           return {
-              curNav: 1
+              curNav: 1,
+              provinceList:null,
+              cityList:null,
+              provinceIndex:0,
+              cityId:null,
+              shopList:null,
+              shopId:null,
           }
       },
       store,
@@ -122,10 +126,52 @@
           activePage(event){//切换page
               var self = event.currentTarget;
               this.curNav = self.getAttribute("data-nav");
+          },
+          setCity(){//获取市列表
+              let self = this;
+              self.cityList = self.provinceList[self.provinceIndex].citys;
+              self.cityId = self.provinceList[self.provinceIndex].citys[0].id;
+          },
+          setShop(){//获取店铺列表
+              let self = this;
+              axios.post(httpStr+"/artisan/queryStorefrontByRegion",{
+                  territoryId: self.cityId
+              }).then(function(ret){
+                  let data = ret.data;
+                  if( data.flag === 100 ){
+                      self.shopList = data.data;
+                      self.shopId = self.shopList[0].storefrontId;
+                      self.setShopInfo();
+                  }
+              })
+          },
+          setShopInfo(){//获取店铺信息
+              let self = this;
+              axios.post(httpStr+"/artisan/queryStorefrontInfo",{
+                  storefrontId: self.shopId
+              }).then(function(ret){
+                  let data = ret.data;
+                  if( data.flag === 100 ){
+                      console.log(data);
+                  }
+              })
           }
       },
       mounted(){
 
+      },
+      created(){
+          let self = this;
+          axios({
+              method:"post",
+              url: httpStr + "/artisan/queryRegion"
+          }).then(function(ret){
+              if( ret.data.flag === 100 ){
+                  self.provinceList = ret.data.data;
+                  self.setCity();
+                  self.setShop();
+              }
+          })
       }
   }
 </script>

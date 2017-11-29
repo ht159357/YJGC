@@ -205,7 +205,7 @@
 
         <div class="jis-pop-time-title">
           <div class="jis-pop-time-left">可预约时间</div>
-          <div class="jis-pop-time-right">
+          <div class="jis-pop-time-right jis-pop-time-right-module">
             <span class="jis-pop-time-green"></span>
             <span class="jis-pop-time-name">可约</span>
             <span class="jis-pop-time-gary"></span>
@@ -543,12 +543,15 @@ export default {
     line-height: 21px;
   }
   .jis-pop-time-right{
-    flex: 0 0 75%;
+    flex: 1;
     overflow: hidden;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  .jis-pop-time-right-module{
+    justify-content: flex-start;
   }
   .jis-pop-time-green,.jis-pop-time-gary{
     display: inline-block;
