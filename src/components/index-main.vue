@@ -45,8 +45,12 @@
         <span class="index-nav-tab-title">按项目</span>
       </div>
     </div>
-    <div class="index-nav-page" v-show="curNav==1">
+    <div class="index-nav-page" v-show="curNav==1" v-loading="mLoading"
+         element-loading-text="加载中...">
       <div class="index-page-box">
+        <div class="no-data-index" v-if="shopInfo.artisanList.length === 0">
+          暂无数据~
+        </div>
         <!--单一技师-->
         <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')">
           <div>
@@ -84,26 +88,30 @@
               <span class="yj-state" v-else>
                 明日可约
               </span>
-              <span class="yj-state">
-                店铺优惠卷
-              </span>
+              <!--<span class="yj-state">-->
+                <!--店铺优惠卷-->
+              <!--</span>-->
             </div>
           </div>
         </router-link>
       </div>
     </div>
-    <div class="index-nav-page" v-show="curNav==2">
-      <div class="index-page-box" style="padding: 10px 0">
+    <div class="index-nav-page" v-show="curNav==2" v-loading="mLoading"
+         element-loading-text="加载中...">
+      <div class="index-page-box">
+        <div class="no-data-index" v-if="shopInfo.goodsList.length === 0">
+          暂无数据~
+        </div>
         <!--单个类型项目-->
-        <div class="xm-box" v-for="item in 4">
+        <div class="xm-box" v-for="item in shopInfo.goodsList">
           <div class="xm-header">
             <div class="xm-header-border">
-              <span class="xm-title">卸甲服务</span>
+              <span class="xm-title">{{ item.classifyName }}</span>
             </div>
           </div>
           <div class="xm-one-box">
-            <router-link :to="'/project/'+item+'/'+1" class="xm-info" v-for="item in 8">
-              <img v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
+            <router-link :to="'/project/'+goodinfo.goodsId+'/'+1" class="xm-info" v-for="goodinfo in item.goods">
+              <img v-lazy='require("./../assets/img/nav-1.jpg")'>
             </router-link>
           </div>
         </div>
@@ -114,15 +122,18 @@
 </template>
 <script>
   import axios from 'axios';
-  import store from './../store/store'
-  import Vue from 'vue'
+  import store from './../store/store';
+  import Vue from 'vue';
   import { Rate } from 'element-ui';
+  import { Loading } from 'element-ui';
 
   Vue.use(Rate);
+  Vue.use(Loading);
   export default {
       name:'index-main',
       data(){
           return {
+              mLoading: false,
               curNav: 1,
               provinceList:null,
               cityList:null,
@@ -160,6 +171,7 @@
           },
           setShopInfo(){//获取店铺信息
               let self = this;
+              self.mLoading = true;
               axios.post(httpStr+"/artisan/queryStorefrontInfo",{
                   storefrontId: self.shopId
               }).then(function(ret){
@@ -167,6 +179,9 @@
                   if( data.flag === 100 ){
                       console.log(data);
                       self.shopInfo = data.data;
+                      setTimeout(function(){
+                          self.mLoading = false;
+                      },500)
                   }
               })
           },
@@ -247,6 +262,7 @@
   .index-nav-page{
     background: #fff;
     text-align: justify;
+    min-height: 120px;
   }
   .index-page-box{
     padding: 10px 5px 0;
@@ -373,5 +389,15 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+  .el-loading-spinner .path{
+    stroke: #FB3453;
+  }
+  .el-loading-spinner .el-loading-text{
+    color: #FB3453;
+  }
+  .no-data-index{
+    text-align: center;
+    padding: 50px 0;
   }
 </style>

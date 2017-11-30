@@ -580,6 +580,7 @@ export default {
   }
   .jis-pop-title{
     flex: 0 0 20%;
+    font-size: 12px;
   }
   .jis-pop-time-img{
     flex: 0 0 72%;
