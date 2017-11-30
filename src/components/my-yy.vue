@@ -26,18 +26,16 @@
         </svg>05-15 10:30</span>
         <div class="myyy-btn-box">
           <div class="myyy-btn myyy-btn-cancel">取消订单</div>
-          <div class="myyy-btn myyy-btn-yes">付款</div>
+          <div v-if="0" class="myyy-btn myyy-btn-yes">付款</div>
           <!--杂项-->
-          <div v-if="0">
-            <div class="myyy-btn myyy-btn-cancel">取消订单</div>
-            <div class="myyy-btn myyy-btn-yes">增项付费</div>
+          <div v-if="0" class="myyy-btn myyy-btn-cancel">取消订单</div>
+          <div v-if="0" class="myyy-btn myyy-btn-yes">增项付费</div>
 
-            <div class="myyy-btn myyy-btn-cancel">投诉售后</div>
-            <div class="myyy-btn myyy-btn-yes">评价</div>
+          <div v-if="0" class="myyy-btn myyy-btn-cancel">投诉售后</div>
+          <router-link to="/commentBill" class="myyy-btn myyy-btn-yes router-link">评价</router-link>
 
-            <div class="myyy-btn myyy-btn-cancel">投诉售后</div>
-            <div class="myyy-btn myyy-btn-cancel">删除订单</div>
-          </div>
+          <div v-if="0" class="myyy-btn myyy-btn-cancel">投诉售后</div>
+          <div v-if="0" class="myyy-btn myyy-btn-cancel">删除订单</div>
         </div>
       </div>
     </div>

@@ -48,14 +48,14 @@
     <div class="index-nav-page" v-show="curNav==1" v-loading="mLoading"
          element-loading-text="加载中...">
       <div class="index-page-box">
-        <div class="no-data-index" v-if="shopInfo.artisanList.length === 0">
-          暂无数据~
+        <div class="no-data-index" v-if="shopInfo.artisanList.length === 0 && !mLoading">
+          <img src="./../assets/img/no-data.png" alt="">
         </div>
         <!--单一技师-->
-        <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')">
-          <div>
-            <img src="" alt="">
-          </div>
+        <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')" v-show="!mLoading">
+          <!--<div>-->
+            <!--<img src="" alt="">-->
+          <!--</div>-->
           <!--头像-->
           <div class="index-img-box">
             <img class="index-js-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
@@ -99,8 +99,8 @@
     <div class="index-nav-page" v-show="curNav==2" v-loading="mLoading"
          element-loading-text="加载中...">
       <div class="index-page-box">
-        <div class="no-data-index" v-if="shopInfo.goodsList.length === 0">
-          暂无数据~
+        <div class="no-data-index" v-if="shopInfo.goodsList.length === 0 && !mLoading">
+          <img src="./../assets/img/no-data.png" alt="">
         </div>
         <!--单个类型项目-->
         <div class="xm-box" v-for="item in shopInfo.goodsList">
@@ -111,7 +111,8 @@
           </div>
           <div class="xm-one-box">
             <router-link :to="'/project/'+goodinfo.goodsId+'/'+1" class="xm-info" v-for="goodinfo in item.goods">
-              <img v-lazy='require("./../assets/img/nav-1.jpg")'>
+              <!--<img v-lazy='require("./../assets/img/nav-1.jpg")'>-->
+              <img v-lazy='goodinfo.marketPrice'>
             </router-link>
           </div>
         </div>
@@ -390,14 +391,17 @@
     overflow: hidden;
     white-space: nowrap;
   }
-  .el-loading-spinner .path{
+  .el-loading-spinner circle.path{
     stroke: #FB3453;
   }
-  .el-loading-spinner .el-loading-text{
+  .el-loading-spinner p.el-loading-text{
     color: #FB3453;
   }
   .no-data-index{
     text-align: center;
     padding: 50px 0;
+  }
+  .no-data-index img{
+    width: 128px;
   }
 </style>

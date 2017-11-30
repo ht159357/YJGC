@@ -35,8 +35,16 @@
       }
   }
 </script>
-<style scoped>
-.header-backcolor{
-  background-color: #FB3453;
-}
+<style>
+  .header-backcolor{
+    background-color: #FB3453;
+  }
+  .router-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  input.mint-radio-input:checked + .mint-radio-core {
+    background-color: #fb3453;
+    border-color: #fb3453;
+  }
 </style>

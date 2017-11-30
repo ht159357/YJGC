@@ -29,7 +29,9 @@ import workAttendance from "./../components/work-attendance"
 import registed from "./../components/registed"
 import workerScheduling from "./../components/worker-scheduling"
 import businessChart from "./../components/business-chart"
-import star from "./../components/star"
+import commentBill from "./../components/comment-bill"
+import complaint from "./../components/complaint"
+import submitOrder from "./../components/submit-order"
 
 
 
@@ -134,9 +136,12 @@ export default new Router({
     },{//营业报表
       path:"/businessChart",
       component: businessChart
-    },{//星星
-      path:"/star",
-      component: star
+    },{//评论订单
+      path:"/commentBill",
+      component: commentBill
+    },{//评论订单
+      path:"/submitOrder",
+      component: submitOrder
     }
   ]
 })

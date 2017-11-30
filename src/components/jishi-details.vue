@@ -120,7 +120,10 @@
               时段
             </div>
             <div class="jis-pop-time-img">
-              <img src="./../assets/img/timeline.png" alt="">
+              <!--<img src="./../assets/img/timeline.png" alt="">-->
+              <div v-for="(item,index) in 23">
+                <div class="yy-time-position" v-if="index%2 != 1">{{index}}</div>
+              </div>
             </div>
           </div>
           <div class="jis-pop-time-box" v-for="date in 30" v-if="date <= 5">
@@ -201,34 +204,7 @@
 
     <!------------------module层---------------------->
     <mt-popup v-model="popupVisible" position="bottom" style="width: 100%;height: 45%;overflow-y: scroll;">
-      <div class="jis-pop-box">
-
-        <div class="jis-pop-time-title">
-          <div class="jis-pop-time-left">可预约时间</div>
-          <div class="jis-pop-time-right jis-pop-time-right-module">
-            <span class="jis-pop-time-green"></span>
-            <span class="jis-pop-time-name">可约</span>
-            <span class="jis-pop-time-gary"></span>
-            <span class="jis-pop-time-name">不可约</span>
-          </div>
-        </div>
-        <div class="jis-pop-time-box">
-          <div class="jis-pop-title">
-            时段
-          </div>
-          <div class="jis-pop-time-img">
-            <img src="./../assets/img/timeline.png" alt="">
-          </div>
-        </div>
-        <div class="jis-pop-time-box" v-for="date in 30">
-          <div class="jis-pop-title">
-            今天
-          </div>
-          <div class="jis-pop-time">
-            <span v-for="item in 23" :class="[{'jis-pop-green' : item%2 == 1 }]"></span>
-          </div>
-        </div>
-      </div>
+      <yy-time></yy-time>
     </mt-popup>
   </div>
 </template>
@@ -239,6 +215,8 @@ import store from './../store/store';
 import { Popup } from 'mint-ui';
 import { InfiniteScroll } from 'mint-ui';
 import { Spinner } from 'mint-ui';
+import yyTime from './yytime-component'
+
 Vue.component(Spinner.name, Spinner);
 Vue.component(Popup.name, Popup);
 Vue.use(InfiniteScroll);
@@ -272,6 +250,9 @@ export default {
             ],
             loading: false,
         }
+    },
+    components:{
+        yyTime
     },
     methods:{
         tabActive(index){
@@ -526,6 +507,9 @@ export default {
     color: #2C3D41;
     font-weight: bold;
   }
+
+
+
   .jis-pop-box{
     background: #fff;
     margin-top: 10px;
@@ -584,6 +568,32 @@ export default {
   }
   .jis-pop-time-img{
     flex: 0 0 72%;
+    display: flex;
+    box-sizing: border-box;
+    align-items: flex-end;
+  }
+  .jis-pop-time-img>div{
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+  }
+  .jis-pop-time-img>div .yy-time-position{
+    font-size: 12px;
+    width: 12px;
+    position: absolute;
+    text-align: center;
+    top: -15px;
+    left: -6px;
+    transform: scale(0.8);
+    color: #7E7E7E;
+  }
+  .jis-pop-time-img>div:nth-child(odd){
+    border-left: 1px solid #7E7E7E;
+    height: 7px;
+  }
+  .jis-pop-time-img>div:nth-child(even){
+    border-left: 1px solid #BABABA;
+    height: 4px;
   }
   .jis-pop-time{
     flex: 0 0 72%;
@@ -601,8 +611,10 @@ export default {
   .jis-pop-time-img img{
     width: 100%;
   }
+
+
   .jis-pop-show-more{
-    margin-right: 20px;
+    margin-right: 10px;
     display: inline-block;
     height: 21px;
     line-height: 21px;

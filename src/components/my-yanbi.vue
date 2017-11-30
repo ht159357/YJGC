@@ -4,7 +4,7 @@
     <mt-loadmore :top-method="loadTop" ref="loadmore" class="yb-list">
       <ul v-infinite-scroll="loadMore"
           infinite-scroll-disabled="loading"
-          infinite-scroll-distance="10">
+          infinite-scroll-distance="20">
         <li v-for="item in list">
           <div class="yb-one-list">
             <div class="yb-img">

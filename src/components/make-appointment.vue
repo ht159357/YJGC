@@ -75,7 +75,8 @@
             payIt(){
 
                 //支付完成跳转
-                this.$router.push('../../../yySuccess');
+                this.$router.push('/submitOrder');
+//                this.$router.push('/yySuccess');
             }
         }
     }
