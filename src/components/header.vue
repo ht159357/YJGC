@@ -47,4 +47,24 @@
     background-color: #fb3453;
     border-color: #fb3453;
   }
+  select::-ms-expand { display: none; }
+  .select-reset-defult{
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 44px;
+    border-radius: 0;
+    line-height: 44px;
+    padding-left: 14px;
+    padding-right: 26px;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    position: relative;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px);
+    background-size: 12px;
+    color: #808080;
+  }
 </style>

@@ -32,7 +32,7 @@ import businessChart from "./../components/business-chart"
 import commentBill from "./../components/comment-bill"
 import complaint from "./../components/complaint"
 import submitOrder from "./../components/submit-order"
-
+import star from "./../components/star"
 
 
 Vue.use(Router);
@@ -139,9 +139,15 @@ export default new Router({
     },{//评论订单
       path:"/commentBill",
       component: commentBill
-    },{//评论订单
+    },{//投诉订单
+      path:"/complaint",
+      component: complaint
+    },{//提交订单
       path:"/submitOrder",
       component: submitOrder
+    },{//星星------------------------测试
+      path:"/star",
+      component: star
     }
   ]
 })

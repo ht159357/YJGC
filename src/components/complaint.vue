@@ -120,18 +120,18 @@
     text-align: left;
     text-indent: 10px;
   }
-  div.mint-radiolist{
+  .complaint-box div.mint-radiolist{
     display: flex;
   }
-  div.mint-cell-wrapper{
+  .complaint-box div.mint-cell-wrapper{
     background: none;
     padding: 0;
     font-size: 12px;
   }
-  a.mint-cell{
+  .complaint-box a.mint-cell{
     background: none!important;
   }
-  label.mint-radiolist-title{
+  .complaint-box label.mint-radiolist-title{
     margin: 0;
   }
   .ts-type-val{

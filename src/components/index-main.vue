@@ -53,13 +53,15 @@
         </div>
         <!--单一技师-->
         <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')" v-show="!mLoading">
-          <!--<div>-->
-            <!--<img src="" alt="">-->
-          <!--</div>-->
           <!--头像-->
+          <!--测试时头像文件-->
           <div class="index-img-box">
             <img class="index-js-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
           </div>
+          <!--正式的头像为网络路径-->
+          <!--<div class="index-img-box">-->
+            <!--<img class="index-js-img" v-lazy="item.artisanImg" alt="">-->
+          <!--</div>-->
           <!--技师信息-->
           <div class="index-info-box">
             <div class="yj-cell">

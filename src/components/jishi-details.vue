@@ -6,30 +6,36 @@
       </div>
       <div class="jis-info">
         <div class="jis-cell">
-          <span class="jis-name">莉莉</span>
-          <span class="jis-work">【美甲师、美容师】</span>
+          <span class="jis-name">{{jishiInfo.stageName}}</span>
+          <span class="jis-work">【{{jishiInfo.work_types}}】</span>
         </div>
-        <div class="jis-cell">
+        <div class="jis-cell jishi-star-eva">
           <!--星星-->
-          <svg class="icon" aria-hidden="true" v-for="item in 5">
-            <use xlink:href="#icon-star"></use>
-          </svg>
+          <!--<svg class="icon" aria-hidden="true" v-for="item in 5">-->
+            <!--<use xlink:href="#icon-star"></use>-->
+          <!--</svg>-->
           <!--奖杯-->
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jiangbei"></use>
-          </svg>
-          <span class="jis-work">卓越</span>
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-jiangbei"></use>-->
+          <!--</svg>-->
+          <!--<span class="jis-work">卓越</span>-->
+          <el-rate v-model="jishiInfo.evaluate / 2" disabled disabled-void-color="#ccc" show-text></el-rate>
         </div>
         <div class="jis-cell">
-          <span class="jis-ret">好评率：9.95</span>
+          <span class="jis-ret">好评率：{{jishiInfo.evaluate}}</span>
         </div>
       </div>
       <div class="jis-foucs">
-        <span class="jis-foucnum">关注数：999</span>
-        <span class="jis-addfocus">
+        <span class="jis-foucnum">关注数：{{jishiInfo.concerns}}</span>
+        <span class="jis-addfocus" v-if="jishiInfo.isFans === 0">
           <svg class="icon icon-like" aria-hidden="true">
             <use xlink:href="#icon-like"></use>
           </svg>关注
+        </span>
+        <span class="jis-addfocus" v-if="jishiInfo.isFans === 1">
+          <svg class="icon icon-like" aria-hidden="true">
+            <use xlink:href="#icon-like"></use>
+          </svg>已关注
         </span>
       </div>
     </div>
@@ -81,7 +87,9 @@
           <div class="jis-yy-tm">
             <div class="jis-yy-time" @click="openPop">
               <span class="jis-yy-title">可预约时间</span>
-              <span class="jis-yy-bottom">今日可约
+              <span class="jis-yy-bottom">
+                <span v-if="jishiInfo.appointment !== 0">今日可约</span>
+                <span v-else>明日可约</span>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-rili"></use>
                 </svg>
@@ -142,14 +150,14 @@
             v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10" style="width: 100%;">
-            <li class="jis-pro-li" v-for="(item,index) in list">
-              <router-link :to="'/project/'+index+'/'+3" class="router-link">
+            <li class="jis-pro-li" v-for="(item,index) in jishiInfo.goodsList">
+              <router-link :to="'/project/'+item.goodsId+'/'+3" class="router-link">
                 <div class="jis-pro-one">
                   <div class="jis-pro-img-box">
-                    <img class="jis-pro-img" v-lazy="item">
+                    <img class="jis-pro-img" v-lazy="item.marketPic">
                     <div class="jis-pro-info">
-                      <span class="jis-pro-name">自然款{{index}}</span>
-                      <span class="jis-pro-price">&yen;258</span>
+                      <span class="jis-pro-name">{{item.goodsName}}</span>
+                      <span class="jis-pro-price">&yen;{{item.marketPrice}}</span>
                     </div>
                   </div>
                 </div>
@@ -211,15 +219,18 @@
 
 <script>
 import Vue from 'vue';
+import axios from 'axios';
 import store from './../store/store';
 import { Popup } from 'mint-ui';
 import { InfiniteScroll } from 'mint-ui';
 import { Spinner } from 'mint-ui';
 import yyTime from './yytime-component'
+import { Rate } from 'element-ui';
 
 Vue.component(Spinner.name, Spinner);
 Vue.component(Popup.name, Popup);
 Vue.use(InfiniteScroll);
+Vue.use(Rate);
 
 export default {
     name: 'jishi-detail',
@@ -249,6 +260,8 @@ export default {
                 'http://fuss10.elemecdn.com/7/a5/596ab03934612236f807b92906fd8jpeg.jpeg'
             ],
             loading: false,
+            artisanId:null,
+            jishiInfo:null,
         }
     },
     components:{
@@ -299,12 +312,26 @@ export default {
             var timer = setInterval(Marquee,speed);
         }
     },
+    beforeCreate(){
+        console.log("beforeCreate");
+        let self = this;
+        self.artisanId = self.$route.params.id;
+        axios.post(httpStr+"/artisan/queryArtisan",{
+            artisanId: self.artisanId,
+            openId:openId
+        }).then((ret) => {
+            if( ret.data.flag === 100 ){
+                console.log(ret.data.data);
+                self.jishiInfo = ret.data.data;
+            }
+        })
+    },
     mounted(){
-        console.log(1);
+        console.log("mounted");
         this.scrollLeft();
-    }
-    ,activated(){
-        console.log(2);
+    },
+    activated(){
+        console.log("activated");
         this.scrollLeft();
     }
 }
@@ -790,5 +817,8 @@ export default {
     height: 150px;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  .jishi-star-eva i.el-rate__icon{
+    font-size: 12px;
   }
 </style>
