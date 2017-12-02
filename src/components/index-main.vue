@@ -48,11 +48,15 @@
     <div class="index-nav-page" v-show="curNav==1" v-loading="mLoading"
          element-loading-text="加载中...">
       <div class="index-page-box">
-        <div class="no-data-index" v-if="shopInfo.artisanList.length === 0 && !mLoading">
+        <div class="no-data-index" v-if="ifloading && shopInfo.artisanList.length === 0 && !mLoading">
           <img src="./../assets/img/no-data.png" alt="">
         </div>
         <!--单一技师-->
-        <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info" v-for="(item,index) in shopInfo.artisanList" @click="showJishiDetails(item,'showJsDetails')" v-show="!mLoading">
+        <router-link :to="'/jiangshi/'+item.artisanId" class="index-js-info"
+                     v-if="ifloading"
+                     v-for="(item,index) in shopInfo.artisanList"
+                     @click="showJishiDetails(item,'showJsDetails')"
+                     v-show="!mLoading">
           <!--头像-->
           <!--测试时头像文件-->
           <div class="index-img-box">
@@ -145,6 +149,7 @@
               shopList:null,
               shopId:null,
               shopInfo:null,
+              ifloading:false,
           }
       },
       store,
@@ -201,6 +206,7 @@
               if( ret.data.flag === 100 ){
                   self.provinceList = ret.data.data;
                   self.setCity();
+                  self.ifloading = true;
               }
           })
       }
@@ -208,6 +214,11 @@
 </script>
 <style scoped>
   [lazy=loading] {
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  [lazy=error] {
     width: 100%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
@@ -365,26 +376,27 @@
     display: flex;
     flex-flow: row wrap;
     align-content: flex-start;
+    box-sizing: border-box;
   }
   .xm-info{
     box-sizing: border-box;
     flex: 0 0 25%;
-    border: 1px solid #F7F6F7;
+    border: 1px solid transparent;
     border-top: none;
     background: #fff;
   }
-  .xm-one-box .xm-info:nth-child(1){
-    border-left: none;
-  }
-  .xm-one-box .xm-info:nth-child(n+1){
-    border-right: none;
-  }
-  .xm-one-box .xm-info:nth-child(5n){
-    border-left: none;
-  }
-  .xm-one-box .xm-info:nth-child(4n){
-    border-right: none;
-  }
+  /*.xm-one-box .xm-info:nth-child(1){*/
+    /*border-left: none;*/
+  /*}*/
+  /*.xm-one-box .xm-info:nth-child(n+1){*/
+    /*border-right: none;*/
+  /*}*/
+  /*.xm-one-box .xm-info:nth-child(5n){*/
+    /*border-left: none;*/
+  /*}*/
+  /*.xm-one-box .xm-info:nth-child(4n){*/
+    /*border-right: none;*/
+  /*}*/
   .xm-info img{
     width: 100%;
   }

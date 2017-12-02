@@ -2,37 +2,29 @@
   <div class="jis-detail-box">
     <div class="jis-info-box" :style="jisinfobox">
       <div class="jis-header">
-        <img class="jis-header-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
+        <!--<img class="jis-header-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">-->
+        <img class="jis-header-img" v-lazy="jishiInfo && jishiInfo.artisanImg" alt="">
       </div>
       <div class="jis-info">
         <div class="jis-cell">
-          <span class="jis-name">{{jishiInfo.stageName}}</span>
-          <span class="jis-work">【{{jishiInfo.work_types}}】</span>
+          <span class="jis-name">{{jishiInfo ? jishiInfo.stageName : ""}}</span>
+          <span class="jis-work">【{{jishiInfo ? jishiInfo.work_types : "" }}】</span>
         </div>
         <div class="jis-cell jishi-star-eva">
-          <!--星星-->
-          <!--<svg class="icon" aria-hidden="true" v-for="item in 5">-->
-            <!--<use xlink:href="#icon-star"></use>-->
-          <!--</svg>-->
-          <!--奖杯-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-jiangbei"></use>-->
-          <!--</svg>-->
-          <!--<span class="jis-work">卓越</span>-->
-          <el-rate v-model="jishiInfo.evaluate / 2" disabled disabled-void-color="#ccc" show-text></el-rate>
+          <el-rate v-model="jishiInfo.evaluate / 2" disabled disabled-void-color="#ccc" show-text v-if="ifloading"></el-rate>
         </div>
         <div class="jis-cell">
-          <span class="jis-ret">好评率：{{jishiInfo.evaluate}}</span>
+          <span class="jis-ret">好评率：{{jishiInfo ? jishiInfo.evaluate : ""}}</span>
         </div>
       </div>
       <div class="jis-foucs">
-        <span class="jis-foucnum">关注数：{{jishiInfo.concerns}}</span>
-        <span class="jis-addfocus" v-if="jishiInfo.isFans === 0">
+        <span class="jis-foucnum">关注数：{{jishiInfo ? jishiInfo.concerns : ""}}</span>
+        <span class="jis-addfocus" v-if="jishiInfo ? jishiInfo.isFans === 0 : '' ">
           <svg class="icon icon-like" aria-hidden="true">
             <use xlink:href="#icon-like"></use>
           </svg>关注
         </span>
-        <span class="jis-addfocus" v-if="jishiInfo.isFans === 1">
+        <span class="jis-addfocus" v-if="jishiInfo ? jishiInfo.isFans === 1 : '' ">
           <svg class="icon icon-like" aria-hidden="true">
             <use xlink:href="#icon-like"></use>
           </svg>已关注
@@ -52,19 +44,22 @@
           <div class="jis-filter jis-filter-active">
             热销
             <svg class="icon icon-arr" aria-hidden="true">
-              <use xlink:href="#icon-up"></use>
+              <use xlink:href="#icon-up" v-if="0"></use>
+              <use xlink:href="#icon-down"></use>
             </svg>
           </div>
           <div class="jis-filter">
             上新
             <svg class="icon icon-arr" aria-hidden="true">
+              <use xlink:href="#icon-up" v-if="0"></use>
               <use xlink:href="#icon-down"></use>
             </svg>
           </div>
           <div class="jis-filter">
             价格
             <svg class="icon icon-arr" aria-hidden="true">
-              <use xlink:href="#icon-up"></use>
+              <use xlink:href="#icon-up" v-if="0"></use>
+              <use xlink:href="#icon-down"></use>
             </svg>
           </div>
         </div>
@@ -78,7 +73,7 @@
               <!--通知-->
               <div id="jis-yy-tz-box-in">
                 <div id="jis-yy-tz-box-in1">
-                  <a v-for="item in 100">测试文字{{item}}</a>
+                  <a>{{ jishiInfo && jishiInfo.shopNote }}</a>
                 </div>
                 <div id="jis-yy-tz-box-in2"></div>
               </div>
@@ -88,7 +83,7 @@
             <div class="jis-yy-time" @click="openPop">
               <span class="jis-yy-title">可预约时间</span>
               <span class="jis-yy-bottom">
-                <span v-if="jishiInfo.appointment !== 0">今日可约</span>
+                <span v-if="jishiInfo ? jishiInfo.appointment !== 0 : '' ">今日可约</span>
                 <span v-else>明日可约</span>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-rili"></use>
@@ -97,7 +92,7 @@
             </div>
             <div class="jis-yy-map">
               <span class="jis-yy-title">服务店铺</span>
-              <a href="http://map.baidu.com/mobile/webapp/place/marker/qt=inf&vt=map&act=read_share&code=315/third_party=uri_api&point=118.742609|32.038532&title=河西万达店&content=江东中路98号万达广场A座205=pcqq.c2c" class="jis-yy-bottom">河西万达
+              <a :href="addrHref" class="jis-yy-bottom">{{jishiInfo ? jishiInfo.strorFront.storefrontName:""}}
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-map"></use>
                 </svg>
@@ -152,15 +147,15 @@
           <ul class="jis-pro-ul"
             v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
-            infinite-scroll-distance="10" style="width: 100%;">
-            <li class="jis-pro-li" v-for="(item,index) in jishiInfo.goodsList">
-              <router-link :to="'/project/'+item.goodsId+'/'+3" class="router-link">
+            infinite-scroll-distance="10" style="width: 100%;" v-if="jishiInfo">
+            <li class="jis-pro-li" v-for="(item,index) in jishiInfo.styleList">
+              <router-link :to="'/project/'+item.styleId+'/'+3" class="router-link">
                 <div class="jis-pro-one">
                   <div class="jis-pro-img-box">
-                    <img class="jis-pro-img" v-lazy="item.marketPic">
+                    <img class="jis-pro-img" v-lazy="item.picPaths">
                     <div class="jis-pro-info">
-                      <span class="jis-pro-name">{{item.goodsName}}</span>
-                      <span class="jis-pro-price">&yen;{{item.marketPrice}}</span>
+                      <span class="jis-pro-name">{{item.styleTitle}}</span>
+                      <span class="jis-pro-price">&yen;{{item.price}}</span>
                     </div>
                   </div>
                 </div>
@@ -174,48 +169,102 @@
 
       </div>
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
+        <!--在线预约-->
+        <div v-if="ifloading && jishiInfo.goodsList.length === 0"  style="padding: 10px 0;">
+          <img src="./../assets/img/no-data.png" style="width: 40%;"><br>
+          暂时没有商品哦~
+        </div>
 
-        <div class="xm-one-box">
-          <router-link :to="'/project/'+ item +'/'+ 2" class="xm-info" v-for="item in 10">
-            <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item +".jpg")'>
+        <div class="xm-one-box" v-if="ifloading && jishiInfo.goodsList.length !== 0">
+          <router-link :to="'/project/'+ item.goodsId +'/'+ 2" class="xm-info" v-for="(item,index) in jishiInfo.goodsList">
+            <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item.marketPic +".jpg")'>
           </router-link>
         </div>
 
       </div>
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==2">
-        <div class="jis-context-box">
-          <!--单一评论-->
-          <a class="index-js-info" v-for="item in 5">
-            <!--头像-->
-            <div class="index-img-box">
-              <img class="index-js-img" src="./../assets/img/header-icon.jpg" alt="">
-            </div>
-            <div class="index-info-box">
-              <div class="yj-cell yj-cell-name">
-                <span class="yj-name yj-elic">*王花花</span>
-                <div class="yj-time">2017/11/12 19:13:39</div>
-              </div>
-              <div class="yj-cell">
-                <span class="yj-workd yj-y">技术：5分</span>
-                <span>
-                  好好好好好好好好好好好好
+        <div v-if="ifloading && jishiInfo.evaluateList.length === 0" style="padding: 10px 0;">
+          <img src="./../assets/img/no-data.png" style="width: 40%;"><br>
+          暂时没有评论哦~
+        </div>
+        <div class="jis-context-box"  v-if="ifloading && jishiInfo.evaluateList.length !== 0">
+          <!--单一-->
+          <ul
+              v-infinite-scroll="loadMorePinlun"
+              infinite-scroll-disabled="loadingp"
+              infinite-scroll-distance="10"
+              infinite-scroll-immediate-check="false" style="width: 100%;" v-if="jishiInfo">
+            <li v-for="(item,index) in jishiInfo.evaluateList">
+              <!--单一评论-->
+              <a class="index-js-info">
+                <!--头像-->
+                <div class="index-img-box">
+                  <img class="index-js-img" v-lazy="item.headUrl">
+                </div>
+                <div class="index-info-box">
+                  <div class="yj-cell yj-cell-name">
+                    <span class="yj-name yj-elic">{{item.nickname}}</span>
+                    <div class="yj-time">{{item.evaluateTime | timeParse}}</div>
+                  </div>
+                  <div class="yj-cell">
+                    <span class="yj-workd yj-y">技术：{{item.score}}分</span>
+                    <span>
+                    {{item.title}}
                 </span>
-              </div>
-              <div class="yj-cell">
-                <span class="yj-workd yj-g">服务：5分</span>
-                <span>
-                  好好好好好好好好好好好好
-                </span>
-              </div>
-            </div>
-          </a>
+                  </div>
+                  <!--<div class="yj-cell">-->
+                  <!--<span class="yj-workd yj-g">服务：5分</span>-->
+                  <!--<span>-->
+                  <!--好好好好好好好好好好好好-->
+                  <!--</span>-->
+                  <!--</div>-->
+                </div>
+              </a>
+            </li>
+          </ul>
+          <div class="jis-loadmore" v-show="loadingp">
+            <mt-spinner color="#FB3453" type="triple-bounce"></mt-spinner>
+          </div>
+
         </div>
       </div>
     </div>
 
     <!------------------module层---------------------->
     <mt-popup v-model="popupVisible" position="bottom" style="width: 100%;height: 45%;overflow-y: scroll;">
-      <yy-time></yy-time>
+      <div class="jis-pop-box">
+        <div class="jis-pop-time-title">
+          <div class="jis-pop-time-left">可预约时间</div>
+          <div class="jis-pop-time-right" style="justify-content: flex-start;">
+            <span class="jis-pop-time-green"></span>
+            <span class="jis-pop-time-name">可约</span>
+            <span class="jis-pop-time-gary"></span>
+            <span class="jis-pop-time-name">不可约</span>
+          </div>
+        </div>
+        <div class="jis-pop-time-box">
+          <div class="jis-pop-title">
+            时段
+          </div>
+          <div class="jis-pop-time-img">
+            <div v-for="(item,index) in intervalTimeArr" :class="[{'border-bottom-transparent': intervalTimeArr.length-1 === index }]">
+              <div class="yy-time-position" v-if="index%2 === 0">{{ item }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="jis-pop-time-box" v-for="(date,index) in shopTime">
+          <div class="jis-pop-title">
+            <span v-if="index === 0">今天</span>
+            <span v-else-if="index === 1">明天</span>
+            <span v-else-if="index === 2">后天</span>
+            <span v-else>{{date.week}}</span>
+          </div>
+          <div class="jis-pop-time">
+            <span v-for="item in date.data" :class="[{'jis-pop-green' : item.yy }]"></span>
+            <span style="background: #fff;"></span>
+          </div>
+        </div>
+      </div>
     </mt-popup>
   </div>
 </template>
@@ -227,7 +276,6 @@ import store from './../store/store';
 import { Popup } from 'mint-ui';
 import { InfiniteScroll } from 'mint-ui';
 import { Spinner } from 'mint-ui';
-import yyTime from './yytime-component'
 import { Rate } from 'element-ui';
 
 Vue.component(Spinner.name, Spinner);
@@ -255,16 +303,16 @@ export default {
             },
             popupVisible : false,
             loading: false,
+            loadingp: false,
             artisanId:null,
             jishiInfo:null,
             userTime:null,
             intervalTime:null,
             intervalTimeArr:[],
             shopTime:[],
+            ifloading: false,
+            addrHref:null,
         }
-    },
-    components:{
-        yyTime
     },
     methods:{
         tabActive(index){
@@ -288,6 +336,26 @@ export default {
 
                 this.loading = false;
             }, 2000);
+        },
+        loadMorePinlun(){
+            let self = this;
+            this.loadingp = true;
+            setTimeout(() => {
+                console.log(self.jishiInfo.evaluateList);
+                axios.post(httpStr+"/artisan/queryMbkEvaluate",{
+                    artisanId:self.jishiInfo.artisanId,
+                    evaluateId:self.jishiInfo.evaluateList[self.jishiInfo.evaluateList.length-1].evaluateId
+                }).then((ret)=>{
+                    console.log(ret.data);
+                    let data = ret.data;
+                    if( data.flag === 100 ){
+                        data.list.forEach(function(item,index){
+                            self.jishiInfo.evaluateList.push(item);
+                        })
+                    }
+                })
+                this.loadingp = false;
+            }, 500);
         },
         scrollLeft(){
             var speed = 20;
@@ -340,6 +408,7 @@ export default {
             if( ret.data.flag === 100 ){
                 self.jishiInfo = ret.data.data;
                 self.userTime = self.jishiInfo.userTime;
+                self.addrHref = "http://map.baidu.com/mobile/webapp/place/marker/qt=inf&vt=map&act=read_share&code=315/third_party=uri_api&point="+self.jishiInfo.strorFront.longitude+"|"+ self.jishiInfo.strorFront.latitude +"&title="+ self.jishiInfo.strorFront.storefrontName +"&content="+ self.jishiInfo.strorFront.address +"=pcqq.c2c"
                 for( let i=0;i<20;i++ ){
 //                    self.jishiInfo.goodsList.push(self.jishiInfo.goodsList[0]);
                 }
@@ -348,9 +417,9 @@ export default {
                 for( let a=0;a<self.userTime.length;a++ ){
                     self.shopTime[a] = {week:null,date:null,data:[]};
                     let flag = 0;
-                    console.log(a);
+//                    console.log(a);
                     for( let j=0;j<self.intervalTimeArr.length;j++ ){
-                        console.log("-------"+j);
+//                        console.log("-------"+j);
                         if( flag >= self.userTime[a].rep_dates.length ){
                             break;
                         }
@@ -368,11 +437,10 @@ export default {
                             self.shopTime[a].data.push({yy:true,time:start/100});
                             flag ++;
                         }
-                        console.log(self.shopTime);
-                        console.log(flag);
                     }
 
                 }
+                self.ifloading = true;
             }
         })
     },
@@ -385,14 +453,35 @@ export default {
         this.scrollLeft();
     }
 }
+Vue.filter("timeParse",function(val){
+    let date = new Date( val );
+    let year = date.getFullYear();
+    let month = date.getMonth()+1;
+    let day = date.getDate();
+    let time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    month < 10 ? month = "0"+month : month;
+    day < 10 ? day = "0"+day : day;
+    let dateStr = year+"-"+month+"-"+day+" "+time;
+    return dateStr;
+})
 </script>
 <style scoped>
-  .index-js-img[lazy=loading],.jis-yy-img[lazy=loading]{
+  [lazy=error] {
     width: 100%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
   }
-  .jis-header-img[lazy=loading]{
+  .index-js-img[lazy=loading],.jis-yy-img[lazy=loading],[lazy=loading]{
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  img.jis-header-img[lazy=loading]{
+    width: 80%;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  img.jis-header-img[lazy=error]{
     width: 80%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
@@ -564,7 +653,7 @@ export default {
   }
   .jis-yy-tm{
     display: flex;
-    padding: 20px 0;
+    padding: 10px 0;
   }
   .jis-yy-time{
     flex: 1;
@@ -768,26 +857,27 @@ export default {
     display: flex;
     flex-flow: row wrap;
     align-content: flex-start;
+    box-sizing: border-box;
   }
   .xm-info{
     box-sizing: border-box;
     flex: 0 0 25%;
-    border: 1px solid #F7F6F7;
+    border: 1px solid transparent;
     border-top: none;
     background: #fff;
   }
-  .xm-one-box .xm-info:nth-child(1){
-    border-left: none;
-  }
-  .xm-one-box .xm-info:nth-child(n+1){
-    border-right: none;
-  }
-  .xm-one-box .xm-info:nth-child(5n){
-    border-left: none;
-  }
-  .xm-one-box .xm-info:nth-child(4n){
-    border-right: none;
-  }
+  /*.xm-one-box .xm-info:nth-child(1){*/
+    /*border-left: none;*/
+  /*}*/
+  /*.xm-one-box .xm-info:nth-child(n+1){*/
+    /*border-right: none;*/
+  /*}*/
+  /*.xm-one-box .xm-info:nth-child(5n){*/
+    /*border-left: none;*/
+  /*}*/
+  /*.xm-one-box .xm-info:nth-child(4n){*/
+    /*border-right: none;*/
+  /*}*/
   .xm-info img{
     width: 100%;
   }

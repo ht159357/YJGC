@@ -36,7 +36,7 @@
   }
 </script>
 <style>
-  .header-backcolor{
+  header.header-backcolor{
     background-color: #FB3453;
   }
   .router-link {
