@@ -128,22 +128,25 @@
               时段
             </div>
             <div class="jis-pop-time-img">
-              <!--<img src="./../assets/img/timeline.png" alt="">-->
-              <div v-for="(item,index) in 23">
-                <div class="yy-time-position" v-if="index%2 != 1">{{index}}</div>
+              <div v-for="(item,index) in intervalTimeArr" :class="[{'border-bottom-transparent': intervalTimeArr.length-1 === index }]">
+                <div class="yy-time-position" v-if="index%2 === 0">{{ item }}</div>
               </div>
             </div>
           </div>
-          <div class="jis-pop-time-box" v-for="date in 30" v-if="date <= 5">
+          <div class="jis-pop-time-box" v-for="(date,index) in shopTime" v-if="index < 3">
             <div class="jis-pop-title">
-              今天
+              <span v-if="index === 0">今天</span>
+              <span v-if="index === 1">明天</span>
+              <span v-if="index === 2">后天</span>
             </div>
             <div class="jis-pop-time">
-              <span v-for="item in 23" :class="[{'jis-pop-green' : item%2 == 1 }]"></span>
+              <span v-for="item in date.data" :class="[{'jis-pop-green' : item.yy }]"></span>
+              <span style="background: #fff;"></span>
             </div>
           </div>
         </div>
         <!--项目-->
+
         <div class="jis-pro-box">
           <!--单一-->
           <ul class="jis-pro-ul"
@@ -164,11 +167,11 @@
               </router-link>
             </li>
           </ul>
-          <div class="jis-loadmore" v-show="loading">
+          <div class="jis-loadmore" v-show="0">
             <mt-spinner color="#FB3453" type="triple-bounce"></mt-spinner>
           </div>
-
         </div>
+
       </div>
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
 
@@ -251,17 +254,13 @@ export default {
                 padding: "20px 0 10px"
             },
             popupVisible : false,
-            list:[
-                'http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg',
-                'http://fuss10.elemecdn.com/3/1e/42634e29812e6594c98a89e922c60jpeg.jpeg',
-                'http://fuss10.elemecdn.com/1/c5/95c37272d3e554317dcec1e17a9f5jpeg.jpeg',
-                'http://fuss10.elemecdn.com/7/85/e478e4b26af74f4539c79f31fde80jpeg.jpeg',
-                'http://fuss10.elemecdn.com/b/df/b630636b444346e38cef6c59f6457jpeg.jpeg',
-                'http://fuss10.elemecdn.com/7/a5/596ab03934612236f807b92906fd8jpeg.jpeg'
-            ],
             loading: false,
             artisanId:null,
             jishiInfo:null,
+            userTime:null,
+            intervalTime:null,
+            intervalTimeArr:[],
+            shopTime:[],
         }
     },
     components:{
@@ -286,12 +285,7 @@ export default {
         loadMore() {
             this.loading = true;
             setTimeout(() => {
-                this.list.push('http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg',
-                  'http://fuss10.elemecdn.com/3/1e/42634e29812e6594c98a89e922c60jpeg.jpeg',
-                  'http://fuss10.elemecdn.com/1/c5/95c37272d3e554317dcec1e17a9f5jpeg.jpeg',
-                  'http://fuss10.elemecdn.com/7/85/e478e4b26af74f4539c79f31fde80jpeg.jpeg',
-                  'http://fuss10.elemecdn.com/b/df/b630636b444346e38cef6c59f6457jpeg.jpeg',
-                  'http://fuss10.elemecdn.com/7/a5/596ab03934612236f807b92906fd8jpeg.jpeg');
+
                 this.loading = false;
             }, 2000);
         },
@@ -310,6 +304,29 @@ export default {
 
             }
             var timer = setInterval(Marquee,speed);
+        },
+        setWorkInterval(start,end){
+            let self = this;
+            let startStr = start.toString().substr(-2,1);
+            let endStr = end.toString().substr(-2,1);
+            if(startStr === "3"){
+                start = parseInt(start) + 20;
+            }
+            if(endStr === "3"){
+                end = parseInt(end) + 20;
+            }
+            let intervalTime = (end-start)/100*2;
+            self.intervalTime = intervalTime;
+            for( let i=0;i<=intervalTime;i++ ){
+                startStr = start.toString().substr(-2,1);
+                if( startStr === "0" ){
+                    self.intervalTimeArr.push(parseInt(start)/100);
+                    start = parseInt(start) + 50;
+                }else{
+                    self.intervalTimeArr.push(parseInt(start)/100);
+                    start = parseInt(start) + 50;
+                }
+            }
         }
     },
     beforeCreate(){
@@ -321,8 +338,41 @@ export default {
             openId:openId
         }).then((ret) => {
             if( ret.data.flag === 100 ){
-                console.log(ret.data.data);
                 self.jishiInfo = ret.data.data;
+                self.userTime = self.jishiInfo.userTime;
+                for( let i=0;i<20;i++ ){
+//                    self.jishiInfo.goodsList.push(self.jishiInfo.goodsList[0]);
+                }
+                self.setWorkInterval(self.jishiInfo.strorFront.businessStart,self.jishiInfo.strorFront.businessEnd);
+//                遍历对比数据
+                for( let a=0;a<self.userTime.length;a++ ){
+                    self.shopTime[a] = {week:null,date:null,data:[]};
+                    let flag = 0;
+                    console.log(a);
+                    for( let j=0;j<self.intervalTimeArr.length;j++ ){
+                        console.log("-------"+j);
+                        if( flag >= self.userTime[a].rep_dates.length ){
+                            break;
+                        }
+                        let start = self.intervalTimeArr[j]*100;
+                        let userTime = self.userTime[a].rep_dates[flag].time_n;
+                        self.shopTime[a].week = self.userTime[a].req_week_day;
+                        self.shopTime[a].date = self.userTime[a].rep_date;
+                        if( userTime.toString().substr(-2,1) === "3" ){
+                            userTime = parseInt(userTime) + 20;
+                        }
+//                        debugger
+                        if( start !== userTime ){
+                            self.shopTime[a].data.push({yy:false,time:start/100});
+                        }else{
+                            self.shopTime[a].data.push({yy:true,time:start/100});
+                            flag ++;
+                        }
+                        console.log(self.shopTime);
+                        console.log(flag);
+                    }
+
+                }
             }
         })
     },
@@ -346,6 +396,9 @@ export default {
     width: 80%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  span i.el-rate__icon{
+    font-size: 12px;
   }
 </style>
 <style>
@@ -818,7 +871,7 @@ export default {
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
   }
-  .jishi-star-eva i.el-rate__icon{
-    font-size: 12px;
+  div.border-bottom-transparent{
+    border-bottom: 1px solid transparent;
   }
 </style>
