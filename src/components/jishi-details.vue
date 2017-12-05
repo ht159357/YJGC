@@ -1,5 +1,6 @@
 <template>
   <div class="jis-detail-box">
+    <router-view></router-view>
     <div class="jis-info-box" :style="jisinfobox">
       <div class="jis-header">
         <!--<img class="jis-header-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">-->
@@ -143,13 +144,15 @@
         <!--项目-->
 
         <div class="jis-pro-box">
-          <!--单一-->
+          <!--单一商品样式-->
           <ul class="jis-pro-ul"
             v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10" style="width: 100%;" v-if="jishiInfo">
             <li class="jis-pro-li" v-for="(item,index) in jishiInfo.styleList">
-              <router-link :to="'/project/'+item.styleId+'/'+3" class="router-link">
+              <!--'/project/:shopId/:styleId/:shopType/:artisanId'-->
+              <!--shopType：3 ，根据styleId查询-->
+              <router-link :to="'/project/'+ (ifloading ? jishiInfo.storefrontId : null) +'/'+item.styleId+'/'+ 3 +'/'+(ifloading ? jishiInfo.artisanId : null)+'/'+(jishiInfo ? jishiInfo.stageName : '')" class="router-link">
                 <div class="jis-pro-one">
                   <div class="jis-pro-img-box">
                     <img class="jis-pro-img" v-lazy="item.picPaths">
@@ -166,7 +169,6 @@
             <mt-spinner color="#FB3453" type="triple-bounce"></mt-spinner>
           </div>
         </div>
-
       </div>
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
         <!--在线预约-->
@@ -176,8 +178,10 @@
         </div>
 
         <div class="xm-one-box" v-if="ifloading && jishiInfo.goodsList.length !== 0">
-          <router-link :to="'/project/'+ item.goodsId +'/'+ 2" class="xm-info" v-for="(item,index) in jishiInfo.goodsList">
-            <img class="jis-yy-img" v-lazy='require("./../assets/img/nav-"+ item.marketPic +".jpg")'>
+          <!--'/project/:shopId/:goodsId/:shopType/:artisanId'-->
+          <!--shopType：2 ，根据goodsId，artisanId查询-->
+          <router-link :to="'/project/'+ (ifloading ? jishiInfo.storefrontId : null) +'/'+ item.goodsId +'/'+ 2 + '/'+(ifloading ? jishiInfo.artisanId : null)+'/'+(jishiInfo ? jishiInfo.stageName : '')" class="xm-info" v-for="(item,index) in jishiInfo.goodsList">
+            <img class="jis-yy-img" v-lazy='item.marketPic'>
           </router-link>
         </div>
 
@@ -268,7 +272,6 @@
     </mt-popup>
   </div>
 </template>
-
 <script>
 import Vue from 'vue';
 import axios from 'axios';
@@ -335,7 +338,7 @@ export default {
             setTimeout(() => {
 
                 this.loading = false;
-            }, 2000);
+            }, 100);
         },
         loadMorePinlun(){
             let self = this;
@@ -355,7 +358,7 @@ export default {
                     }
                 })
                 this.loadingp = false;
-            }, 500);
+            }, 100);
         },
         scrollLeft(){
             var speed = 20;
@@ -409,9 +412,9 @@ export default {
                 self.jishiInfo = ret.data.data;
                 self.userTime = self.jishiInfo.userTime;
                 self.addrHref = "http://map.baidu.com/mobile/webapp/place/marker/qt=inf&vt=map&act=read_share&code=315/third_party=uri_api&point="+self.jishiInfo.strorFront.longitude+"|"+ self.jishiInfo.strorFront.latitude +"&title="+ self.jishiInfo.strorFront.storefrontName +"&content="+ self.jishiInfo.strorFront.address +"=pcqq.c2c"
-                for( let i=0;i<20;i++ ){
+//                for( let i=0;i<20;i++ ){
 //                    self.jishiInfo.goodsList.push(self.jishiInfo.goodsList[0]);
-                }
+//                }
                 self.setWorkInterval(self.jishiInfo.strorFront.businessStart,self.jishiInfo.strorFront.businessEnd);
 //                遍历对比数据
                 for( let a=0;a<self.userTime.length;a++ ){
@@ -438,7 +441,6 @@ export default {
                             flag ++;
                         }
                     }
-
                 }
                 self.ifloading = true;
             }
@@ -467,12 +469,12 @@ Vue.filter("timeParse",function(val){
 </script>
 <style scoped>
   [lazy=error] {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
-    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
   }
   .index-js-img[lazy=loading],.jis-yy-img[lazy=loading],[lazy=loading]{
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
   }
@@ -484,7 +486,8 @@ Vue.filter("timeParse",function(val){
   img.jis-header-img[lazy=error]{
     width: 80%;
     margin: 0 auto;
-    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
+    background-size: 32px;
   }
   span i.el-rate__icon{
     font-size: 12px;

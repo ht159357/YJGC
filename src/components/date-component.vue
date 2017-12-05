@@ -1,35 +1,49 @@
 <template>
   <div class="date-date-box">
     <!--单一日期-->
-    <div class="date-date-one" v-for="(item,index) in thirtyDays" :class="[{'date-date-one-active' : index == dateFlag }]"
+    <div class="date-date-one" v-if="date" v-for="(item,index) in date" :class="[{'date-date-one-active' : index === parseInt(dateFlag)}]"
          @click="datePikerAtive($event)"
          :date-flag="index">
-      <span>{{item.date}}</span><br>
-      <span v-if="index == 0">今天</span>
-      <span v-else-if="index == 1">明天</span>
-      <span v-else>周{{ item.week }}</span>
+      <span>{{item.rep_date}}</span><br>
+      <span v-if="index === 0">今天</span>
+      <span v-else-if="index === 1">明天</span>
+      <span v-else-if="index === 2">后天</span>
+      <span v-else>{{item.req_week_day}}</span>
     </div>
   </div>
 </template>
 <script>
-    import getThirtyDays from "./../assets/js/commFunction"
+    import getThirtyDays from "./../assets/js/commFunction";
 
     export default {
         name:"date-component",
+        props:['date'],
         data(){
             return{
-                thirtyDays:[],
-                dateFlag : 0
+                thirtyDays: [],
+                dateFlag : 0,
             }
         },
         methods:{
             datePikerAtive(event){
-                let self = event.currentTarget;
-                this.dateFlag = self.getAttribute("date-flag");
-
+                let selfEvent = event.currentTarget;
+                let self = this;
+                this.dateFlag = selfEvent.getAttribute("date-flag");
+                this.$emit('changedate',{
+                    dateindex: self.dateFlag,
+                });
             },
         },
-        beforeMount(){
+        watch:{
+            dateFlag(newval,oldval){
+                return newval;
+            }
+        },
+        created(){
+            let self = this;
+            if( self.$route.params.yyType === "2" ){
+                self.dateFlag = null;
+            }
             this.thirtyDays = getThirtyDays.getThirtyDays();
         }
     }

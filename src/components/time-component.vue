@@ -1,10 +1,10 @@
 <template>
   <div class="date-time-box">
-    <div class="date-time-one" v-for="(item,index) in 25"
+    <div class="date-time-one" v-if="datetime" v-for="(item,index) in datetime.rep_dates"
          @click="timePikerAtive($event)"
          :time-flag="index">
-      <div class="date-date-time" :class="[{'date-date-time-active' : index == timeFlag }]">
-        10:00
+      <div class="date-date-time" :class="[{'date-date-time-active' : index === timeFlag }]">
+        {{item.time}}
       </div>
     </div>
   </div>
@@ -12,15 +12,29 @@
 <script>
     export default {
         name:"time-component",
+        props:["datetime"],
         data(){
             return{
-                timeFlag: null
+                timeFlag: null,
             }
         },
         methods:{
             timePikerAtive(event){
                 let self = event.currentTarget;
-                this.timeFlag = self.getAttribute("time-flag");
+                this.timeFlag = parseInt(self.getAttribute("time-flag"));
+            }
+        },
+        watch:{
+            timeFlag(newval,oldval){
+                let self = this;
+                self.$emit("change-time",{
+                    timeFlag:self.timeFlag
+                })
+            },
+            datetime(newval,oldval){
+                let self = this;
+                self.timeFlag = null;
+                return newval;
             }
         }
     }

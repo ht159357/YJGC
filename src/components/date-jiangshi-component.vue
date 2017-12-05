@@ -6,32 +6,25 @@
     </div>
     <!--匠师列表-->
     <!--没有匠师缺省-->
-    <div class="jiangshi-no-data" v-if="1">
+    <div class="jiangshi-no-data" v-if="!jishiinfo">
       该时段没有匠师可以约了(^_^)
     </div>
-    <div class="jiangshi-list">
+    <div class="jiangshi-list" v-if="jishiinfo">
       <!--单个匠师-->
-      <div class="jiangshi-one" v-for="(item,index) in 5">
+      <div class="jiangshi-one" v-for="(item,index) in jishiinfo">
         <div class="jiangshi-header">
-          <img v-lazy="require('./../assets/img/js-2.jpg')" class="jiangshi-icon">
+          <img v-lazy="item.artisanImg" class="jiangshi-icon">
         </div>
         <div class="jiangshi-info">
           <div class="jiangshi-box-info">
-            <span class="jiangshi-name">莉莉</span>
-            <span class="jiangshi-choies" :data-jiangshi="index" :class="[{'jiangshi-choies-active': jiangshiFlag == index}]" @click="jsPikerAtive($event)">选择</span>
+            <span class="jiangshi-name">{{item.stageName}}</span>
+            <span class="jiangshi-choies" :data-jiangshi="index" :class="[{'jiangshi-choies-active': item.artisanId === artisanId}]" @click="jsPikerAtive($event,item.artisanId)">选择</span>
           </div>
           <div class="jiangshi-details mint-header-title">
-            擅长的手艺:加时,加时,加时,加时,纯色美甲,纯色美甲体验,加时,加时,加时,加时,加时,猫眼美甲,线条款式,美钻款式,加时,加时,简易日系,经典日系,加时,新娘美甲,专属定制,纯色卸甲,美钻卸甲,日系卸甲,美足卸甲
+            擅长的手艺:{{item.work_types}}
           </div>
           <div class="jiangshi-level">
-            <!--星星-->
-            <svg class="icon" aria-hidden="true" v-for="item in 5">
-              <use xlink:href="#icon-star"></use>
-            </svg>
-            <!--奖杯-->
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-jiangbei"></use>
-            </svg>
+            <el-rate v-model="item.evaluate / 2" disabled disabled-void-color="#ccc" show-text></el-rate>
           </div>
         </div>
       </div>
@@ -40,24 +33,46 @@
   </div>
 </template>
 <script>
+    import Vue from "vue";
+    import { Rate } from 'element-ui';
+
+    Vue.use(Rate);
     export default {
         name:"date-jiangshi-component",
         data(){
             return {
-                jiangshiFlag: null
+                jiangshiFlag: null,
+                artisanId : null
             }
         },
+        props:["jishiinfo"],
         methods:{
-            jsPikerAtive(event){
+            jsPikerAtive(event,id){
                 let self = event.currentTarget;
                 let flag = self.getAttribute("data-jiangshi");
-                if( this.jiangshiFlag == flag ){
-                  this.jiangshiFlag = null;
+                if( this.jiangshiFlag === flag ){
+                    this.jiangshiFlag = null;
+                    this.artisanId = null;
                     return;
                 }
                 this.jiangshiFlag = flag;
-
+                this.artisanId = id;
             },
+        },
+        watch:{
+            jishiinfo(newval,oldval){
+                let self = this;
+                if( !newval ){
+                    self.artisanId = null;
+                }
+                return newval;
+            },
+            artisanId(newval,oldval){
+                let self = this;
+                this.$emit("set-artisanId",{
+                    artisanId:this.artisanId
+                })
+            }
         }
     }
 </script>
@@ -66,6 +81,11 @@
     width: 100%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  .jiangshi-icon[lazy=error]{
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
   }
 </style>
 <style>
@@ -121,7 +141,7 @@
     justify-content:space-between;
   }
   .jiangshi-name{
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
     font-weight: bold;
   }
@@ -132,6 +152,7 @@
     border-radius: 4px;
   }
   .jiangshi-details{
+    font-size: 14px;
     margin-top: 5px;
   }
   .jiangshi-level{

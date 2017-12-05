@@ -6,8 +6,8 @@
       </svg>
       <h2>请在微信客户端打开链接</h2>
     </div>
-    <header-nav v-if="$store.state.showHeader"></header-nav>
-    <router-view :class="[{'margin-top-header': $store.state.showHeader}]"></router-view>
+    <header-nav v-if="$store.state.showHeader" v-on:user-info="getUserData"></header-nav>
+    <router-view :class="[{'margin-top-header': $store.state.showHeader}]" :userinfo="userData"></router-view>
     <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
     <!--<project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>-->
     <!--<make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>-->
@@ -21,7 +21,7 @@
   import store from './store/store'
   import {Swipe, SwipeItem} from 'mint-ui';
   import headerNav from "./components/header";
-  import wx from 'weixin-js-sdk';
+//  import wx from 'weixin-js-sdk';
   import axios from 'axios';
   import commjs from "./assets/js/commFunction";
 
@@ -40,6 +40,10 @@
 //              showHeader: false,
 //              is_wx: commjs.is_weixn(),//生产，禁止非微信端打开
               is_wx: true,//测试
+              userData:{
+                  headUrl:null,
+                  nickname: null,
+              }
           }
       },
       methods: {
@@ -51,6 +55,9 @@
               }else{
                   this.$store.state.showHeader = true;
               }
+          },
+          getUserData(data){
+              this.userData = data;
           }
       },
       mounted(){

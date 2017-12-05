@@ -9,7 +9,7 @@
 
     <mt-button slot="right">
       <router-link to="/myPage">
-        <img class="header-icon-btn" src="./../assets/img/header-icon.jpg">
+        <img class="header-icon-btn" v-lazy="userData.headUrl">
       </router-link>
 
     </mt-button>
@@ -19,6 +19,7 @@
   import Vue from 'vue';
   import { Header } from 'mint-ui';
   import store from './../store/store'
+  import axios from 'axios';
 
   Vue.component(Header.name, Header);
   export default {
@@ -26,15 +27,47 @@
       data(){
           return {
               userid: 1,
-              title: "颜匠工场"
+              title: "颜匠工场",
+              userData:{
+                 headUrl:null,
+              },
+              ifload:false,
           }
       },
       store,
       methods:{
 
+      },
+      beforeCreate(){
+          let self = this;
+          axios.post(httpStr+"/artisan/findUserInfo",{
+              openId:openId
+          }).then((ret)=>{
+              let data = ret.data;
+              if( data.flag === 100 ){
+                  self.userData = data.data;
+                  self.ifload = true;
+                  self.$emit("user-info",self.userData);
+              }
+          });
       }
   }
 </script>
+<style scoped>
+  .header-icon-btn[lazy=loading] {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+    background-size: 50%;
+  }
+  /*.header-icon-btn[lazy=error] {*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*margin: 0 auto;*/
+    /*background: url("./../assets/img/load-error.svg") no-repeat center #ddd;*/
+  /*}*/
+</style>
 <style>
   header.header-backcolor{
     background-color: #FB3453;

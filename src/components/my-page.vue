@@ -2,20 +2,20 @@
   <div class="my-Page-box">
     <div class="my-header-box" :style="headerBackClass">
       <div class="my-header-icon">
-        <img src="./../assets/img/header-icon.jpg">
+        <img v-lazy="ifload ? userinfo.headUrl : null">
       </div>
       <p class="my-name" :class="[
-          {'level-color-1':userLevel==1},
-          {'level-color-2':userLevel==2},
-          {'level-color-3':userLevel==3},
-          {'level-color-4':userLevel==4},
-          {'level-color-5':userLevel==5},]">欧阳娜娜</p>
+          {'level-color-1':ifload ? userinfo.beautyFans.vipType===0 : 0},
+          {'level-color-2':ifload ? userinfo.beautyFans.vipType===1 : 0},
+          {'level-color-3':ifload ? userinfo.beautyFans.vipType===2 : 0},
+          {'level-color-4':ifload ? userinfo.beautyFans.vipType===3 : 0},
+          {'level-color-5':ifload ? userinfo.beautyFans.vipType===4 : 0},]">{{ userinfo.nickname }}</p>
       <div class="my-level-box" :class="[
-          {'level-1':userLevel==1},
-          {'level-2':userLevel==2},
-          {'level-3':userLevel==3},
-          {'level-4':userLevel==4},
-          {'level-5':userLevel==5},]">
+          {'level-1':ifload ? userinfo.beautyFans.vipType===0 : 0},
+          {'level-2':ifload ? userinfo.beautyFans.vipType===1 : 0},
+          {'level-3':ifload ? userinfo.beautyFans.vipType===2 : 0},
+          {'level-4':ifload ? userinfo.beautyFans.vipType===3 : 0},
+          {'level-5':ifload ? userinfo.beautyFans.vipType===4 : 0},]">
         <div class="my-jd-box">
           <div class="my-jd-inner" :style="{width : userExpWidth + '%'}">{{userExp}}/{{userMaxExp}}</div>
         </div>
@@ -31,7 +31,7 @@
 
       <mt-cell to="/myYanbi" class="my-cell-list" title="我的颜币" isLink="">
         <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
-        <span class="my-cell-yen">&yen;99999.6</span>
+        <span class="my-cell-yen">&yen;{{ifload ? userinfo.beautyFans.fansNum : null}}</span>
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的卡券" isLink="">
         <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
@@ -68,13 +68,17 @@
   </div>
 </template>
 <script>
+    import axios from "axios";
     export default {
         name:"my-page",
+        props:["userinfo"],
         data(){
             return {
+                userData:null,
+                ifload:false,
                 userLevel: 2,
-                userMaxExp: 1000,
-                userExp: 800,
+                userMaxExp: 1000,//满经验
+                userExp: 800,//当前经验
                 userExpWidth:null,
                 headerBackClass:{
                     "background": "url("+require('./../assets/img/sharecenter-heade-bg.png')+") no-repeat 50%",
@@ -82,12 +86,28 @@
                 }
             }
         },
+        watch:{
+            userinfo(nval,oval){
+                this.ifload = true;
+                return nval;
+            }
+        },
         beforeMount(){
             this.userExpWidth = this.userExp / this.userMaxExp * 100;
         }
     }
 </script>
-<style scoped="">
+<style scoped>
+  .my-header-icon img[lazy=loading]{
+    width: 80px;
+    background:url("./../assets/img/loading.svg") no-repeat center,#ddd;
+    background-size: 32px;
+  }
+  .my-header-icon img[lazy=error]{
+    width: 80px;
+    background:url("./../assets/img/load-error.svg") no-repeat center,#ddd;
+    background-size: 32px;
+  }
 </style>
 <style>
   .my-Page-box{

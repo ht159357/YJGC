@@ -53,11 +53,17 @@ export default new Router({
     },{//匠师详情
       path: '/jiangshi/:id',
       component: jishiDetail
-    },{//项目详情
-      path: '/project/:goodsId/:shopType',
+    },{//项目详情（首页进入）
+      path: '/project/:shopId/:goodsId/:shopType',
       component: projectDetail
-    },{//预约
-      path: '/makeAppointment/:yyType/:shopType/:showGoods',
+    },{//项目详情（匠师页进入）
+      path: '/project/:shopId/:goodsId/:shopType/:artisanId/:artName',
+      component: projectDetail
+    },{//预约(首页)
+      path: '/makeAppointment/:yyType/:shopType/:showGoods/:storefrontId/:goodsId/:time/:price',
+      component: makeAppointment
+    },{//预约（匠师）
+      path: '/makeAppointment/:yyType/:shopType/:showGoods/:storefrontId/:goodsId/:time/:price/:artisanId/:artName',
       component: makeAppointment
     },{//预约成功
       path: '/yySuccess',

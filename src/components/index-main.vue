@@ -60,7 +60,7 @@
           <!--头像-->
           <!--测试时头像文件-->
           <div class="index-img-box">
-            <img class="index-js-img" v-lazy="require('./../assets/img/js-2.jpg')" alt="">
+            <img class="index-js-img" v-lazy="ifloading ? shopInfo.artisanImg : ''" alt="">
           </div>
           <!--正式的头像为网络路径-->
           <!--<div class="index-img-box">-->
@@ -116,9 +116,10 @@
             </div>
           </div>
           <div class="xm-one-box">
-            <router-link :to="'/project/'+goodinfo.goodsId+'/'+1" class="xm-info" v-for="goodinfo in item.goods">
+            <!--'/project/:shopId/:goodsId/:shopType'-->
+            <router-link v-for="goodinfo in item.goods" :to="'/project/'+ goodinfo.storefrontId +'/'+goodinfo.goodsId+'/'+1" class="xm-info">
               <!--<img v-lazy='require("./../assets/img/nav-1.jpg")'>-->
-              <img v-lazy='goodinfo.marketPrice'>
+              <img class="xm-info-img" v-lazy='goodinfo.marketPrice'>
             </router-link>
           </div>
         </div>
@@ -148,7 +149,11 @@
               cityId:null,
               shopList:null,
               shopId:null,
-              shopInfo:null,
+              shopInfo:{
+                  advertisementList:[],
+                  artisanList:[],
+                  goodsList:[]
+              },
               ifloading:false,
           }
       },
@@ -185,11 +190,10 @@
               }).then(function(ret){
                   let data = ret.data;
                   if( data.flag === 100 ){
-                      console.log(data);
                       self.shopInfo = data.data;
                       setTimeout(function(){
                           self.mLoading = false;
-                      },500)
+                      },100)
                   }
               })
           },
@@ -221,7 +225,19 @@
   [lazy=error] {
     width: 100%;
     margin: 0 auto;
-    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
+  }
+  .xm-info-img[lazy=error] {
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
+    background-size: 32px;
+  }
+  .index-js-img[lazy=error] {
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
+    background-size: 32px;
   }
 </style>
 <style>
