@@ -20,7 +20,7 @@
       <!--技师模块-->
       <appointment-js class="app-viwe" v-if="$route.params.yyType === '2'" :date="ifLoading ? dateTime : null" @set-jishi="setJishi"></appointment-js>
       <!--根据技师选时间-->
-      <appointment-time class="app-viwe" :date="ifLoading ? dateTime : null" v-if="$route.params.yyType === '3'"></appointment-time>
+      <appointment-time class="app-viwe" :date="ifLoading ? dateTime : null" v-if="$route.params.yyType === '3'" @set-yytime="setTime"></appointment-time>
       <!--{{$store.state.showGoodDetails}}-->
       <!--商品信息-->
       <div class="goods-detals-box" v-if="$route.params.showGoods == 1 && goodsInfo !== null">
@@ -83,7 +83,11 @@
                 payData:null,
                 jishiInfo2:null,
                 goodsInfo:null,
-                jiangshiInfo:null
+                jiangshiInfo:null,
+                jishiInfo3:{
+                    dateTime:null,
+                    timeFalg:null
+                }
             }
         },
         store,
@@ -99,6 +103,12 @@
                     this.$router.push('/submitOrder');
                 }else if( self.$route.params.yyType === "2" ){
                     if(!self.jishiInfo2 || !self.jishiInfo2){
+                        Toast("请选择时间");
+                        return
+                    }
+                    this.$router.push('/submitOrder');
+                }else if( self.$route.params.yyType === "3" ){
+                    if(!self.jishiInfo3 || self.jishiInfo3.timeFalg === null){
                         Toast("请选择时间");
                         return
                     }
@@ -163,6 +173,10 @@
                         self.ifLoading = true;
                     }
                 })
+            },
+            setTime(data){
+                let self = this;
+                self.jishiInfo3 = data;
             }
         },
         created(){

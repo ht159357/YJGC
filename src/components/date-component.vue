@@ -41,7 +41,7 @@
         },
         created(){
             let self = this;
-            if( self.$route.params.yyType === "2" ){
+            if( self.$route.params.yyType === "2" || self.$route.params.yyType === "3"){
                 self.dateFlag = null;
             }
             this.thirtyDays = getThirtyDays.getThirtyDays();
