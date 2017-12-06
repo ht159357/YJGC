@@ -87,7 +87,8 @@
                 jishiInfo3:{
                     dateTime:null,
                     timeFalg:null
-                }
+                },
+                styleId:null,
             }
         },
         store,
@@ -100,19 +101,56 @@
                         return;
                     }
                     //支付完成跳转
-                    this.$router.push('/submitOrder');
+                    self.$router.push({
+                        path: '/submitOrder',
+                        query: {
+
+                        }
+                    });
                 }else if( self.$route.params.yyType === "2" ){
                     if(!self.jishiInfo2 || !self.jishiInfo2){
                         Toast("请选择时间");
                         return
                     }
-                    this.$router.push('/submitOrder');
+                    self.$router.push({
+                        path: '/submitOrder',
+                        query: {//有styleId
+                            artisanId:self.jiangshiInfo.artisanId,
+                            styleId:self.styleId,
+                            goodsId:self.goodsId,
+                            storefrontId:self.storefrontId,
+                            time:self.time,
+                            price:self.price,
+                            goodsName:self.goodsInfo.goodsName,
+                            date:self.jishiInfo3.dateTime.req_date_day+'_'+self.jishiInfo3.dateTime.rep_dates[self.jishiInfo3.timeFalg].time,
+                            yyType:2,
+                            marketPic:self.goodsInfo.marketPic,
+                            artisanImg:self.jiangshiInfo.artisanImg,
+                            stageName:self.jiangshiInfo.stageName,
+                        }
+                    });
                 }else if( self.$route.params.yyType === "3" ){
                     if(!self.jishiInfo3 || self.jishiInfo3.timeFalg === null){
                         Toast("请选择时间");
                         return
                     }
-                    this.$router.push('/submitOrder');
+                    self.$router.push({
+                        path: '/submitOrder',
+                        query: {//styleId是空的
+                            artisanId:self.jiangshiInfo.artisanId,
+                            styleId:self.styleId,
+                            goodsId:self.goodsId,
+                            storefrontId:self.storefrontId,
+                            time:self.time,
+                            price:self.price,
+                            goodsName:self.goodsInfo.goodsName,
+                          date:self.jishiInfo3.dateTime.req_date_day+'_'+self.jishiInfo3.dateTime.rep_dates[self.jishiInfo3.timeFalg].time,
+                            yyType:3,
+                            marketPic:self.goodsInfo.marketPic,
+                            artisanImg:self.jiangshiInfo.artisanImg,
+                            stageName:self.jiangshiInfo.stageName,
+                        }
+                    });
                 }
 //                this.$router.push('/yySuccess');
             },
@@ -136,6 +174,7 @@
             },
             queryByStyleId(fun){
                 let self = this;
+                self.styleId = self.$route.params.goodsId;
                 axios.post(httpStr+'/artisan/selectByStyleId',{
                     styleId: self.$route.params.goodsId
                 }).then((ret)=>{

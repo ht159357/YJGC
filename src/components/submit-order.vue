@@ -5,12 +5,12 @@
         <img src="./../assets/img/js-2.jpg" alt="">
       </div>
       <div class="order-info-box">
-        <span class="order-info-title">时尚风柳钉高跟鞋款美甲</span>
-        <span class="order-info-time">时间：2017-11-26 12:30</span>
-        <span class="order-info-name">匠师：萌萌</span>
+        <span class="order-info-title">{{ifload?data.goodsName:''}}</span>
+        <span class="order-info-time">时间：{{ifload?date+' '+time:''}}</span>
+        <span class="order-info-name">匠师：{{ifload?data.stageName:''}}</span>
       </div>
       <div class="order-price-box">
-        &yen;128.00
+        &yen;{{ifload?data.price:''}}
       </div>
     </div>
     <div class="yh-box">
@@ -33,12 +33,22 @@
     </div>
 
     <div class="yh-box" style="margin-top: 10px;">
+      <div class="yh-title">已有颜币：</div>
+      <div class="yh-info yh-info-money">
+        <span class="yh-yb">{{ifload?userData.beautyFans.fansNum:''}}</span>
+        <!--<svg class="icon icon-right-arr" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-right-arr-gary"></use>-->
+        <!--</svg>-->
+      </div>
+    </div>
+
+    <div class="yh-box">
       <div class="yh-title">共计金额：</div>
       <div class="yh-info yh-info-money">
-        <span class="yh-yb">颜币:127</span><span class="yh-rmb"> + &yen;1.00</span>
-        <svg class="icon icon-right-arr" aria-hidden="true">
-          <use xlink:href="#icon-right-arr-gary"></use>
-        </svg>
+        <span class="yh-yb">&yen;{{ifload?data.price:''}}</span>
+        <!--<svg class="icon icon-right-arr" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-right-arr-gary"></use>-->
+        <!--</svg>-->
       </div>
     </div>
 
@@ -49,7 +59,47 @@
   </div>
 </template>
 <script>
-    export default {}
+    import Vue from 'vue';
+    import axios from "axios";
+    import Toast from "mint-ui";
+    import { Popup } from 'mint-ui';
+
+    Vue.component(Popup.name, Popup);
+
+    export default {
+        name:"submit-order",
+        data(){
+            return {
+                data:null,
+                date:null,
+                time:null,
+                ifload:false,
+                userData:null,
+            }
+        },
+        beforeMount(){//实例被初始化
+            let self = this;
+            self.data = self.$route.query;
+            self.parseTime(self.data.date);
+            axios.post(httpStr+'/artisan/findUserInfo',{
+                openId:openId
+            }).then((ret)=>{//查询用户颜币等信息
+                let data = ret.data;
+                if( data.flag === 100 ){
+                    self.userData = data.data;
+                    self.ifload = true;//请求是异步操作，等到请求完成数据loading完成
+                }
+            });
+        },
+        methods:{
+            parseTime(dateStr){//格式化时间，用于展示
+                dateStr = dateStr.split('_');
+                let timeStr = dateStr[1].split(':');
+                this.date = dateStr[0].substring(0,4)+"-"+dateStr[0].substring(4,6)+'-'+dateStr[0].substring(6,8);
+                this.time = timeStr[0]+":"+timeStr[1];
+            }
+        }
+    }
 </script>
 <style scoped>
   img[lazy=loading]{

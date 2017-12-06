@@ -6,8 +6,8 @@
       </svg>
       <h2>请在微信客户端打开链接</h2>
     </div>
-    <header-nav v-if="$store.state.showHeader" v-on:user-info="getUserData"></header-nav>
-    <router-view :class="[{'margin-top-header': $store.state.showHeader}]"></router-view>
+    <header-nav v-if="$store.state.showHeader" v-on:user-info="getUserData" v-cloak></header-nav>
+    <router-view :class="[{'margin-top-header': $store.state.showHeader}]" v-cloak></router-view>
     <!--<jishi-detail class="margin-top-header" v-if="$store.state.showJsDetails"></jishi-detail>-->
     <!--<project-detail class="margin-top-header" v-if="$store.state.showProjectDetails"></project-detail>-->
     <!--<make-appointment class="margin-top-header" v-if="$store.state.showAppointment"></make-appointment>-->

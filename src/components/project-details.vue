@@ -12,7 +12,7 @@
       </mt-swipe>
     </div>
     <!--价格-->
-    <div class="pro-price-box">
+    <div class="pro-price-box" v-cloak>
       <div class="pro-price-left">
         <div class="pro-name">
           {{ifLoading && goodsInfo.goodsName}}
@@ -243,7 +243,7 @@
                     if( data.flag === 100 ){
                         console.log(data.list);
                         self.getGoodsInfo(data.list[0].goodsId);
-//                        data.list.push({});
+                        data.list.push({});
                         if( data.list.length > 1 ){
                             self.footerType = 2;
                             self.styleId = data.list[0].styleId;
@@ -283,6 +283,9 @@
   }
 </style>
 <style>
+  [v-cloak]{
+    display: none;
+  }
   .project-page{
     background: #EFEEEE;
     padding-bottom: 50px;
