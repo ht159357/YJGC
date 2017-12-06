@@ -31,9 +31,11 @@
 </template>
 <script>
     import Vue from 'vue';
-    import { Checklist } from 'mint-ui';
+//    import { Checklist } from 'mint-ui';
+    import axios from "axios";
+    import { Toast } from 'mint-ui';
 
-    Vue.component(Checklist.name, Checklist);
+//    Vue.component(Checklist.name, Checklist);
     export default {
         name:"make-order",
         data(){
@@ -106,15 +108,22 @@
                     }
                 });
                 console.log( this.checkList );
-
                 //code
 
-                self.$router.push("/makeBill");
+//                self.$router.push("/makeBill");
             }
         },
         created(){
+            let self = this;
             this.dataHandle(this.orderList);
             console.log(this.orderList);
+
+            axios.post(httpStr+"/artisan/queryAppointmentByInvoiceId",{
+                openId:openId
+            }).then((ret)=>{
+                let data = ret.data;
+                console.log(data);
+            })
         },
 
     }

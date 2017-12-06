@@ -43,12 +43,23 @@
   </div>
 </template>
 <script>
+    import axios from "axios";
+
     export default {
         name:"my-yy",
         data(){
             return {
                 hasData:true,
             }
+        },
+        beforeCreate(){
+            let self = this;
+            axios.post(httpStr+"/artisan/selectByAppointment",{
+                openId:openId
+            }).then((ret)=>{
+                let data = ret.data;
+                console.log(data);
+            })
         }
     }
 </script>
@@ -76,7 +87,7 @@
   }
   .myyy-one-box{
     background: #fff;
-    margin: 10px;
+    margin: 5px;
     display: flex;
     padding: 5px;
     flex-wrap: wrap;

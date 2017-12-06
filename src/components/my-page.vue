@@ -9,7 +9,7 @@
           {'level-color-2':ifload ? userinfo.beautyFans.vipType===1 : 0},
           {'level-color-3':ifload ? userinfo.beautyFans.vipType===2 : 0},
           {'level-color-4':ifload ? userinfo.beautyFans.vipType===3 : 0},
-          {'level-color-5':ifload ? userinfo.beautyFans.vipType===4 : 0},]">{{ userinfo.nickname }}</p>
+          {'level-color-5':ifload ? userinfo.beautyFans.vipType===4 : 0},]">{{ ifload ? userinfo.nickname : ''}}</p>
       <div class="my-level-box" :class="[
           {'level-1':ifload ? userinfo.beautyFans.vipType===0 : 0},
           {'level-2':ifload ? userinfo.beautyFans.vipType===1 : 0},
@@ -21,11 +21,11 @@
         </div>
       </div>
       <p class="my-jd-ch" :class="[
-          {'level-color-1':userLevel==1},
-          {'level-color-2':userLevel==2},
-          {'level-color-3':userLevel==3},
-          {'level-color-4':userLevel==4},
-          {'level-color-5':userLevel==5},]">颜粉</p>
+          {'level-color-1':ifload ? userinfo.beautyFans.vipType===0 : 0},
+          {'level-color-2':ifload ? userinfo.beautyFans.vipType===1 : 0},
+          {'level-color-3':ifload ? userinfo.beautyFans.vipType===2 : 0},
+          {'level-color-4':ifload ? userinfo.beautyFans.vipType===3 : 0},
+          {'level-color-5':ifload ? userinfo.beautyFans.vipType===4 : 0},]">颜粉</p>
     </div>
     <div class="my-list-box">
 
@@ -35,18 +35,21 @@
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的卡券" isLink="">
         <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
+        <span class="my-cell-yen">未做</span>
       </mt-cell>
       <mt-cell to="myYy" class="my-cell-list" title="我的预约" isLink="">
         <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
         <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
+        <span class="my-cell-yen">未做</span>
       </mt-cell>
       <mt-cell to="/makeOrder" class="my-cell-list" title="开具发票" isLink="">
         <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
       </mt-cell>
       <mt-cell class="my-cell-list" title="我的消息" isLink="">
         <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
+        <span class="my-cell-yen">未做</span>
       </mt-cell>
       <mt-cell to="myLike" class="my-cell-list" title="我的喜欢" isLink="">
         <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
@@ -69,13 +72,14 @@
 </template>
 <script>
     import axios from "axios";
+
     export default {
         name:"my-page",
-        props:["userinfo"],
         data(){
             return {
                 userData:null,
                 ifload:false,
+                userinfo:null,
                 userLevel: 2,
                 userMaxExp: 1000,//满经验
                 userExp: 800,//当前经验
@@ -86,11 +90,17 @@
                 }
             }
         },
-        watch:{
-            userinfo(nval,oval){
-                this.ifload = true;
-                return nval;
-            }
+        beforeCreate(){
+            let self = this;
+            axios.post(httpStr+"/artisan/findUserInfo",{
+                openId:openId
+            }).then((ret)=>{
+                let data = ret.data;
+                if( data.flag === 100 ){
+                    self.userinfo = data.data;
+                    self.ifload = true;
+                }
+            });
         },
         beforeMount(){
             this.userExpWidth = this.userExp / this.userMaxExp * 100;

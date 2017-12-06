@@ -39,7 +39,24 @@
   </div>
 </template>
 <script>
-    export default {}
+    import axios from 'axios';
+
+    export default {
+        name:"my-jiangshi",
+        data(){
+            return {
+
+            }
+        },
+        beforeCreate(){
+            axios.post(httpStr+"/artisan/selectFansByUserId",{
+                openId:openId
+            }).then((ret)=>{
+                let data = ret.data;
+                console.log(data);
+            })
+        }
+    }
 </script>
 <style>
   .index-js-info{

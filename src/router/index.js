@@ -33,6 +33,7 @@ import commentBill from "./../components/comment-bill"
 import complaint from "./../components/complaint"
 import submitOrder from "./../components/submit-order"
 import star from "./../components/star"
+import jiangshiPage from "./../components/jiangshi-page"
 
 
 Vue.use(Router);
@@ -154,6 +155,9 @@ export default new Router({
     },{//星星------------------------测试
       path:"/star",
       component: star
+    },{
+      path:"/jiangshiPage",
+      component:jiangshiPage
     }
   ]
 })

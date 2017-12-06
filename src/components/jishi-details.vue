@@ -20,14 +20,14 @@
       </div>
       <div class="jis-foucs">
         <span class="jis-foucnum">关注数：{{jishiInfo ? jishiInfo.concerns : ""}}</span>
-        <span class="jis-addfocus" v-if="jishiInfo ? jishiInfo.isFans === 0 : '' ">
+        <span class="jis-addfocus" v-if="jishiInfo ? jishiInfo.isFans === 0 : '' " @click="addFocus">
           <svg class="icon icon-like" aria-hidden="true">
             <use xlink:href="#icon-like"></use>
           </svg>关注
         </span>
-        <span class="jis-addfocus" v-if="jishiInfo ? jishiInfo.isFans === 1 : '' ">
+        <span class="jis-addfocus" v-if="jishiInfo ? jishiInfo.isFans === 1 : '' " @click="addFocus">
           <svg class="icon icon-like" aria-hidden="true">
-            <use xlink:href="#icon-like"></use>
+            <use xlink:href="#icon-liked"></use>
           </svg>已关注
         </span>
       </div>
@@ -397,6 +397,27 @@ export default {
                     self.intervalTimeArr.push(parseInt(start)/100);
                     start = parseInt(start) + 50;
                 }
+            }
+        },
+        addFocus(){
+            let self = this;
+            console.log(self.jishiInfo.isFans);
+            if( self.jishiInfo.isFans ){
+                axios.post(httpStr+"/artisan/deleteArtisanFollow",{
+                    openId:openId,
+                    artisanId: self.jishiInfo.artisanId
+                }).then((ret)=>{
+                    let data = ret.data;
+                    self.jishiInfo.isFans = 0;
+                })
+            }else{
+                axios.post(httpStr+"/artisan/addArtisanFollow",{
+                    openId:openId,
+                    artisanId: self.jishiInfo.artisanId
+                }).then((ret)=>{
+                    let data = ret.data;
+                    self.jishiInfo.isFans = 1;
+                })
             }
         }
     },

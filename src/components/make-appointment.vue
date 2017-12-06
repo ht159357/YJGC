@@ -47,7 +47,7 @@
       <!--选过匠师支付-->
       <div class="yy-pay-btn yy-pay-btn-2" v-if="$route.params.shopType == 2 || $route.params.shopType == 3" @click="payIt()">
         <div class="pay-btn-left">
-          预约&yen;158（颜币：0.00）
+          预约&yen;{{price}}（颜币：0.00）
         </div>
         <div class="pay-btn-right">
           提交订单
