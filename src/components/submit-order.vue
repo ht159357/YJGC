@@ -13,7 +13,7 @@
         &yen;{{ifload?data.price:''}}
       </div>
     </div>
-    <div class="yh-box">
+    <div class="yh-box" @click="popUp('yhPop')">
       <div class="yh-title">优惠券：</div>
       <div class="yh-info">
         满100减10
@@ -22,7 +22,7 @@
         </svg>
       </div>
     </div>
-    <div class="yh-box">
+    <div class="yh-box" @click="popUp('tYPop')">
       <div class="yh-title">体验卡：</div>
       <div class="yh-info">
         无可用
@@ -56,6 +56,24 @@
       <div class="yh-btn-cancel">取消</div>
       <div class="yh-btn-pay">支付</div>
     </div>
+
+    <mt-popup v-model="yhPop" position="right" style="width: 100%;height: 100%;overflow-y: scroll;">
+      <div class="yh-pop-box">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="popUp('yhPop')">
+          <use xlink:href="#icon-left-arr-gary"></use>
+        </svg>
+      </div>
+      优惠
+    </mt-popup>
+
+    <mt-popup v-model="tYPop" position="right" style="width: 100%;height: 100%;overflow-y: scroll;">
+      <div class="yh-pop-box">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="popUp('tYPop')">
+          <use xlink:href="#icon-left-arr-gary"></use>
+        </svg>
+      </div>
+      体验
+    </mt-popup>
   </div>
 </template>
 <script>
@@ -75,6 +93,8 @@
                 time:null,
                 ifload:false,
                 userData:null,
+                yhPop:false,
+                tYPop:false,
             }
         },
         beforeMount(){//实例被初始化
@@ -97,6 +117,9 @@
                 let timeStr = dateStr[1].split(':');
                 this.date = dateStr[0].substring(0,4)+"-"+dateStr[0].substring(4,6)+'-'+dateStr[0].substring(6,8);
                 this.time = timeStr[0]+":"+timeStr[1];
+            },
+            popUp(str){
+                this[str] = !this[str];
             }
         }
     }
@@ -197,5 +220,9 @@
     width: 50%;
     padding:10px 0;
     background: #E83751;
+  }
+  .yh-pop-box{
+    text-align: left;
+    margin: 10px;
   }
 </style>
