@@ -28,44 +28,71 @@
           {'level-color-5':ifload ? userinfo.beautyFans.vipType===4 : 0},]">颜粉</p>
     </div>
     <div class="my-list-box">
+      <div>
+        <mt-cell to="/myYanbi" class="my-cell-list" title="我的颜币" isLink="">
+          <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
+          <span class="my-cell-yen">&yen;{{ifload ? userinfo.beautyFans.fansNum : null}}</span>
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的卡券" isLink="">
+          <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
+          <span class="my-cell-yen">未做</span>
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="myYy" class="my-cell-list" title="我的预约" isLink="">
+          <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
+          <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
+          <span class="my-cell-yen">未做</span>
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/makeOrder" class="my-cell-list" title="开具发票" isLink="">
+          <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的消息" isLink="">
+          <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
+          <span class="my-cell-yen">未做</span>
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="myLike" class="my-cell-list" title="我的喜欢" isLink="">
+          <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/myJiangshi" class="my-cell-list" title="我的匠师" isLink="">
+          <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/question" class="my-cell-list" title="常见问题" isLink="">
+          <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div @click="goCenter(2)">
+        <mt-cell class="my-cell-list" title="店主中心" isLink="">
+          <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div @click="goCenter(1)">
+        <mt-cell class="my-cell-list" title="匠师中心" isLink="">
+          <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/myShare" class="my-cell-list" title="我要分享" isLink="">
+          <img slot="icon" src="../assets/img/share.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
 
-      <mt-cell to="/myYanbi" class="my-cell-list" title="我的颜币" isLink="">
-        <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
-        <span class="my-cell-yen">&yen;{{ifload ? userinfo.beautyFans.fansNum : null}}</span>
-      </mt-cell>
-      <mt-cell class="my-cell-list" title="我的卡券" isLink="">
-        <img slot="icon" src="../assets/img/myfans.jpg" class="my-cell-icon">
-        <span class="my-cell-yen">未做</span>
-      </mt-cell>
-      <mt-cell to="myYy" class="my-cell-list" title="我的预约" isLink="">
-        <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
-        <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
-        <span class="my-cell-yen">未做</span>
-      </mt-cell>
-      <mt-cell to="/makeOrder" class="my-cell-list" title="开具发票" isLink="">
-        <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell class="my-cell-list" title="我的消息" isLink="">
-        <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
-        <span class="my-cell-yen">未做</span>
-      </mt-cell>
-      <mt-cell to="myLike" class="my-cell-list" title="我的喜欢" isLink="">
-        <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/myJiangshi" class="my-cell-list" title="我的匠师" isLink="">
-        <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/question" class="my-cell-list" title="常见问题" isLink="">
-        <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/dzPage" class="my-cell-list" title="店主中心" isLink="">
-        <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/myShare" class="my-cell-list" title="我要分享" isLink="">
-        <img slot="icon" src="../assets/img/share.png" class="my-cell-icon">
-      </mt-cell>
 
     </div>
   </div>
@@ -88,6 +115,15 @@
                     "background": "url("+require('./../assets/img/sharecenter-heade-bg.png')+") no-repeat 50%",
                     "background-size": "100%"
                 }
+            }
+        },
+        methods:{
+            goCenter(flag){
+                this.$store.state.curMyCenter = flag;
+                //0:颜粉端，1:匠师端，2:店长端
+                this.$router.push({
+                    path:this.$store.state.page[flag]
+                });
             }
         },
         beforeCreate(){
@@ -274,5 +310,18 @@
   }
   .my-cell-yen{
     font-size: 14px;
+  }
+  .mint-cell .mint-cell-wrapper{
+    background-image: none;
+  }
+  .mint-cell:last-child{
+    background-image: none;
+  }
+  .my-list-box>div{
+    border-bottom: 1px solid #ddd;
+    margin-left: 10px;
+  }
+  div.mint-cell-wrapper{
+    padding-left: 2px;
   }
   </style>

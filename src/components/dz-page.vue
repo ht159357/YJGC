@@ -15,31 +15,46 @@
       </select>
     </div>
     <div class="my-list-box">
-
-      <mt-cell to="/ckpm" class="my-cell-list" title="创客排名" isLink="">
-        <img slot="icon" src="../assets/img/ckpm.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/shopOrder" class="my-cell-list" title="店铺订单" isLink="">
-        <img slot="icon" src="../assets/img/dpdd.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/salesReport" class="my-cell-list" title="销售报表" isLink="">
-        <img slot="icon" src="../assets/img/xsbb.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/workAttendance" class="my-cell-list" title="匠师考勤" isLink="">
-        <img slot="icon" src="../assets/img/jskq.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/workerScheduling" class="my-cell-list" title="排班管理" isLink="">
-        <img slot="icon" src="../assets/img/pbgl.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/businessChart" class="my-cell-list" title="营业报表" isLink="">
-        <img slot="icon" src="../assets/img/ryjbb.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell class="my-cell-list" title="物料商城" isLink="">
-        <img slot="icon" src="../assets/img/yjbb.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/myPage" class="my-cell-list" title="个人中心" isLink="">
-        <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
-      </mt-cell>
+      <div>
+        <mt-cell to="/ckpm" class="my-cell-list" title="创客排名" isLink="">
+          <img slot="icon" src="../assets/img/ckpm.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/shopOrder" class="my-cell-list" title="店铺订单" isLink="">
+          <img slot="icon" src="../assets/img/dpdd.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/salesReport" class="my-cell-list" title="销售报表" isLink="">
+          <img slot="icon" src="../assets/img/xsbb.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/workAttendance" class="my-cell-list" title="匠师考勤" isLink="">
+          <img slot="icon" src="../assets/img/jskq.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/workerScheduling" class="my-cell-list" title="排班管理" isLink="">
+          <img slot="icon" src="../assets/img/pbgl.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell to="/businessChart" class="my-cell-list" title="营业报表" isLink="">
+          <img slot="icon" src="../assets/img/ryjbb.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="物料商城" isLink="">
+          <img slot="icon" src="../assets/img/yjbb.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div  @click="goCenter(0)">
+        <mt-cell to="/myPage" class="my-cell-list" title="个人中心" isLink="">
+          <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
 
     </div>
   </div>
@@ -57,6 +72,15 @@
                     "background": "url("+require('./../assets/img/sharecenter-heade-bg.png')+") no-repeat 50%",
                     "background-size": "100%"
                 }
+            }
+        },
+        methods:{
+            goCenter(flag){
+                this.$store.state.curMyCenter = flag;
+                //0:颜粉端，1:匠师端，2:店长端
+                this.$router.push({
+                    path:this.$store.state.page[flag]
+                });
             }
         },
         beforeMount(){
@@ -153,5 +177,27 @@
     border: 1px solid red !important;
     border-radius: 20px;
     margin-top: 15px;
+  }
+  .mint-cell .mint-cell-wrapper{
+    background-image: none;
+  }
+  .mint-cell:last-child{
+    background-image: none;
+  }
+  .my-list-box>div{
+    border-bottom: 1px solid #ddd;
+  }
+  .mint-cell .mint-cell-wrapper{
+    background-image: none;
+  }
+  .mint-cell:last-child{
+    background-image: none;
+  }
+  .my-list-box>div{
+    border-bottom: 1px solid #ddd;
+    margin-left: 10px;
+  }
+  div.mint-cell-wrapper{
+    padding-left: 2px;
   }
   </style>

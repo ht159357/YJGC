@@ -34,6 +34,10 @@ import complaint from "./../components/complaint"
 import submitOrder from "./../components/submit-order"
 import star from "./../components/star"
 import jiangshiPage from "./../components/jiangshi-page"
+import jsMyYy from "./../components/js-my-yy"
+import jsMyFans from "./../components/js-my-fans"
+import jsMyPb from "./../components/js-my-pb"
+import jsMyPf from "./../components/js-my-pf"
 
 
 Vue.use(Router);
@@ -155,9 +159,21 @@ export default new Router({
     },{//星星------------------------测试
       path:"/star",
       component: star
-    },{
+    },{//匠师页
       path:"/jiangshiPage",
       component:jiangshiPage
+    },{//匠师：我的预约
+      path:"/jsMyYy",
+      component:jsMyYy
+    },{//匠师：我的颜粉
+      path:"/jsMyFans",
+      component:jsMyFans
+    },{//匠师：我的排班
+      path:"/jsMyPb",
+      component:jsMyPb
+    },{//匠师：我的评分
+      path:"/jsMyPf",
+      component:jsMyPf
     }
   ]
 })

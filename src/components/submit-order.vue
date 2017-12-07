@@ -22,7 +22,7 @@
         </svg>
       </div>
     </div>
-    <div class="yh-box" @click="popUp('tYPop')">
+    <div class="yh-box" @click="popUp('tyPop')">
       <div class="yh-title">体验卡：</div>
       <div class="yh-info">
         无可用
@@ -54,25 +54,62 @@
 
     <div class="yh-btn-box">
       <div class="yh-btn-cancel">取消</div>
-      <div class="yh-btn-pay">支付</div>
+      <div class="yh-btn-pay" @click="payIt()">支付</div>
     </div>
 
-    <mt-popup v-model="yhPop" position="right" style="width: 100%;height: 100%;overflow-y: scroll;">
+    <mt-popup v-model="yhPop" position="right" style="width: 100%;height: 100%;overflow-y: scroll;text-align: left;">
       <div class="yh-pop-box">
-        <svg class="icon icon-right-arr" aria-hidden="true" @click="popUp('yhPop')">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="popUp('yhPop')" style="float: left;margin-top: 3px;">
           <use xlink:href="#icon-left-arr-gary"></use>
         </svg>
+        优惠券
       </div>
-      优惠
+      <div class="card-box">
+        <!--单一-->
+        <div class="card-one" v-for="item in 5">
+          <div class="card-money-box">
+            <div class="card-money">&yen;10</div>
+            <div class="card-condition">满100减10</div>
+          </div>
+          <div class="card-title-box">
+            <div class="card-title">xxx专享</div>
+          </div>
+          <div class="card-use-box">
+            <div class="card-use" @click="userCard('yhPop')">使用</div>
+          </div>
+          <div class="card-top-border">
+            <div class="card-time">限 2017-12-08 00:00 前使用</div>
+          </div>
+        </div>
+
+      </div>
     </mt-popup>
 
-    <mt-popup v-model="tYPop" position="right" style="width: 100%;height: 100%;overflow-y: scroll;">
+    <mt-popup v-model="tyPop" position="right" style="width: 100%;height: 100%;overflow-y: scroll;text-align: left;">
       <div class="yh-pop-box">
-        <svg class="icon icon-right-arr" aria-hidden="true" @click="popUp('tYPop')">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="popUp('tyPop')" style="float: left;margin-top: 3px;">
           <use xlink:href="#icon-left-arr-gary"></use>
         </svg>
+        体验卡
       </div>
-      体验
+      <div class="card-box">
+        <!--单一-->
+        <div class="card-one" v-for="item in 5">
+          <div class="card-money-title-box">
+            <div class="card-money-title">体验卡</div>
+          </div>
+          <div class="card-title-box">
+            <div class="card-title">xxx专享</div>
+          </div>
+          <div class="card-use-box">
+            <div class="card-use" @click="userCard('tyPop')">使用</div>
+          </div>
+          <div class="card-top-border">
+            <div class="card-time">限 2017-12-08 00:00 前使用</div>
+          </div>
+        </div>
+
+      </div>
     </mt-popup>
   </div>
 </template>
@@ -94,7 +131,7 @@
                 ifload:false,
                 userData:null,
                 yhPop:false,
-                tYPop:false,
+                tyPop:false,
             }
         },
         beforeMount(){//实例被初始化
@@ -120,6 +157,19 @@
             },
             popUp(str){
                 this[str] = !this[str];
+            },
+            userCard(str){
+                let self = this;
+                if( str === 'yhPop' ){//优惠券
+                    alert('选择了优惠券');
+                    self.popUp(str);
+                }else if( str === 'tyPop' ){//体验卷
+                    alert('选择了体验券');
+                    self.popUp(str);
+                }
+            },
+            payIt(){
+                alert('支付！');
             }
         }
     }
@@ -222,7 +272,110 @@
     background: #E83751;
   }
   .yh-pop-box{
-    text-align: left;
+    text-align: center;
     margin: 10px;
+  }
+  .card-one{
+    box-sizing: border-box;
+    width: 95%;
+    margin: 5px auto;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px 0 40px;
+    border-radius: 3px;
+    position: relative;
+  }
+  .card-one:after{
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    transform: rotate(-45deg);
+  }
+  .card-one:before{
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    transform: rotate(-45deg);
+  }
+  .card-top-border{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-top: 1px dashed #ddd;
+    text-align: left;
+    text-indent: 15px;
+  }
+  .card-money-box{
+    width: 90px;
+  }
+  .card-title-box{
+    flex: 1;
+    text-align: left;
+  }
+  .card-use-box{
+    width: 60px;
+  }
+  .card-money{
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .card-condition{
+    font-size: 12px;
+    color: #bbb;
+  }
+  .card-title{
+    font-size: 20px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .card-time{
+    font-size: 12px;
+    color: #bbb;
+  }
+  .card-use{
+    width: 50px;
+    margin: 0 auto;
+    background: red;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 0;
+  }
+  .card-money-title-box{
+    width: 60px;
+  }
+  .card-money-title{
+    font-size: 12px;
+    width: 50px;
+    margin: 0 auto;
+    color: #fff;
+    background: #FB3453;
+    padding: 5px 0;
+    border-radius: 20px;
+    position: absolute;
+    top: 12px;
+    left: 5px;
   }
 </style>

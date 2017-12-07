@@ -1,6 +1,6 @@
 <template>
   <div class="my-Page-box">
-    <div class="my-header-box" :style="headerBackClass">
+    <div class="my-header-box jishi-header-box" :style="headerBackClass">
       <div class="my-header-icon">
         <img src="./../assets/img/header-icon.jpg">
       </div>
@@ -10,36 +10,97 @@
           {'level-color-3':userLevel==3},
           {'level-color-4':userLevel==4},
           {'level-color-5':userLevel==5},]">欧阳娜娜</p>
-      <select class="select-reset dz-select">
-        <option value="">江宁万达店</option>
-      </select>
+
+    </div>
+    <div class="my-Page-nav-box">
+      <div class="jishi-page-nav-box">
+        <div class="jishi-myorder-box">
+          <img src="./../assets/img/myorder.png" alt="" style="width: 78px;height: 16px;">
+          <p class="jishi-myorder-title">你已经有6个预约护理项目</p>
+          <router-link class="jishi-myorder-btn router-link" to="jsMyYy">
+            查看
+          </router-link>
+        </div>
+        <router-link to="/jsMyFans" class="jishi-nav-one router-link">
+          <img src="./../assets/img/vjb-nav-01.png" alt="">
+          <p class="jishi-nav-title">我的颜粉</p>
+        </router-link>
+        <router-link to="/jsMyPb" class="jishi-nav-one router-link">
+          <img src="./../assets/img/vjb-nav-02.png" alt="">
+          <p class="jishi-nav-title router-link">我的排班</p>
+        </router-link>
+        <router-link to="/jsMyPf" class="jishi-nav-one router-link">
+          <img src="./../assets/img/vjb-nav-03.png" alt="">
+          <p class="jishi-nav-title router-link">我的评分</p>
+        </router-link>
+        <router-link to="" class="jishi-nav-one router-link">
+          <img src="./../assets/img/vjb-nav-04.png" alt="">
+          <p class="jishi-nav-title router-link">款式管理</p>
+        </router-link>
+      </div>
     </div>
     <div class="my-list-box">
-
-      <mt-cell to="/ckpm" class="my-cell-list" title="创客排名" isLink="">
-        <img slot="icon" src="../assets/img/ckpm.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/shopOrder" class="my-cell-list" title="店铺订单" isLink="">
-        <img slot="icon" src="../assets/img/dpdd.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/salesReport" class="my-cell-list" title="销售报表" isLink="">
-        <img slot="icon" src="../assets/img/xsbb.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/workAttendance" class="my-cell-list" title="匠师考勤" isLink="">
-        <img slot="icon" src="../assets/img/jskq.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/workerScheduling" class="my-cell-list" title="排班管理" isLink="">
-        <img slot="icon" src="../assets/img/pbgl.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/businessChart" class="my-cell-list" title="营业报表" isLink="">
-        <img slot="icon" src="../assets/img/ryjbb.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell class="my-cell-list" title="物料商城" isLink="">
-        <img slot="icon" src="../assets/img/yjbb.png" class="my-cell-icon">
-      </mt-cell>
-      <mt-cell to="/myPage" class="my-cell-list" title="个人中心" isLink="">
-        <img slot="icon" src="../assets/img/dzzx.png" class="my-cell-icon">
-      </mt-cell>
+      <div>
+        <mt-cell to="/question" class="my-cell-list" title="常见问题" isLink="">
+          <img slot="icon" src="../assets/img/problem.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我要提现" isLink="">
+          <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="装修店铺" isLink="">
+          <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的颜币" isLink="">
+          <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
+          <span class="my-cell-yen">&yen;999</span>
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="购买优惠券" isLink="">
+          <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的客户" isLink="">
+          <img slot="icon" src="../assets/img/mykh.jpg" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
+          <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="我的收入" isLink="">
+          <img slot="icon" src="../assets/img/mywage.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="消息推送" isLink="">
+          <img slot="icon" src="../assets/img/xxts.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="教学直播" isLink="">
+          <img slot="icon" src="../assets/img/20170720145927.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div>
+        <mt-cell class="my-cell-list" title="物料商城" isLink="">
+          <img slot="icon" src="../assets/img/yjbb.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
+      <div @click="goCenter(0)">
+        <mt-cell class="my-cell-list" title="个人中心" isLink="">
+          <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
+        </mt-cell>
+      </div>
 
     </div>
   </div>
@@ -59,17 +120,26 @@
                 }
             }
         },
+        methods:{
+            goCenter(flag){
+                this.$store.state.curMyCenter = flag;
+                //0:颜粉端，1:匠师端，2:店长端
+                this.$router.push({
+                    path:this.$store.state.page[flag]
+                });
+            }
+        },
         beforeMount(){
             this.userExpWidth = this.userExp / this.userMaxExp * 100;
         }
     }
 </script>
-<style scoped="">
+<style scoped>
+  .my-Page-box{
+    background: none;
+  }
 </style>
 <style>
-  .my-Page-box{
-    background: #fff;
-  }
   .my-header-box{
     padding-bottom: 15px;
   }
@@ -127,6 +197,7 @@
     color: #fff;
   }
   .my-list-box{
+    background: #fff;
     text-align: left;
   }
   .my-cell-list{
@@ -153,5 +224,69 @@
     border: 1px solid red !important;
     border-radius: 20px;
     margin-top: 15px;
+  }
+  .jishi-page-nav-box{
+    display: flex;
+    background: #fff;
+    padding: 50px 5% 0;
+    margin: 0 auto 15px;
+    position: relative;
+  }
+  .jishi-myorder-box{
+    position: absolute;
+    top: -36px;
+    left: 5%;
+    width: 90%;
+    box-sizing: border-box;
+    border: 1px solid #F5EFEF;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 204, 204, .5);
+    padding: 10px 15px;
+    text-align: left;
+  }
+  .jishi-myorder-title{
+    color: #BCBCBC;
+    font-size: 12px;
+    margin: 10px 0 5px;
+  }
+  .jishi-myorder-btn{
+    border: 1px solid #FB3453;
+    color: #FB3453;
+    font-size: 14px;
+    display: inline-block;
+    padding: 4px 21px;
+    border-radius: 3px;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+  }
+  .jishi-header-box{
+    padding-bottom: 50px;
+  }
+  .jishi-nav-one{
+    flex: 1;
+  }
+  .jishi-nav-one img{
+    width: 70%;
+    margin-top: 10px;
+  }
+  .jishi-nav-title{
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 0 10px;
+  }
+  .mint-cell .mint-cell-wrapper{
+    background-image: none;
+  }
+  .mint-cell:last-child{
+    background-image: none;
+  }
+  .my-list-box>div{
+    border-bottom: 1px solid #ddd;
+    margin-left: 10px;
+  }
+  div.mint-cell-wrapper{
+    padding-left: 2px;
   }
   </style>

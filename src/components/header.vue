@@ -8,10 +8,9 @@
     </mt-button>
 
     <mt-button slot="right">
-      <router-link to="/myPage">
+      <router-link :to="$store.state.page[$store.state.curMyCenter]">
         <img class="header-icon-btn" v-lazy="userData.headUrl">
       </router-link>
-
     </mt-button>
   </mt-header>
 </template>
