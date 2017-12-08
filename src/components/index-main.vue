@@ -14,27 +14,27 @@
         </mt-swipe-item>
       </mt-swipe>
     </div>
-
+    <!--省市店-->
+    <!--
     <div class="shops-box">
       <div class="shops-box-box">
-        <!--省-->
         <select class="select-reset" v-model="provinceIndex" name="province" @change="setCity">
           <option :value="index" v-for="(item,index) in provinceList">{{item.name}}</option>
         </select>
       </div>
       <div class="shops-box-box">
-        <!--市-->
         <select class="select-reset" name="city" v-model="cityId" @change="setShop">
           <option :value="item.id" v-for="item in cityList">{{item.name}}</option>
         </select>
       </div>
       <div class="shops-box-box">
-        <!--店铺-->
         <select class="select-reset" name="city" v-model="shopId" @change="setShopInfo">
           <option :value="item.storefrontId" v-for="item in shopList">{{item.storefrontName}}</option>
         </select>
       </div>
     </div>
+    -->
+
     <div class="index-nav-box">
       <div class="index-nav-tab" data-nav="1" @click="activePage($event)" :class="[{ 'index-nav-tab-active index-nav-tab-active1': curNav == 1 } ]">
         <span class="index-nav-tab-title">
@@ -148,7 +148,7 @@
               provinceIndex:0,
               cityId:null,
               shopList:null,
-              shopId:null,
+              shopId:this.$route.query.shopId,
               shopInfo:{
                   advertisementList:[],
                   artisanList:[],
@@ -163,25 +163,25 @@
               var self = event.currentTarget;
               this.curNav = self.getAttribute("data-nav");
           },
-          setCity(){//获取市列表
-              let self = this;
-              self.cityList = self.provinceList[self.provinceIndex].citys;
-              self.cityId = self.provinceList[self.provinceIndex].citys[0].id;
-              self.setShop();
-          },
-          setShop(){//获取店铺列表
-              let self = this;
-              axios.post(httpStr+"/artisan/queryStorefrontByRegion",{
-                  territoryId: self.cityId
-              }).then(function(ret){
-                  let data = ret.data;
-                  if( data.flag === 100 ){
-                      self.shopList = data.data;
-                      self.shopId = self.shopList[0].storefrontId;
-                      self.setShopInfo();
-                  }
-              })
-          },
+//          setCity(){//获取市列表
+//              let self = this;
+//              self.cityList = self.provinceList[self.provinceIndex].citys;
+//              self.cityId = self.provinceList[self.provinceIndex].citys[0].id;
+//              self.setShop();
+//          },
+//          setShop(){//获取店铺列表
+//              let self = this;
+//              axios.post(httpStr+"/artisan/queryStorefrontByRegion",{
+//                  territoryId: self.cityId
+//              }).then(function(ret){
+//                  let data = ret.data;
+//                  if( data.flag === 100 ){
+//                      self.shopList = data.data;
+//                      self.shopId = self.shopList[0].storefrontId;
+//                      self.setShopInfo();
+//                  }
+//              })
+//          },
           setShopInfo(){//获取店铺信息
               let self = this;
               self.mLoading = true;
@@ -209,7 +209,8 @@
           }).then(function(ret){
               if( ret.data.flag === 100 ){
                   self.provinceList = ret.data.data;
-                  self.setCity();
+//                  self.setCity();
+                  self.setShopInfo();
                   self.ifloading = true;
               }
           })
