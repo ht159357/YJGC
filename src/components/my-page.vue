@@ -311,7 +311,7 @@
   .my-cell-yen{
     font-size: 14px;
   }
-  .mint-cell .mint-cell-wrapper{
+  .my-cell-list .mint-cell-wrapper{
     background-image: none;
   }
   .mint-cell:last-child{
@@ -321,7 +321,7 @@
     border-bottom: 1px solid #ddd;
     margin-left: 10px;
   }
-  div.mint-cell-wrapper{
+  .my-cell-list div.mint-cell-wrapper{
     padding-left: 2px;
   }
   </style>

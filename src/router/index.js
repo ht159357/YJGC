@@ -38,13 +38,14 @@ import jsMyYy from "./../components/js-my-yy"
 import jsMyFans from "./../components/js-my-fans"
 import jsMyPb from "./../components/js-my-pb"
 import jsMyPf from "./../components/js-my-pf"
+import jsMyYbtx from "./../components/js-my-ybtx"
+import jsMyKh from "./../components/js-my-kh"
 
 
 Vue.use(Router);
 
 export default new Router({
   // mode: 'history',
-  // history:false,
   base: "/YJGC/dist", //基路径
   redirect:'/index',
   routes: [
@@ -174,6 +175,12 @@ export default new Router({
     },{//匠师：我的评分
       path:"/jsMyPf",
       component:jsMyPf
+    },{//匠师：我要提现
+      path:"/jsMyYbtx",
+      component:jsMyYbtx
+    },{//匠师：我要提现
+      path:"/jsMyKh",
+      component:jsMyKh
     }
   ]
 })

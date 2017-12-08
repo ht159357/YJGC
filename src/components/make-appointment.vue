@@ -95,7 +95,7 @@
         methods:{
             payIt(){
                 let self = this;
-                if( self.$route.params.yyType === "1" ){
+                if( (self.$route.params.yyType === "1" && self.$route.params.shopType === "1") ){
                     if( self.payData === null || self.payData.artisanId === null ){
                         Toast('请选择匠师');
                         return;
@@ -104,7 +104,10 @@
                     self.$router.push({
                         path: '/submitOrder',
                         query: {
-
+                            artisanId:self.payData.artisanId,
+                            goodsId:self.goodsId,
+                            price:self.price,
+                            storefrontId: self.storefrontId
                         }
                     });
                 }else if( self.$route.params.yyType === "2" ){
@@ -112,6 +115,7 @@
                         Toast("请选择时间");
                         return
                     }
+                    debugger
                     self.$router.push({
                         path: '/submitOrder',
                         query: {//有styleId

@@ -88,8 +88,6 @@
         }
     }
 </script>
-<style scoped="">
-</style>
 <style>
   .my-Page-box{
     background: #fff;
@@ -178,26 +176,26 @@
     border-radius: 20px;
     margin-top: 15px;
   }
-  .mint-cell .mint-cell-wrapper{
+  .my-cell-list.mint-cell .mint-cell-wrapper{
     background-image: none;
   }
-  .mint-cell:last-child{
+  .my-cell-list.mint-cell:last-child{
     background-image: none;
   }
   .my-list-box>div{
     border-bottom: 1px solid #ddd;
   }
-  .mint-cell .mint-cell-wrapper{
+  .my-cell-list.mint-cell .mint-cell-wrapper{
     background-image: none;
   }
-  .mint-cell:last-child{
+  .my-list-box.mint-cell:last-child{
     background-image: none;
   }
   .my-list-box>div{
     border-bottom: 1px solid #ddd;
     margin-left: 10px;
   }
-  div.mint-cell-wrapper{
+  .my-cell-list div.mint-cell-wrapper{
     padding-left: 2px;
   }
   </style>

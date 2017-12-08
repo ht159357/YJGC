@@ -46,7 +46,7 @@
         </mt-cell>
       </div>
       <div>
-        <mt-cell class="my-cell-list" title="我要提现" isLink="">
+        <mt-cell to="/jsMyYbtx" class="my-cell-list" title="我要提现" isLink="">
           <img slot="icon" src="../assets/img/change_jiang.png" class="my-cell-icon">
         </mt-cell>
       </div>
@@ -56,7 +56,7 @@
         </mt-cell>
       </div>
       <div>
-        <mt-cell class="my-cell-list" title="我的颜币" isLink="">
+        <mt-cell to="/myYanbi" class="my-cell-list" title="我的颜币" isLink="">
           <img slot="icon" src="../assets/img/money.png" class="my-cell-icon">
           <span class="my-cell-yen">&yen;999</span>
         </mt-cell>
@@ -67,7 +67,7 @@
         </mt-cell>
       </div>
       <div>
-        <mt-cell class="my-cell-list" title="我的客户" isLink="">
+        <mt-cell to="/jsMyKh" class="my-cell-list" title="我的客户" isLink="">
           <img slot="icon" src="../assets/img/mykh.jpg" class="my-cell-icon">
         </mt-cell>
       </div>
@@ -261,7 +261,7 @@
     right: 15px;
     top: 20px;
   }
-  .jishi-header-box{
+  .my-header-box.jishi-header-box{
     padding-bottom: 50px;
   }
   .jishi-nav-one{
@@ -276,17 +276,17 @@
     font-size: 14px;
     margin: 5px 0 10px;
   }
-  .mint-cell .mint-cell-wrapper{
+  .my-cell-list .mint-cell-wrapper{
     background-image: none;
   }
-  .mint-cell:last-child{
+  .my-cell-list.mint-cell:last-child{
     background-image: none;
   }
   .my-list-box>div{
     border-bottom: 1px solid #ddd;
     margin-left: 10px;
   }
-  div.mint-cell-wrapper{
+  .my-cell-list div.mint-cell-wrapper{
     padding-left: 2px;
   }
   </style>

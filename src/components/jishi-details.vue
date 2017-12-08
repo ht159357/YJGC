@@ -32,14 +32,26 @@
         </span>
       </div>
     </div>
+    <!--标签页题-->
     <div class="jis-tab-box">
+
       <div v-for="(item,index) in tabInfo" @click="tabActive(index)" ref="tab1" class="jis-tab-one" :class="[{ 'jis-tab-one-active' : item.active }]">
         <img class="tab-img" v-if="!item.active" :src="item.url">
         <img class="tab-img" v-else="item.active" :src="item.urlActive">
         <p class="tab-title">{{item.title}}</p>
       </div>
+
     </div>
+
+    <!--页面主体-->
     <div class="jis-tab-page-box">
+      <!--我的店铺-->
+      <div class="jis-tab-page" v-show="tabpage==3">
+        <div>
+          我的店铺
+        </div>
+      </div>
+      <!--在线选款-->
       <div class="jis-tab-page" v-show="tabpage==0">
         <div class="jis-filter-box">
           <div class="jis-filter jis-filter-active">
@@ -170,8 +182,8 @@
           </div>
         </div>
       </div>
+      <!--在线预约-->
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==1">
-        <!--在线预约-->
         <div v-if="ifloading && jishiInfo.goodsList.length === 0"  style="padding: 10px 0;">
           <img src="./../assets/img/no-data.png" style="width: 40%;"><br>
           暂时没有商品哦~
@@ -186,6 +198,7 @@
         </div>
 
       </div>
+      <!--顾客评价-->
       <div class="jis-tab-page" style="background: #fff;" v-show="tabpage==2">
         <div v-if="ifloading && jishiInfo.evaluateList.length === 0" style="padding: 10px 0;">
           <img src="./../assets/img/no-data.png" style="width: 40%;"><br>
@@ -232,6 +245,7 @@
 
         </div>
       </div>
+
     </div>
 
     <!------------------module层---------------------->
@@ -292,11 +306,12 @@ export default {
     data () {
         return {
             tabInfo:[
-              {title:"在线选款",url:require("./../assets/img/xuanku1.png"),urlActive:require("./../assets/img/xuanku.png"),active:true,activeNum:0},
+              {title:"我的店铺",url:require("./../assets/img/comm1.png"),urlActive:require("./../assets/img/comm.png"),active:true,activeNum:3},
+              {title:"在线选款",url:require("./../assets/img/xuanku1.png"),urlActive:require("./../assets/img/xuanku.png"),active:false,activeNum:0},
               {title:"在线预约",url:require("./../assets/img/allp1.png"),urlActive:require("./../assets/img/allp.png"),active:false,activeNum:1},
               {title:"顾客评价",url:require("./../assets/img/comm1.png"),urlActive:require("./../assets/img/comm.png"),active:false,activeNum:2},
             ],
-            tabpage: 0,
+            tabpage: 3,
             jisinfobox:{
                 backgroundImage: "url("+require('./../assets/img/sharecenter-heade-bg.png')+")",
                 backgroundSize: "100%",
@@ -647,6 +662,7 @@ Vue.filter("timeParse",function(val){
   .tab-title{
     margin: 0 0 5px;
     color: #8C8E8E;
+    font-size: 14px;
   }
   .jis-filter-box{
     display: flex;
