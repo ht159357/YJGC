@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import indexMian from "./../components/index-main";
+import yjgcIndex from "./../components/yjgc-index";
 import jishiDetail from "./../components/jishi-details";
 import projectDetail from "./../components/project-details";
 import makeAppointment from "./../components/make-appointment";
@@ -49,11 +50,15 @@ export default new Router({
   base: "/YJGC/dist", //基路径
   redirect:'/index',
   routes: [
-    {//首页
+    {//定向首页
       path: '/',
-      redirect:'/index',
-      component: indexMian
+      redirect:'/yjgcIndex',
+      component: yjgcIndex
     },{//首页
+      path: '/',
+      redirect:'/yjgcIndex',
+      component: yjgcIndex
+    },{//预约店铺首页
       path: '/index',
       component: indexMian
     },{//匠师详情
