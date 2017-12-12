@@ -119,6 +119,12 @@
     line-height: 52px;
     padding: 0 10px;
   }
+  .bill-box-title .mint-cell-wrapper{
+    background: none;
+  }
+  .bill-box-title .mint-cell{
+    background: none;
+  }
   a.mint-cell{
     display: flex;
     flex: 1;

@@ -110,7 +110,7 @@
                 console.log( this.checkList );
                 //code
 
-//                self.$router.push("/makeBill");
+                self.$router.push("/makeBill");
             }
         },
         created(){
