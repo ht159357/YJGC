@@ -19,10 +19,10 @@
             <mt-swipe-item class="mint-swipe-item" v-for="(item2,swiperIndex) in item3.userTime">
               <div class="date-time-box">
                 <div class="date-time-one" v-for="(item,index) in item2.rep_dates"
-                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId)"
-                     :time-flag="item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId"
+                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time+'-'+item3.artisanId,jsindex)"
+                     :time-flag="item2.req_date_day+'-'+item.time+'-'+item3.artisanId"
                       v-if="index < 9">
-                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId }]">
+                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time+'-'+item3.artisanId }]">
                     {{item.time}}
                   </div>
                 </div>
@@ -32,10 +32,10 @@
             <mt-swipe-item class="mint-swipe-item" v-for="(item2,swiperIndex) in item3.userTime" v-if="item2.rep_dates.length > 9">
               <div class="date-time-box">
                 <div class="date-time-one" v-for="(item,index) in item2.rep_dates"
-                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId)"
-                     :time-flag="item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId"
+                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time+'-'+item3.artisanId,jsindex)"
+                     :time-flag="item2.req_date_day+'-'+item.time+'-'+item3.artisanId"
                      v-if="index >= 9 && index < 18">
-                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId }]">
+                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time+'-'+item3.artisanId }]">
                     {{item.time}}
                   </div>
                 </div>
@@ -45,10 +45,10 @@
             <mt-swipe-item class="mint-swipe-item" v-for="(item2,swiperIndex) in item3.userTime" v-if="item2.rep_dates.length > 18">
               <div class="date-time-box">
                 <div class="date-time-one" v-for="(item,index) in item2.rep_dates"
-                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId)"
-                     :time-flag="item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId"
+                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time+'-'+item3.artisanId,jsindex)"
+                     :time-flag="item2.req_date_day+'-'+item.time+'-'+item3.artisanId"
                      v-if="index >= 18 && index < 27">
-                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId }]">
+                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time+'-'+item3.artisanId }]">
                     {{item.time}}
                   </div>
                 </div>
@@ -58,10 +58,10 @@
             <mt-swipe-item class="mint-swipe-item" v-for="(item2,swiperIndex) in item3.userTime"  v-if="item2.rep_dates.length > 27">
               <div class="date-time-box">
                 <div class="date-time-one" v-for="(item,index) in item2.rep_dates"
-                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId)"
-                     :time-flag="item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId"
+                     @click="timePikerAtive($event,item2.req_date_day+'-'+item.time+'-'+item3.artisanId,jsindex)"
+                     :time-flag="item2.req_date_day+'-'+item.time+'-'+item3.artisanId"
                      v-if="index >= 27">
-                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time_n+'-'+item3.artisanId }]">
+                  <div class="date-date-time" :class="[{'date-date-time-active' : timeFlag === item2.req_date_day+'-'+item.time+'-'+item3.artisanId }]">
                     {{item.time}}
                   </div>
                 </div>
@@ -93,7 +93,7 @@
             }
         },
         methods:{
-            timePikerAtive(event,flag){
+            timePikerAtive(event,flag,index){
                 let selfEvent = event.currentTarget;
                 let self = this;
                 self.timeFlag = selfEvent.getAttribute("time-flag");
@@ -102,9 +102,10 @@
                 self.time = flag[1];
                 self.artisanId = flag[2];
                 self.$emit("set-jsinfo",{
-                    date:self.date,
+                    date:flag[0],
                     time:self.time,
-                    artisanId:self.artisanId
+                    artisanId:self.artisanId,
+                    jishi:self.data[index]
                 })
             },
             parseTime(timeStr){

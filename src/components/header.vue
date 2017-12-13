@@ -2,7 +2,7 @@
   <!--头部-->
   <mt-header class="header-backcolor" style="height: 44px;" fixed :title="title">
     <mt-button slot="left">
-      <router-link to="/index">
+      <router-link to="/yjgcIndex">
         <img style="width: 22px;" src="./../assets/img/indexicon.png">
       </router-link>
     </mt-button>

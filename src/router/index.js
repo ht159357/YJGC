@@ -48,15 +48,14 @@ Vue.use(Router);
 export default new Router({
   // mode: 'history',
   base: "/YJGC/dist", //基路径
-  redirect:'/index',
+  redirect:'/yjgcIndex',
   routes: [
     {//定向首页
       path: '/',
       redirect:'/yjgcIndex',
       component: yjgcIndex
     },{//首页
-      path: '/',
-      redirect:'/yjgcIndex',
+      path: '/yjgcIndex',
       component: yjgcIndex
     },{//预约店铺首页
       path: '/index',

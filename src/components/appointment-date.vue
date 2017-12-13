@@ -21,13 +21,15 @@
             timeComponent,
             dateJiangshiComponent
         },
-        props:["date","jishiinfo"],
+        props:["date"],
         data(){
             return{
                 dateTime : null,//向子组件传的当日的时间
                 datetimeFlag:0,//日期下标
                 timeFlag: 0,//时间下标
-                artisanId: null
+                artisanId: null,
+                jishiinfo: null,
+                jishi:null,
             }
         },
         methods:{
@@ -53,9 +55,11 @@
             setArtisanId(data){
                 let self = this;
                 self.artisanId = data.artisanId;
+                self.jishi = data.jishi;
             },
             getJsInfo(){//获取当前选择时间的技师信息
                 let self = this;
+                self.artisanId = null;
                 let date = self.dateTime.req_date_day;
                 let year=date.substring(0,4),
                     month=date.substring(4,6),
@@ -86,6 +90,9 @@
                 self.$emit("set-info",{
                     artisanId: newval,
                     dateTime: self.dateTime,
+                    timeFlag:self.timeFlag,
+                    jishi:self.jishi,
+
                 });
                 return newval;
             }

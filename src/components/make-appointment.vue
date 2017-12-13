@@ -16,7 +16,7 @@
         </router-link>
       </div>
       <!--时间模块-->
-      <appointment-date class="app-viwe" v-if="$route.params.yyType === '1'" :date="ifLoading ? dateTime : null" :jishiinfo="jishiInfo" @set-info="getJishiInfo"></appointment-date>
+      <appointment-date class="app-viwe" v-if="$route.params.yyType === '1'" :date="ifLoading ? dateTime : null" @set-info="getJishiInfo"></appointment-date>
       <!--技师模块-->
       <appointment-js class="app-viwe" v-if="$route.params.yyType === '2'" :date="ifLoading ? dateTime : null" @set-jishi="setJishi"></appointment-js>
       <!--根据技师选时间-->
@@ -107,7 +107,10 @@
                             artisanId:self.payData.artisanId,
                             goodsId:self.goodsId,
                             price:self.price,
-                            storefrontId: self.storefrontId
+                            storefrontId: self.storefrontId,
+                            date:self.payData.dateTime.req_date_day+"_"+self.payData.dateTime.rep_dates[self.payData.timeFlag].time,
+                            stageName:self.payData.jishi.stageName,
+                            needQueryGoods:true
                         }
                     });
                 }else if( self.$route.params.yyType === "2" ){
@@ -115,22 +118,21 @@
                         Toast("请选择时间");
                         return
                     }
-                    debugger
                     self.$router.push({
                         path: '/submitOrder',
                         query: {//有styleId
-                            artisanId:self.jiangshiInfo.artisanId,
-                            styleId:self.styleId,
+                            artisanId:self.jishiInfo2.artisanId,
+//                            styleId:self.styleId,
                             goodsId:self.goodsId,
                             storefrontId:self.storefrontId,
                             time:self.time,
                             price:self.price,
-                            goodsName:self.goodsInfo.goodsName,
-                            date:self.jishiInfo3.dateTime.req_date_day+'_'+self.jishiInfo3.dateTime.rep_dates[self.jishiInfo3.timeFalg].time,
+                            date:self.jishiInfo2.date+'_'+self.jishiInfo2.time,
                             yyType:2,
-                            marketPic:self.goodsInfo.marketPic,
-                            artisanImg:self.jiangshiInfo.artisanImg,
-                            stageName:self.jiangshiInfo.stageName,
+                            marketPic:self.jishiInfo2.jishi.marketPic,
+                            artisanImg:self.jishiInfo2.jishi.artisanImg,
+                            stageName:self.jishiInfo2.jishi.stageName,
+                            needQueryGoods:true,
                         }
                     });
                 }else if( self.$route.params.yyType === "3" ){
@@ -148,11 +150,12 @@
                             time:self.time,
                             price:self.price,
                             goodsName:self.goodsInfo.goodsName,
-                          date:self.jishiInfo3.dateTime.req_date_day+'_'+self.jishiInfo3.dateTime.rep_dates[self.jishiInfo3.timeFalg].time,
+                            date:self.jishiInfo3.dateTime.req_date_day+'_'+self.jishiInfo3.dateTime.rep_dates[self.jishiInfo3.timeFalg].time,
                             yyType:3,
                             marketPic:self.goodsInfo.marketPic,
-                            artisanImg:self.jiangshiInfo.artisanImg,
+//                            artisanImg:self.jiangshiInfo.artisanImg,
                             stageName:self.jiangshiInfo.stageName,
+                            needQueryGoods:false,
                         }
                     });
                 }

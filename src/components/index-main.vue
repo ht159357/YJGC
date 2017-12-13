@@ -1,7 +1,7 @@
 <template>
   <div class="index-main-nav">
     <!--轮播-->
-    <div class="mint-swipe-container" style="height: 200px;">
+    <div class="mint-swipe-container" :style="bannerStyle">
       <mt-swipe :auto="0" :prevent="true">
         <mt-swipe-item class="mint-swipe-item">
           <img v-lazy="'http://wx.yanjianggongchang.com/Uploads/Picture/2017-09-04/59acc55fac9ea.jpg'" class="swipe-img index-swipe-img">
@@ -141,6 +141,10 @@
       name:'index-main',
       data(){
           return {
+              bannerStyle:{
+                  "width":"100%",
+                  "height":null,
+              },
               mLoading: false,
               curNav: 1,
               provinceList:null,
@@ -196,6 +200,9 @@
                       },100)
                   }
               })
+              //轮播图宽高为16:9
+              let clientW = document.documentElement.clientWidth;
+              self.bannerStyle.height = clientW/16*9+"px";
           },
       },
       mounted(){

@@ -62,15 +62,15 @@
         watch:{
             jishiinfo(newval,oldval){
                 let self = this;
-                if( !newval ){
-                    self.artisanId = null;
-                }
+                self.artisanId = null;
+                self.jiangshiFlag = null;
                 return newval;
             },
             artisanId(newval,oldval){
                 let self = this;
                 this.$emit("set-artisanId",{
-                    artisanId:this.artisanId
+                    artisanId:this.artisanId,
+                    jishi:self.jishiinfo[self.jiangshiFlag]
                 })
             }
         }

@@ -56,12 +56,12 @@
           <img slot="icon" src="../assets/img/invo.png" class="my-cell-icon">
         </mt-cell>
       </div>
-      <div>
-        <mt-cell class="my-cell-list" title="我的消息" isLink="">
-          <img slot="icon" src="../assets/img/message.png" class="my-cell-icon">
-          <span class="my-cell-yen">未做</span>
-        </mt-cell>
-      </div>
+      <!--<div>-->
+        <!--<mt-cell class="my-cell-list" title="我的消息" isLink="">-->
+          <!--<img slot="icon" src="../assets/img/message.png" class="my-cell-icon">-->
+          <!--<span class="my-cell-yen">未做</span>-->
+        <!--</mt-cell>-->
+      <!--</div>-->
       <div>
         <mt-cell to="myLike" class="my-cell-list" title="我的喜欢" isLink="">
           <img slot="icon" src="../assets/img/renovation.png" class="my-cell-icon">

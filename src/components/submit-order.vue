@@ -2,7 +2,7 @@
   <div class="make-order-box">
     <div class="order-good-one">
       <div class="order-img-box">
-        <img src="./../assets/img/js-2.jpg" alt="">
+        <img alt="" v-lazy="ifload?data.marketPic:''">
       </div>
       <div class="order-info-box">
         <span class="order-info-title">{{ifload?data.goodsName:''}}</span>
@@ -147,6 +147,9 @@
                     self.ifload = true;//请求是异步操作，等到请求完成数据loading完成
                 }
             });
+            if( self.data.needQueryGoods ){
+                self.queryGoods(self.data.goodsId);
+            }
         },
         methods:{
             parseTime(dateStr){//格式化时间，用于展示
@@ -170,6 +173,19 @@
             },
             payIt(){
                 alert('支付！');
+            },
+            queryGoods(goodsId){
+                let my = this;
+                axios.post(httpStr+"/artisan/queryGoods",{
+                    goodsId:goodsId
+                }).then((ret)=>{
+                    let data = ret.data;
+                    if( data.flag === 100 ){
+                        console.log(data.data);
+                        my.$set(my.data,"goodsName",data.data.goodsName);
+                        my.$set(my.data,"marketPic",data.data.marketPic);
+                    }
+                })
             }
         }
     }
@@ -179,6 +195,12 @@
     width: 100%;
     margin: 0 auto;
     background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+  }
+  img[lazy=error]{
+    width: 100%;
+    margin: 0 auto;
+    background: url("./../assets/img/load-error.svg") no-repeat center #ddd;
+    background-size: 32px;
   }
   .icon-right-arr{
     fill: #9b9b9b;
