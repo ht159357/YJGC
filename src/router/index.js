@@ -50,6 +50,7 @@ import jsMyStyleEdit from "./../components/js-my-style-edit"
 import jsMyYbtxTx from "./../components/js-my-ybtx-tx"
 import jsMyYbtxJl from "./../components/js-my-ybtx-jl"
 import jsBuyYhq from "./../components/js-buy-yhq"
+import jsMyYhq from "./../components/js-my-yhq"
 
 
 Vue.use(Router);
@@ -222,6 +223,9 @@ export default new Router({
     },{//匠师：款式管理（编辑）
       path:"/jsMyStyleEdit",
       component:jsMyStyleEdit
+    },{//匠师：我的优惠券
+      path:"/jsMyYhq",
+      component:jsMyYhq
     }
   ]
 })

@@ -72,7 +72,7 @@
         </mt-cell>
       </div>
       <div>
-        <mt-cell class="my-cell-list" title="我的优惠券" isLink="">
+        <mt-cell to="/jsMyYhq" class="my-cell-list" title="我的优惠券" isLink="">
           <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
         </mt-cell>
       </div>

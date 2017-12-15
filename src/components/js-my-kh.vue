@@ -45,7 +45,7 @@
       v-model="tsxx"
       position="right" style="width: 100%;height: 100%;overflow-y: scroll;">
       <div class="yh-pop-box">
-        <svg class="icon icon-right-arr" aria-hidden="true" @click="togolePop()" style="float: left;margin-top: 3px;">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="togolePop('tsxx')" style="float: left;margin-top: 3px;">
           <use xlink:href="#icon-left-arr-gary"></use>
         </svg>
         消息推送
@@ -67,10 +67,23 @@
             <div class="ts-search-list">
               <div class="ts-list" v-for="item in list" v-if="item.check">
                 <span class="ts-list-left">{{item.name}}</span>
-                <span class="ts-list-right">发优惠券</span>
+                <span class="ts-list-right" @click="togolePop('yhqPop')">发优惠券</span>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </mt-popup>
+    <mt-popup v-model="yhqPop" position="center" style="width: 80%;height: 70%;overflow-y: auto;border-radius: 4px;">
+      <div class="yh-pop-box">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="togolePop('yhqPop')" style="float: left;margin-top: 3px;">
+          <use xlink:href="#icon-left-arr-gary"></use>
+        </svg>
+        消息推送
+      </div>
+      <div class="pop-yhq-box">
+        <div class="pop-yhq" v-for="item in 10">
+          <p>10元优惠券</p>
         </div>
       </div>
     </mt-popup>
@@ -86,7 +99,8 @@
         name: "js-my-kh",
         data(){
             return {
-                tsxx: true,
+                tsxx: false,
+                yhqPop: false,
                 list:[
                     {value:1,name:"萌萌",check:true},
                     {value:2,name:"丽丽",check:false},
@@ -101,11 +115,10 @@
         methods:{
             tsxxPop(id){//推送消息弹层
                 let self = this;
-                self.togolePop();
-
+                self.togolePop("tsxx");
             },
-            togolePop(){
-                this.tsxx = !this.tsxx;
+            togolePop(str){
+                this[str] = !this[str];
             },
             getValue(data){
                 this.list[data.index].check = data.check;
@@ -299,5 +312,26 @@
     color: #fff;
     padding: 3px 5px;
     border-radius: 3px;
+  }
+  .pop-yhq-box{
+    display: flex;
+    box-sizing: border-box;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .pop-yhq{
+    width: 45%;
+    box-sizing: border-box;
+    border: 1px solid #FB3453;
+    border-radius: 5px;
+    padding: 20px 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .pop-title{
+    padding: 15px 0 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
   }
 </style>
