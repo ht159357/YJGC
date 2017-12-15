@@ -1,7 +1,7 @@
 <template>
   <div class="reg-box">
     <div class="reg-back" :style="regBackClass">
-      <p class="reg-title">加盟商注册</p>
+      <p class="reg-title">美睫师注册</p>
     </div>
     <div class="reg-info-box">
 
@@ -23,27 +23,16 @@
         <input class="reg-input" type="text" placeholder="请输入您的身份证号（必填）" v-model.trim="id_number">
       </div>
       <div class="reg-cell-boxone">
-        <input class="reg-input" type="text" placeholder="注册资金（必填，单位元）" v-model.trim="register_money">
-      </div>
-      <div class="reg-cell-boxone">
-        <input class="reg-input" type="text" placeholder="店面数（必填）" v-model.trim="outlets_num">
-      </div>
-      <div class="reg-cell-boxone">
-        <select class="reg-input" v-model="territory_id">
-          <option v-for="item in cityList" :value="item.territory_id">{{ item.territory_name }}</option>
-        </select>
-      </div>
-      <div class="reg-cell-boxone">
         <input class="reg-input" type="text" placeholder="备注" v-model.trim="remark">
       </div>
       <div class="reg-agreat">
         <label><input type="checkbox" class="reg-check" v-model="ireader">我已阅读并同意</label>
-        <span class="reg-xy" @click="showOrHideModel"> 《颜匠工场加盟商注册协议》</span>
+        <span class="reg-xy" @click="showOrHideModel"> 《颜匠工场美睫师注册协议》</span>
       </div>
 
     </div>
     <div class="reg-btn" @click="register">
-      颜粉注册
+      注册
     </div>
 
     <mt-popup class="reg-need-know"
@@ -92,13 +81,13 @@
               ireader: false,
               cityList:[],
               openId: openId,
-              name: "",//"胡涛",
-              id_number: "",//"340222199412035014",
-              phone: "",//"15855991987",
+              name: "",
+              id_number: "",
+              phone: "",
               veriCode : "",
-              register_money: "",//"10000",
-              outlets_num: "",//"2",
-              territory_id: "",
+//              register_money: "",
+//              outlets_num: "",
+//              territory_id: "",
               remark: "",
               notice: {},
           }
@@ -135,7 +124,7 @@
           },
           register(){
               let self = this;
-              if( !self.name || !self.id_number || !self.phone || !self.register_money || !self.outlets_num  ){
+              if( !self.name || !self.id_number || !self.phone ){
                   Toast("请填写必填项！");
                   return;
               }else if( !(/^1[34578]\d{9}$/.test(self.phone)) ){
@@ -143,12 +132,6 @@
                   return;
               }else if( !(/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(self.id_number)) ){
                   Toast("请输入正确的身份证号！");
-                  return;
-              }else if( !(/^\d+(?=\.{0,1}\d+$|$)/.test(self.register_money)) ){
-                  Toast("请输入正确的注册资金！");
-                  return;
-              }else if( !(/^[0-9]*[1-9][0-9]*$/.test(self.outlets_num)) ){
-                  Toast("请输入正确的门店数！");
                   return;
               }else if( !self.ireader ){
                   Toast("请阅读并同意注册协议！");
@@ -158,14 +141,13 @@
                   return;
               }
 
-              axios({
-                  method: 'post',
-                  url:httpStr+"/wechat/register/addAlliance?openId="+self.openId+"&name="+self.name+"&id_number="+self.id_number+"&phone="+self.phone+"&register_money="+(self.register_money*100)+"&outlets_num="+self.outlets_num+"&territory_id="+self.territory_id+"&remark="+self.remark+"&code="+self.veriCode,
+              axios.post(httpStr+"",{
+
               }).then(function(ret){
                   console.log(ret.data);
                   if( ret.data.flag === 100 ){
                       MessageBox.alert('注册成功！').then(action => {
-                          self.$router.push("/index");
+//                          self.$router.push("/index");
                       });
                   }else if( ret.data.flag === 104 ){
                       Toast("手机号已被注册！");
@@ -180,19 +162,19 @@
           }
       },
       created(){
-          axios({//检查是否已注册
-              method:"post",
-              url:httpStr + "/wechat/register/isAllianceBt",
-              data:{
-                  openId:openId
-              }
-          }).then(function(ret){
-              if(ret.data.has === 1){
-                  self.$router.push("/registed/1");
-              }
-          })
           let self = this;
-          axios({//获取协议
+//          axios({//检测是否已注册
+//              method:"post",
+//              url:httpStr + "/wechat/register/isAllianceBt",
+//              data:{
+//                  openId:openId
+//              }
+//          }).then(function(ret){
+//              if(ret.data.has === 1){
+//                  self.$router.push("/registed/1");
+//              }
+//          })
+          axios({
               method: 'post',
               url: httpStr + "/wechat/register/getNotice?know_type="+2,
           }).then(function (ret) {
@@ -204,15 +186,15 @@
                   self.notice = ret.data.notice;
               }
           });
-          axios({//获取城市列表
-              method: 'post',
-              url: httpStr + "/wechat/register/allCity",
-          }).then(function (ret) {
-              if( ret.data.flag === 100 ){
-                  self.cityList = ret.data.list;
-                  self.territory_id = self.cityList[0].territory_id;
-              }
-          });
+//          axios({//获取城市列表
+//              method: 'post',
+//              url: httpStr + "/wechat/register/allCity",
+//          }).then(function (ret) {
+//              if( ret.data.flag === 100 ){
+//                  self.cityList = ret.data.list;
+//                  self.territory_id = self.cityList[0].territory_id;
+//              }
+//          });
       }
   }
 </script>

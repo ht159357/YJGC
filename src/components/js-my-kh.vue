@@ -44,26 +44,71 @@
     <mt-popup
       v-model="tsxx"
       position="right" style="width: 100%;height: 100%;overflow-y: scroll;">
-
+      <div class="yh-pop-box">
+        <svg class="icon icon-right-arr" aria-hidden="true" @click="togolePop()" style="float: left;margin-top: 3px;">
+          <use xlink:href="#icon-left-arr-gary"></use>
+        </svg>
+        消息推送
+      </div>
+      <div class="ts-box-pop">
+        <div class="btn btn-send">发送</div>
+        <input type="text" class="ts-send-title" placeholder="请输入消息标题">
+        <textarea class="ts-send-info" placeholder="请填写您要发送的信息"></textarea>
+        <div class="ts-bottom-box">
+          <div class="ts-bottom-left-box">
+            <div class="ts-search-box">
+              <input type="text" placeholder="搜索颜粉">
+            </div>
+            <div class="ts-search-list" style="margin-top: 5px">
+              <check-box v-for="(item,index) in list" :value="item.value" :title="item.name" :check="item.check" :index="index" @set-val="getValue" style="display: block;"></check-box>
+            </div>
+          </div>
+          <div class="ts-bottom-right-box">
+            <div class="ts-search-list">
+              <div class="ts-list" v-for="item in list" v-if="item.check">
+                <span class="ts-list-left">{{item.name}}</span>
+                <span class="ts-list-right">发优惠券</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </mt-popup>
   </div>
 </template>
 <script>
     import Vue from "vue";
     import { Popup } from 'mint-ui';
+    import checkBox from "./check-box"
 
     Vue.component(Popup.name, Popup);
     export default {
         name: "js-my-kh",
         data(){
             return {
-                tsxx:false,
+                tsxx: true,
+                list:[
+                    {value:1,name:"萌萌",check:true},
+                    {value:2,name:"丽丽",check:false},
+                    {value:3,name:"嘟嘟",check:false},
+                    {value:4,name:"珍珍",check:false},
+                ]
             }
+        },
+        components:{
+            checkBox
         },
         methods:{
             tsxxPop(id){//推送消息弹层
                 let self = this;
-                self.tsxx = true;
+                self.togolePop();
+
+            },
+            togolePop(){
+                this.tsxx = !this.tsxx;
+            },
+            getValue(data){
+                this.list[data.index].check = data.check;
             }
         }
     }
@@ -178,5 +223,81 @@
     margin: 0;
     padding: 0 0 15px;
     font-weight: bold;
+  }
+
+  .yh-pop-box{
+    text-align: center;
+    margin: 10px;
+  }
+  .btn-send{
+    background: #FB3453;
+    color: #fff;
+    border-radius: 3px;
+    padding: 8px 0;
+  }
+  .ts-box-pop{
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .ts-send-title,.ts-send-info{
+    width: 100%;
+    margin: 5px auto;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-indent: 5px;
+    font-size: 14px;
+    color: #333;
+    padding: 3px;
+  }
+  .ts-send-title{
+    height: 26px;
+  }
+  .ts-send-info{
+    height: 78px;
+    margin: 0 auto;
+  }
+  .ts-bottom-box{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: 10px;
+  }
+  .ts-bottom-left-box{
+    width: 50%;
+    box-sizing: border-box;
+    border-right: 1px solid #ddd;
+  }
+  .ts-search-list{
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: left;
+  }
+  .ts-bottom-right-box{
+    width: 50%;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  .ts-search-box input{
+    width: 90%;
+    outline: none;
+    border-radius: 20px;
+    height: 24px;
+    text-indent: 10px;
+    border: 1px solid #ddd;
+  }
+  .ts-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px auto;
+  }
+  .ts-list-right{
+    background: #FB3453;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 3px;
   }
 </style>

@@ -176,26 +176,26 @@
     border-radius: 20px;
     margin-top: 15px;
   }
-  .my-cell-list.mint-cell .mint-cell-wrapper{
+  .my-Page-box .my-cell-list.mint-cell .mint-cell-wrapper{
     background-image: none;
   }
-  .my-cell-list.mint-cell:last-child{
+  .my-Page-box .my-cell-list.mint-cell:last-child{
     background-image: none;
   }
-  .my-list-box>div{
+  .my-Page-box .my-list-box>div{
     border-bottom: 1px solid #ddd;
   }
-  .my-cell-list.mint-cell .mint-cell-wrapper{
+  .my-Page-box .my-cell-list.mint-cell .mint-cell-wrapper{
     background-image: none;
   }
-  .my-list-box.mint-cell:last-child{
+  .my-Page-box .my-list-box.mint-cell:last-child{
     background-image: none;
   }
-  .my-list-box>div{
+  .my-Page-box .my-list-box>div{
     border-bottom: 1px solid #ddd;
     margin-left: 10px;
   }
-  .my-cell-list div.mint-cell-wrapper{
+  .my-Page-box .my-cell-list div.mint-cell-wrapper{
     padding-left: 2px;
   }
   </style>

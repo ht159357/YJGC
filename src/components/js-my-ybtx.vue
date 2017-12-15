@@ -9,12 +9,12 @@
       <p class="tx-title">账户余额</p>
       <p class="tx-money"><span class="tx-money-icon">&yen;</span> 0.00</p>
     </div>
-    <div class="tx-btn txsy-btn-dis" :class="[{'txsy-btn': canTx }]">
+    <router-link to="/jsMyYbtxTx" class="tx-btn txsy-btn-dis router-link" :class="[{'txsy-btn': canTx }]">
       收益提现
-    </div>
-    <div class="tx-btn txjl-btn">
+    </router-link>
+    <router-link to="/jsMyYbtxJl" class="tx-btn txjl-btn router-link">
       提现记录
-    </div>
+    </router-link>
     <p class="tx-tips">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-tips"></use>
@@ -27,7 +27,7 @@
         name:"js-ny-ybtx",
         data(){
             return {
-                canTx:false,
+                canTx: true,
             }
         },
         methods:{
@@ -61,6 +61,7 @@
     font-size: 16px;
   }
   .tx-btn{
+    display: block;
     border-radius: 3px;
     padding: 9px 0;
     margin-bottom: 20px;

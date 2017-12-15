@@ -87,6 +87,16 @@
           <img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">
         </mt-cell>
       </div>
+      <!--<div @click="goCenter(3)">-->
+        <!--<mt-cell class="my-cell-list" title="加盟商" isLink="">-->
+          <!--<img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">-->
+        <!--</mt-cell>-->
+      <!--</div>-->
+      <!--<div @click="goCenter(4)">-->
+        <!--<mt-cell class="my-cell-list" title="共享加盟商" isLink="">-->
+          <!--<img slot="icon" src="../assets/img/yuyue.png" class="my-cell-icon">-->
+        <!--</mt-cell>-->
+      <!--</div>-->
       <div>
         <mt-cell to="/myShare" class="my-cell-list" title="我要分享" isLink="">
           <img slot="icon" src="../assets/img/share.png" class="my-cell-icon">
@@ -305,23 +315,23 @@
     width: 22px;
     height: 22px;
   }
-  div.mint-cell-title{
+  .my-Page-box div.mint-cell-title{
     font-size: 14px;
   }
   .my-cell-yen{
     font-size: 14px;
   }
-  .my-cell-list .mint-cell-wrapper{
+  .my-Page-box .my-cell-list .mint-cell-wrapper{
     background-image: none;
   }
-  .mint-cell:last-child{
+  .my-Page-box .mint-cell:last-child{
     background-image: none;
   }
-  .my-list-box>div{
+  .my-Page-box .my-list-box>div{
     border-bottom: 1px solid #ddd;
     margin-left: 10px;
   }
-  .my-cell-list div.mint-cell-wrapper{
+  .my-Page-box .my-cell-list div.mint-cell-wrapper{
     padding-left: 2px;
   }
   </style>

@@ -41,9 +41,19 @@ import jsMyPb from "./../components/js-my-pb"
 import jsMyPf from "./../components/js-my-pf"
 import jsMyYbtx from "./../components/js-my-ybtx"
 import jsMyKh from "./../components/js-my-kh"
+import registerMjs from "./../components/register-mjs"
+import registerMrs from "./../components/register-mrs"
+import registerMts from "./../components/register-mts"
+import jsMyStyle from "./../components/js-my-style"
+import jsMyStyleAdd from "./../components/js-my-style-add"
+import jsMyStyleEdit from "./../components/js-my-style-edit"
+import jsMyYbtxTx from "./../components/js-my-ybtx-tx"
+import jsMyYbtxJl from "./../components/js-my-ybtx-jl"
+import jsBuyYhq from "./../components/js-buy-yhq"
 
 
 Vue.use(Router);
+
 
 export default new Router({
   // mode: 'history',
@@ -182,9 +192,36 @@ export default new Router({
     },{//匠师：我要提现
       path:"/jsMyYbtx",
       component:jsMyYbtx
-    },{//匠师：我要提现
+    },{//匠师：我要提现（提现）
+      path:"/jsMyYbtxTx",
+      component:jsMyYbtxTx
+    },{//匠师：我要提现（记录）
+      path:"/jsMyYbtxJl",
+      component:jsMyYbtxJl
+    },{//匠师：我的客户
       path:"/jsMyKh",
       component:jsMyKh
+    },{//匠师：购买优惠券
+      path:"/jsBuyYhq",
+      component:jsBuyYhq
+    },{//美甲师注册
+      path:"/registerMjs",
+      component:registerMjs
+    },{//美容师注册
+      path:"/registerMrs",
+      component:registerMrs
+    },{//美睫师注册
+      path:"/registerMts",
+      component:registerMts
+    },{//匠师：款式管理
+      path:"/jsMyStyle",
+      component:jsMyStyle
+    },{//匠师：款式管理(添加)
+      path:"/jsMyStyleAdd",
+      component:jsMyStyleAdd
+    },{//匠师：款式管理（编辑）
+      path:"/jsMyStyleEdit",
+      component:jsMyStyleEdit
     }
   ]
 })

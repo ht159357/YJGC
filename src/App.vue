@@ -49,8 +49,7 @@
       methods: {
           checkIsReg(){//注册界面不显示header
               let curPath = this.$route.path.toUpperCase();
-              console.log()
-              if( curPath === "/register".toUpperCase()||curPath === "/registerJms".toUpperCase() ){
+              if( curPath === "/register".toUpperCase()||curPath === "/registerJms".toUpperCase()||curPath === "/registerMjs".toUpperCase()||curPath === "/registerMrs".toUpperCase()||curPath === "/registerMts".toUpperCase()  ){
                   this.$store.state.showHeader = false;
               }else{
                   this.$store.state.showHeader = true;

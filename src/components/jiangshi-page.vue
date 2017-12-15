@@ -33,7 +33,7 @@
           <img src="./../assets/img/vjb-nav-03.png" alt="">
           <p class="jishi-nav-title router-link">我的评分</p>
         </router-link>
-        <router-link to="" class="jishi-nav-one router-link">
+        <router-link to="/jsMyStyle" class="jishi-nav-one router-link">
           <img src="./../assets/img/vjb-nav-04.png" alt="">
           <p class="jishi-nav-title router-link">款式管理</p>
         </router-link>
@@ -62,7 +62,7 @@
         </mt-cell>
       </div>
       <div>
-        <mt-cell class="my-cell-list" title="购买优惠券" isLink="">
+        <mt-cell to="/jsBuyYhq" class="my-cell-list" title="购买优惠券" isLink="">
           <img slot="icon" src="../assets/img/yhq.jpg" class="my-cell-icon">
         </mt-cell>
       </div>
@@ -276,17 +276,17 @@
     font-size: 14px;
     margin: 5px 0 10px;
   }
-  .my-cell-list .mint-cell-wrapper{
+  .my-Page-box .my-cell-list .mint-cell-wrapper{
     background-image: none;
   }
-  .my-cell-list.mint-cell:last-child{
+  .my-Page-box .my-cell-list.mint-cell:last-child{
     background-image: none;
   }
-  .my-list-box>div{
+  .my-Page-box .my-list-box>div{
     border-bottom: 1px solid #ddd;
     margin-left: 10px;
   }
-  .my-cell-list div.mint-cell-wrapper{
+  .my-Page-box .my-cell-list div.mint-cell-wrapper{
     padding-left: 2px;
   }
   </style>

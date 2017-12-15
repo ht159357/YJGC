@@ -1,35 +1,59 @@
 <template>
   <div class="yb-app">
-    <mt-cell class="yb-top-title" :title="'2017-09'" :value="'消费：¥ '+0.00"></mt-cell>
-    <mt-loadmore :top-method="loadTop" ref="loadmore" class="yb-list">
-      <ul v-infinite-scroll="loadMore"
-          infinite-scroll-disabled="loading"
-          infinite-scroll-distance="20">
-        <li v-for="item in list">
-          <div class="yb-one-list">
-            <div class="yb-img">
-              <img src="./../assets/img/yb-add.png">
-            </div>
-            <div class="yb-detail">
-              <span class="yb-detail-title">充值</span><br>
-              <span class="yb-detail-time">09/29 17:51</span>
-            </div>
-            <div class="yb-money">
-              +6699
-            </div>
-          </div>
-        </li>
-      </ul>
+    <!--<div class="yb-top-title">-->
+      <!--<span class="yb-top-time">2017-09</span>-->
+      <!--<span class="yb-top-money">消费&yen;0</span>-->
+    <!--</div>-->
+    <!--<mt-loadmore :top-method="loadTop" ref="loadmore" class="yb-list">-->
+      <!--<ul v-infinite-scroll="loadMore"-->
+          <!--infinite-scroll-disabled="loading"-->
+          <!--infinite-scroll-distance="20">-->
+        <!--<li v-for="item in list">-->
+          <!--<div class="yb-one-list" v-for="item in 3">-->
+            <!--<div class="yb-img">-->
+              <!--<img src="./../assets/img/yb-add.png">-->
+            <!--</div>-->
+            <!--<div class="yb-detail">-->
+              <!--<span class="yb-detail-title">充值</span><br>-->
+              <!--<span class="yb-detail-time">09/29 17:51</span>-->
+            <!--</div>-->
+            <!--<div class="yb-money">-->
+              <!--+6699-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+      <!--</ul>-->
 
-      <div class="jis-loadmore" v-show="loading">
-        <mt-spinner color="#FB3453" type="triple-bounce"></mt-spinner>
+          <!--<div class="jis-loadmore" v-show="loading">-->
+            <!--<mt-spinner color="#FB3453" type="triple-bounce"></mt-spinner>-->
+          <!--</div>-->
+    <!--</mt-loadmore>-->
+    <div>
+      <div class="yb-top-title">
+        <span class="yb-top-time">2017-09</span>
+        <span class="yb-top-money">消费&yen;0</span>
       </div>
-    </mt-loadmore>
-    <router-link to="/yanfen520" class="tobe-yanfen520-box router-link">
-      <div class="tobe-yanfen520">
-        成为520颜粉
+
+      <div class="yb-one-list" v-for="item in 3">
+        <div class="yb-img">
+          <img src="./../assets/img/yb-add.png">
+        </div>
+        <div class="yb-detail">
+          <span class="yb-detail-title">充值</span><br>
+          <span class="yb-detail-time">09/29 17:51</span>
+        </div>
+        <div class="yb-money">
+          +6699
+        </div>
       </div>
-    </router-link>
+    </div>
+
+    <!--暂时不用-->
+    <!--<router-link to="/yanfen520" class="tobe-yanfen520-box router-link">-->
+      <!--<div class="tobe-yanfen520">-->
+        <!--成为520颜粉-->
+      <!--</div>-->
+    <!--</router-link>-->
   </div>
 </template>
 <script>
@@ -133,10 +157,19 @@
     color: #fff;
     text-align: center;
     width: 90%;
-    margin: 0 auto 10px;
+    margin: 10px auto;
     border-radius: 5px;
   }
   .yb-list{
     margin-bottom: 45px;
+  }
+  .yb-top-title{
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+    justify-content: space-between;
   }
 </style>

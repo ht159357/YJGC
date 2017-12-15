@@ -99,4 +99,22 @@
     background-size: 12px;
     color: #808080;
   }
+  .yj-btn{
+    display: inline-block;
+    border-radius: 3px;
+    padding: 4px 12px;
+    font-size: 14px;
+  }
+  img[lazy=loading] {
+    width: 100%;
+    background: url("./../assets/img/loading.svg") no-repeat center #ddd;
+    background-size: 50%;
+  }
+  p,img{
+    margin: 0;
+  }
+  .icon.icon-bank{
+    font-size: 30px;
+    margin-right: 10px;
+  }
 </style>

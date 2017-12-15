@@ -22,14 +22,14 @@
     </div>
     <!--门店-->
     <div class="shop-nav">
-      <mt-swipe :auto="0" :prevent="true" :style="shopStyle,shopHeight" :continuous="false">
+      <mt-swipe :auto="0" :style="shopStyle,shopHeight" :continuous="false">
         <!--一页十个-->
         <mt-swipe-item class="mint-swipe-item">
           <div class="index-shop-box">
-            <div class="index-shop" v-for="(item,index) in 10">
+            <router-link to="/index?shopId=14" class="index-shop router-link" v-for="(item,index) in 10">
               <img v-lazy="require('./../assets/img/shop-'+ (index+1) +'.png')"><br>
               河西万达店
-            </div>
+            </router-link>
           </div>
         </mt-swipe-item>
         <mt-swipe-item class="mint-swipe-item">
@@ -84,7 +84,7 @@
         已开通服务城市
       </div>
       <div class="city-list-box">
-        <span class="city-one" v-for="item in 30">上海市</span>
+        <span class="city-one" v-for="item in 30" @click="choiesAdrr">上海市</span>
       </div>
     </mt-popup>
   </div>
@@ -118,6 +118,9 @@
                 alert(self.searchInfo);
             },
             openAdrrPop(){
+                this.addPop = !this.addPop;
+            },
+            choiesAdrr(){
                 this.addPop = !this.addPop;
             }
         },

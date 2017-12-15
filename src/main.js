@@ -8,7 +8,9 @@ import 'mint-ui/lib/style.css';
 import storeConfig from './store/store';
 import fontIcon from "./assets/js/fonticon";
 import { Lazyload } from 'mint-ui';
+import axios from 'axios';
 
+Vue.prototype.$axios=axios;
 Vue.use(Lazyload);
 Vue.use(MintUI);
 

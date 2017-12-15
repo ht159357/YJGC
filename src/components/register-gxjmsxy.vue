@@ -19,6 +19,7 @@
 <script>
   import axios from 'axios';
   import { Toast } from 'mint-ui';
+
   export default {
       name:"register-gxjmsxy",
       data(){
@@ -50,6 +51,7 @@
                   }
               }
           })
+          self.$store.state.showHeader = false;
       }
   }
 </script>
