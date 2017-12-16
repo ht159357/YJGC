@@ -175,4 +175,7 @@
     margin-top: 30%;
     font-size: 100px;
   }
+  body.model-open{
+    overflow: hidden;
+  }
 </style>

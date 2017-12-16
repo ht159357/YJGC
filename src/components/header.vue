@@ -113,8 +113,46 @@
   p,img{
     margin: 0;
   }
-  .icon.icon-bank{
+  svg.icon.icon-bank{
     font-size: 30px;
     margin-right: 10px;
+  }
+  div.yh-pop-box{
+    text-align: center;
+    margin: 10px;
+  }
+  div.full-model{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+  div.yjgc-cell-one{
+    display: flex;
+    align-items: center;
+  }
+  div.yjgc-cell-header{
+    width: 60px;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  div.yjgc-cell-header>img{
+    width: 100%;
+  }
+  div.yjgc-cell-info{
+    flex: 1;
+    text-align: left;
+    box-sizing: border-box;
+  }
+  div.yjgc-cell-info .yjgc-cell-detail{
+    font-weight: bold;
+  }
+  div.yjgc-cell-info .yjgc-cell-time{
+    font-size: 14px;
+  }
+  div.yjgc-cell-last{
+    width: 100px;
+    box-sizing: border-box;
+    text-align: right;
+    padding-right: 10px;
   }
 </style>

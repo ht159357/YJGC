@@ -51,6 +51,7 @@ import jsMyYbtxTx from "./../components/js-my-ybtx-tx"
 import jsMyYbtxJl from "./../components/js-my-ybtx-jl"
 import jsBuyYhq from "./../components/js-buy-yhq"
 import jsMyYhq from "./../components/js-my-yhq"
+import jsMySr from "./../components/js-my-sr"
 
 
 Vue.use(Router);
@@ -226,6 +227,9 @@ export default new Router({
     },{//匠师：我的优惠券
       path:"/jsMyYhq",
       component:jsMyYhq
+    },{//匠师：我的收入
+      path:"/jsMySr",
+      component:jsMySr
     }
   ]
 })

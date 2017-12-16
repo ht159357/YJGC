@@ -77,7 +77,7 @@
         </mt-cell>
       </div>
       <div>
-        <mt-cell class="my-cell-list" title="我的收入" isLink="">
+        <mt-cell to="/jsMySr" class="my-cell-list" title="我的收入" isLink="">
           <img slot="icon" src="../assets/img/mywage.png" class="my-cell-icon">
         </mt-cell>
       </div>

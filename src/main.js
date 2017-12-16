@@ -14,6 +14,7 @@ Vue.prototype.$axios=axios;
 Vue.use(Lazyload);
 Vue.use(MintUI);
 
+
 Vue.config.productionTip = false;
 
 new Vue({
